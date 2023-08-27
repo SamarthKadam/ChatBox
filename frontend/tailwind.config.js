@@ -2,7 +2,15 @@
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'Roboto': ['Roboto', 'sans-serif']
+      },
+    },
+    fontFamily: {
+      'Roboto': ['Roboto', 'sans-serif'],
+      'Poppins': ['Poppins', 'serif'] // Ensure fonts with spaces have " " surrounding it.
+    },
   },
   plugins: [],
 }
