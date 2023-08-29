@@ -1,13 +1,13 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 export default function NavList() {
   return (
     <ul className='flex flex-row w-[40%] max-[1200px]:w-[60%] justify-around text-white font-Roboto font-semibold items-center'>
-    <li><Link>Product</Link></li>
-    <li><Link>Services</Link></li>
-    <li><Link>Contact Us</Link></li>
-    <li><Link>Download App</Link></li>
+    <li><NavLink to='/' className={({ isActive }) => (isActive ? "text-[#FFCC33]" : '')}>Product</NavLink></li>
+    <li><NavLink to='/service'>Services</NavLink></li>
+    <li><NavLink>Login</NavLink></li>
+    <li><NavLink>Signup</NavLink></li>
     </ul>
   )
 }

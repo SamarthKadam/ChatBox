@@ -4,12 +4,9 @@ import Description from '../components/Description'
 export default function Home() {
 
   return (
-     <div>
      <div className='h-[100vh] px-40 py-5 bg-[#012478]'>
         <NavBar/>
         <Description></Description>
      </div>
-     <div className='h-[100vh]  bg-[#FFFFFF]'></div>
-    </div>
   )
 }
