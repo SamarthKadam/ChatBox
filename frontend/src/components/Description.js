@@ -43,7 +43,7 @@ export default function Description() {
         <p className='mt-10 text-white text-lg font-semibold font-Roboto'>The easiest & fasted way to live chat</p>
         </div>
         <div className='relative'>
-            <div className="absolute  w-[50%] top-[20%] translate-y-[-20%] left-[95%] z-[555] translate-x-[-95%]">
+            <div className="absolute  w-[50%] top-[20%] translate-y-[-20%] left-[95%] z-[555] translate-x-[-95%] max-[1127px]:top-[-15%]">
               {menChat.map((val,ind)=>{
                 return(
                   <Chat isMale={true} key={ind} message={val}></Chat>
@@ -51,7 +51,7 @@ export default function Description() {
               })
               }
               </div>
-            <div className='absolute w-[50%] top-[68%] translate-y-[-68%]  left-[15%]  z-[87]  translate-x-[-15%]'>
+            <div className='absolute w-[50%] top-[68%] translate-y-[-68%]  left-[15%]  z-[87]  translate-x-[-15%] max-[1127px]:top-[78%]'>
               {womenChat.map((val,ind)=>{
                 return(
                   <Chat isMale={false} key={ind} message={val}></Chat>
@@ -60,9 +60,9 @@ export default function Description() {
              }
             {/* <Chat message={`Yeah definitely!, I'll throw this evening.`}></Chat> */}
               </div>
-            <img alt='men pic' className="w-[55%] rounded-[20px] absolute top-[30%] z-50 translate-y-[-30%] " src={MenImage}></img>
-            <img alt='women pic' className="w-[55%] rounded-[20px] absolute top-[84%] translate-y-[-84%] z-30 left-[95%]   translate-x-[-95%]" src={WomenImage}></img>
-            <img alt='dots pic' className='h-[30%] absolute top-[84%] translate-y-[-84%] left-[25%] translate-x-[-25%] ' src={design}></img>
+            <img alt='men pic' className="w-[55%] rounded-[20px] absolute top-[30%] z-50 translate-y-[-30%] max-[1127px]:top-[0%]  " src={MenImage}></img>
+            <img alt='women pic' className="w-[55%] rounded-[20px] absolute top-[84%] translate-y-[-84%] z-30 left-[95%] max-[1127px]:top-[100%]  translate-x-[-95%]" src={WomenImage}></img>
+            <img alt='dots pic' className='w-[30%] absolute top-[84%] translate-y-[-84%] left-[25%] translate-x-[-25%] ' src={design}></img>
             <img alt='ball' className='absolute top-[10%] translate-y-[-10%] left-[25%] translate-x-[-25%]  ' src={whiteball}></img>
             <img alt='ball' className=' absolute top-[84%] translate-y-[-84%] left-[5%] translate-x-[-5%]' src={orangeball}></img>
             <img alt='orange-ball' className=' absolute top-[15%] translate-y-[-15%] left-[95%] translate-x-[-95%]' src={orangeball}></img>
