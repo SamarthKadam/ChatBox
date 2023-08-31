@@ -1,6 +1,6 @@
 import React from 'react'
-import NavBar from '../components/NavBar'
-import Description from '../components/Description'
+import NavBar from '../components/HomeComponents/NavBar'
+import Description from '../components/HomeComponents/Description'
 import Service from './Service'
 export default function Home() {
    

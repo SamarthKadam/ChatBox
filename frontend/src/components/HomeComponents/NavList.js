@@ -14,8 +14,8 @@ export default function NavList() {
     <ul className='flex flex-row w-[40%] max-[1200px]:w-[60%] justify-around text-white font-Roboto font-semibold items-center max-[607px]:hidden'>
     <li><NavLink to='/' className={({ isActive }) => (isActive ? "text-[#FFCC33]" : '')}>Product</NavLink></li>
     <li><NavLink onClick={()=>{ScrollDown()}}>Services</NavLink></li>
-    <li><NavLink>Login</NavLink></li>
-    <li><NavLink>Signup</NavLink></li>
+    <li><NavLink to='/login'>Login</NavLink></li>
+    <li><NavLink to='/signup'>Signup</NavLink></li>
     </ul>
   )
 }

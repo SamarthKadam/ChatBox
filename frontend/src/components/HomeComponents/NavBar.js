@@ -1,5 +1,5 @@
 import React from 'react'
-import Logo from '../assets/images/logo-large.png'
+import Logo from '../../assets/images/logo-large.png'
 import NavList from './NavList'
 export default function NavBar() {
   return (
