@@ -5,8 +5,9 @@ import {
 } from "react-router-dom";
 import Home from './pages/Home';
 import Service from './pages/Service';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
+import Login,{action as LoginAction}from './pages/Login';
+import Signup,{action as SignupAction} from './pages/Signup';
+import HomeChat from './pages/HomeChat';
 
 const router = createBrowserRouter([
   {
@@ -19,11 +20,18 @@ const router = createBrowserRouter([
   },
   {
     path:'/login',
-    element:<Login></Login>
+    element:<Login></Login>,
+    action:LoginAction
   },
   {
     path:'/signup',
-    element:<Signup></Signup>
+    element:<Signup></Signup>,
+    action:SignupAction
+  },
+  {
+    path:'/home',
+    element:<HomeChat></HomeChat>
+
   }
 ]);
 function App() {

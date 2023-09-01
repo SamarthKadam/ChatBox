@@ -4,21 +4,18 @@ const AppError=require('./utils/AppError')
 const globalErrorHandler=require('./utils/errorController');
 const cookieParser=require('cookie-parser');
 const cors=require('cors');
+const userRouter=require('./routes/userRouter');
 
 app.use(cors());
-
 app.use(cookieParser());
-
 app.use(express.json());
 
 
 
-app.get('/',(req,res)=>{
-    res.status(200).json({
-        status:"success",
-        message:'you are all set to go'
-    })
-})
+
+app.use('/api/v1/users',userRouter);
+
+
 
 app.all("*",(req,res,next)=>{
     

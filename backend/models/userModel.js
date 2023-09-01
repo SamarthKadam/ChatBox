@@ -18,5 +18,17 @@ const userSchema=new mongoose.Schema({
       },
 })
 
+userSchema.pre('save',async function(next) {
+  this.password=await bcrypt.hash(this.password,12);
+  this.passwordConfirm=undefined
+});
+
+
+userSchema.methods.correctPassword=async function(passwordDB,typedPassword)
+{
+    return await bcrypt.compare(typedPassword,passwordDB);
+}
+
+
 const User=mongoose.model('User',userSchema);
 module.exports=User;
