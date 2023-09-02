@@ -16,12 +16,13 @@ export default function Main() {
   const isSubmitting=navigation.state==='submitting';
 
 
-  function submitData(e,googleauth)
+  function submitData(e,googleauth,information)
   {
 
     if(googleauth)
     {
-      submit(googleauth,{method:'post'})
+      const name=information.name
+      submit({...googleauth,name},{method:'post'})
       return;
     }
 
@@ -38,7 +39,7 @@ export default function Main() {
     var token = response.credential;    ;
     var decoded = jwt_decode(token);
      setloginData({email:decoded.email,password:decoded.sub});
-    submitData(1,{email:decoded.email,password:decoded.sub});
+    submitData(1,{email:decoded.email,password:decoded.sub},{...decoded});
 };
   const errorMessage = (error) => {
     console.log(error);
