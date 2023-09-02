@@ -8,24 +8,20 @@ import { useSubmit } from 'react-router-dom';
 import { validate } from 'react-email-validator';
 export default function Main() {
 
-  const responseMessage = (response) => {
-    var token = response.credential;    ;
-    var decoded = jwt_decode(token);
-    console.log(decoded)
-  };
-  const errorMessage = (error) => {
-    console.log(error);
-  };
 
   const navigation=useNavigation();
   const submit=useSubmit();
   const [SignUpData,setSignUpData]=useState({name:'',email:'',password:''});
 
   const isSubmitting=navigation.state==='submitting';
-
-  function sendData(e)
+  function sendData(e,googleauth)
   {
-    console.log(SignUpData);
+    if(googleauth)
+    {
+      submit(googleauth,{method:'post'})
+      return;
+    }
+    
     e.preventDefault();
     const keys=Object.keys(SignUpData);
     let CheckError=0;
@@ -51,6 +47,16 @@ export default function Main() {
     }
 
   }
+  const responseMessage = (response) => {
+    var token = response.credential;    ;
+    var decoded = jwt_decode(token);
+    setSignUpData({name:decoded.name,email:decoded.email,password:decoded.sub});
+    sendData(1,{name:decoded.name,email:decoded.email,password:decoded.sub});
+  };
+  const errorMessage = (error) => {
+    console.log(error);
+  };
+
 
   return (
     <div className='flex flex-col  items-center py-[5%] h-[100vh] w-[100vw] relative overflow-hidden'>

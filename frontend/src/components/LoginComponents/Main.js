@@ -10,25 +10,21 @@ import { validate } from 'react-email-validator'
 export default function Main() {
 
 
-  const responseMessage = (response) => {
-
-    var token = response.credential;    ;
-    var decoded = jwt_decode(token);
-     console.log(decoded);
-};
-  const errorMessage = (error) => {
-    console.log(error);
-  };
-
-
   const navigation=useNavigation();
   const submit=useSubmit();
   const [loginData,setloginData]=useState({email:'',password:''});
   const isSubmitting=navigation.state==='submitting';
 
 
-  function submitData(e)
+  function submitData(e,googleauth)
   {
+
+    if(googleauth)
+    {
+      submit(googleauth,{method:'post'})
+      return;
+    }
+
     e.preventDefault();
     if(!loginData.email || !validate(loginData.email) ||!loginData.password)
     {
@@ -37,8 +33,16 @@ export default function Main() {
     submit(loginData,{method:'post'})
   }
 
+  const responseMessage = (response) => {
 
-
+    var token = response.credential;    ;
+    var decoded = jwt_decode(token);
+     setloginData({email:decoded.email,password:decoded.sub});
+    submitData(1,{email:decoded.email,password:decoded.sub});
+};
+  const errorMessage = (error) => {
+    console.log(error);
+  };
 
 
 
