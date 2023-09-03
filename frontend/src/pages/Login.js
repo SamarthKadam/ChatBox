@@ -78,7 +78,6 @@ export  async function action({request})
 
   if(responseData.status==='fail')
   {
-    // notify(responseData.message);
     alert(responseData.message);
     return null;
   }

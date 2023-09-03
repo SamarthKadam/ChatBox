@@ -20,6 +20,25 @@ export async function action({request})
     password:data.get('password')
   }
 
+  const isGoogleSignIn=data.get('isGoogle');
+  if(isGoogleSignIn)
+  {
+    const gresponse=await fetch(`http://127.0.0.1:4000/api/v1/users/ispresent`,{
+      method:request.method,
+      headers:{
+        'Content-type':'application/json'
+      },
+      body:JSON.stringify(authData)
+    });
+
+    const gresponseData=await gresponse.json();
+    if(gresponseData.status==='success')
+    {
+      localStorage.setItem('jwt',gresponseData.token);
+      return redirect('/home');
+    }
+
+  }
 
   const response=await fetch(`http://127.0.0.1:4000/api/v1/users/signup`,{
     method:request.method,
