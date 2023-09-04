@@ -1,5 +1,6 @@
 const mongoose=require('mongoose');
 const bcrypt=require('bcryptjs');
+const axios=require('axios')
 
 const userSchema=new mongoose.Schema({
     name:{type:String,required:true},
@@ -16,11 +17,18 @@ const userSchema=new mongoose.Schema({
         required: true,
         default: false,
       },
+      gender:{
+        type:String,
+      }
 })
 
 userSchema.pre('save',async function(next) {
   this.password=await bcrypt.hash(this.password,12);
   this.passwordConfirm=undefined
+
+  let value=await axios.get(`https://api.genderize.io?name=${this.name.split(' ')[0]}`)
+  this.gender=value.data.gender;
+
 });
 
 

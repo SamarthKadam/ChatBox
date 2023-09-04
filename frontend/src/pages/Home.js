@@ -1,18 +1,49 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import NavBar from '../components/HomeComponents/NavBar'
 import Description from '../components/HomeComponents/Description'
 import Service from './Service'
-export default function Home() {
-   
+import { useState } from 'react'
+import LoadingPage from './LoadingPage'
 
+import { useNavigate } from 'react-router-dom'
+export default function Home() {
+
+  const navigate=useNavigate();
+  const [isLoading,setIsLoading]=useState(true);
+
+  useEffect(()=>{
+    
+    const checkIfLoggedIn=async()=>{
+      const cookie=localStorage.getItem('jwt');
+      const response=await fetch(`http://127.0.0.1:4000/api/v1/users/protect`,{
+      method:'post',
+      headers:{
+        'Content-type':'application/json',
+        'Authorization':`Bearer ${cookie}`
+      }
+    })
+  
+    const data=await response.json();
+    if(data.status==='success')
+    {
+     navigate('/home')
+    }
+    else{
+      setIsLoading(false);
+    }
+
+  }
+    checkIfLoggedIn()
+  })
 
   return (
      <div>
-     <div className='h-[100vh] px-40 py-5 max-[885px]:px-20 max-[653px]:px-14 bg-[#012478]'>
+      {isLoading&&<LoadingPage></LoadingPage>}
+      {!isLoading&&(<><div className='h-[100vh] px-40 py-5 max-[885px]:px-20 max-[653px]:px-14 bg-[#012478]'>
         <NavBar/>
         <Description></Description>
      </div>
-     <Service></Service>
+     <Service></Service></>)}
      </div>
   )
 }

@@ -8,6 +8,8 @@ import Service from './pages/Service';
 import Login,{action as LoginAction}from './pages/Login';
 import Signup,{action as SignupAction} from './pages/Signup';
 import HomeChat from './pages/HomeChat';
+import LoadingPage from './pages/LoadingPage';
+
 
 const router = createBrowserRouter([
   {
@@ -30,7 +32,7 @@ const router = createBrowserRouter([
   },
   {
     path:'/home',
-    element:<HomeChat></HomeChat>
+    element:<HomeChat></HomeChat>,
 
   }
 ]);

@@ -8,7 +8,8 @@ const HandleTypeError=(err,req)=>{
 
 const HandleDuplicateError=(err)=>{
 
-    const message=`Invalid Duplicate field ${err.keyValue.email}`;
+    // const message=`Invalid Duplicate field ${err.keyValue.email}`;
+     const message=`The email is in use please use different email`;
     return new AppError(message,400);
 }
 

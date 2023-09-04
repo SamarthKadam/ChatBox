@@ -75,3 +75,39 @@ exports.isUserPresent=catchAsync(async (req,res,next)=>{
         token,
     })
 });
+
+
+exports.protect=catchAsync(async(req,res,next)=>{
+
+    let token;
+
+    if(req.headers.authorization && req.headers.authorization.startsWith('Bearer'))
+    {
+        token=req.headers.authorization.split(' ')[1];
+    }
+
+    if(!token)
+    {
+        return next(new AppError('You are not logged in, Please log in to get access',400));
+    }
+
+    const decoded=await promisify(jwt.verify)(token,process.env.JWTSECRET);
+
+    
+    const freshUser=await User.findById(decoded.id);
+
+    if(!freshUser)
+    {
+        return next(new AppError('The user belonging to token no longer exist',401));
+    }
+    req.user=freshUser;
+   next();
+})
+
+
+exports.send=catchAsync(async(req,res,next)=>{
+
+    res.status(200).json({
+        status:'success'
+    })
+})

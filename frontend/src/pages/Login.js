@@ -58,7 +58,7 @@ export  async function action({request})
     alert('error')
     return null;
   }
-  localStorage.setItem('jwt',responseData.token);
+  localStorage.setItem('jwt',responseData2.token);
   return redirect('/home');
 
 
