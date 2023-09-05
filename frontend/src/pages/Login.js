@@ -37,7 +37,7 @@ export  async function action({request})
     if(responseData.status!=='fail')
     {
       localStorage.setItem('jwt',responseData.token);
-      return redirect('/home')
+      return redirect('/home/message')
     }
 
     const authData2={...authdata,name:isGoogleAuth}
@@ -59,7 +59,7 @@ export  async function action({request})
     return null;
   }
   localStorage.setItem('jwt',responseData2.token);
-  return redirect('/home');
+  return redirect('/home/message');
 
 
   }

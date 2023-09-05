@@ -35,7 +35,7 @@ export async function action({request})
     if(gresponseData.status==='success')
     {
       localStorage.setItem('jwt',gresponseData.token);
-      return redirect('/home');
+      return redirect('/home/message');
     }
 
   }
@@ -57,5 +57,5 @@ export async function action({request})
     return null;
   }
   localStorage.setItem('jwt',responseData.token);
-  return redirect('/home');
+  return redirect('/home/message');
 }

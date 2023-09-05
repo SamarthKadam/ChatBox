@@ -1,9 +1,10 @@
 import React from 'react'
 import logo from '../assets/images/send-mail.png'
-import Title from '../components/RootComponents/Title'
+import Title from '../components/ChatComponents/Title'
 import Menu from '../components/RootComponents/Menu'
 import { Outlet } from 'react-router-dom';
 import UserCard from '../components/RootComponents/UserCard';
+import { MotionAnimate } from 'react-motion-animate';
 
 export default function Root() {
   return (

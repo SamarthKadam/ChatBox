@@ -10,11 +10,6 @@ import InsertChartOutlinedTwoToneIcon from '@mui/icons-material/InsertChartOutli
 
 export default function Menu() {
 
-  const [activeTab,setActiveTab]=useState(0);
-  const changeTab=(value)=>{
-    setActiveTab(value);
-  }
-
   return (
     <div className='flex flex-col items-center'>
       <div className='w-[80%]'>
