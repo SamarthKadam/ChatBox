@@ -16,7 +16,7 @@ export default function HomeChat() {
     <ChatBar key={3}></ChatBar>
     <ChatBar key={4}></ChatBar>
     </div>
-    <div className='bg-[#F6F8FC] flex flex-col'>
+    <div className='bg-[#F6F8FC] flex flex-col relative'>
       <ChatMessages></ChatMessages>
       <Type></Type>
       </div> 
