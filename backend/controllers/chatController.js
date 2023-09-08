@@ -69,3 +69,99 @@ exports.fetchChats=catchAsync(async(req,res,next)=>{
         next(new AppError("Something went wrong",400))
     }
 })
+
+exports.createGroupChat=catchAsync(async(req,res,next)=>{
+
+    if(!req.body.users||!req.body.name){
+        return next(new AppError('Please Fill all the fields',400));
+    }
+
+
+    var users=JSON.parse(req.body.users);
+    if(users.length<2)
+    {
+        return next(new AppError("Group should require atleast 3 users",400))
+    }
+    users.push(req.user);
+
+
+    try{
+        const groupChat=await Chat.create({
+            chatName:req.body.name,
+            users:users,
+            isGroupChat:true,
+            groupAdmin:req.user
+        })
+
+        const fgroupChat=await Chat.findOne({_id:groupChat._id}).populate('users','-password').populate('groupAdmin','-password');
+        
+        res.status(200).json({
+            status:'success',
+            fgroupChat
+        })
+
+
+    }catch(error)
+    {
+        next(new AppError(error,400));
+    }
+
+})
+
+
+exports.renameGroup=catchAsync(async(req,res,next)=>{
+
+    const {chatId,chatName}=req.body;
+    const updatedChat=await Chat.findByIdAndUpdate(chatId,{
+        chatName
+    },
+    {
+        new:true
+    }).populate('users','-password').populate('groupAdmin','-password');
+
+    if(!updatedChat)
+    return next(new AppError("Something went wrong",400));
+
+    res.status(200).json({
+        status:'success',
+        updatedChat
+    })
+
+})
+
+exports.AddPersonGroup=catchAsync(async(req,res,next)=>{
+
+    const {chatId,userId}=req.body;
+    const added=await Chat.findByIdAndUpdate(chatId,{
+        $push:{users:userId},
+    },{
+        new:true
+    }).populate('users','-password').populate('groupAdmin','-password');
+
+    if(!added)
+    return next(new AppError("User not added",400));
+
+    res.status(200).json({
+        status:'success',
+        added
+    })
+})
+
+
+exports.RemovePersonGroup=catchAsync(async(req,res,next)=>{
+
+    const {chatId,userId}=req.body;
+    const removed= await Chat.findByIdAndUpdate(chatId,{
+        $pull:{users:userId},
+    },{
+        new:true
+    }).populate('users','-password').populate('groupAdmin','-password');
+
+    if(!removed)
+    return next(new AppError("User not added",400));
+
+    res.status(200).json({
+        status:'success',
+        removed
+    })
+})
