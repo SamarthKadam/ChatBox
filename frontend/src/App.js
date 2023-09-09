@@ -13,6 +13,7 @@ import Dashboard from './pages/Dashboard';
 import Settings from './pages/Settings';
 
 import Root from './pages/Root';
+import Search from './pages/Search';
 
 
 const router = createBrowserRouter([
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path:"settings",
         element:<Settings></Settings>
+      },
+      {
+        path:"search",
+        element:<Search></Search>
       }
     ]
 

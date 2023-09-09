@@ -7,7 +7,7 @@ import Type from '../components/ChatComponents/Type';
 
 export default function HomeChat() {
   return (
-    <div className='grid w-[80vw] grid-rows-[1fr,7fr] grid-cols-[3.5fr,7fr] '>
+    <div className='grid w-[80vw] relative grid-rows-[1fr,7fr] grid-cols-[3.5fr,7fr] '>
     <TopBar></TopBar>
     <div className='flex flex-row items-center  border-[1px] border-[#f5f5f5]'><ChatTitle></ChatTitle></div>
     <div className=' border-[1px] border-[#f5f5f5]'>

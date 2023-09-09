@@ -1,12 +1,6 @@
 
 import * as React from 'react';
-import { useState } from 'react';
 import Item from './Item';
-import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
-import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
-import { NavLink } from 'react-router-dom';
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import InsertChartOutlinedTwoToneIcon from '@mui/icons-material/InsertChartOutlinedTwoTone';
 
 export default function Menu() {
 
@@ -16,7 +10,8 @@ export default function Menu() {
       <Item val={0} to='dashboard' text='Dashboard'></Item>
       <Item val={1} to='analitycs' text='Analitycs'></Item>
       <Item val={2} to='message' text='Messages'></Item>
-      <Item val={3} to='settings' text='Settings'></Item>
+      <Item val={3} to='search' text='Search'></Item>
+      <Item val={4} to='settings' text='Settings'></Item>
       </div>
     </div>
   );

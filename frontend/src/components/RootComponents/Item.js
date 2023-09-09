@@ -5,7 +5,8 @@ import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 import { NavLink } from 'react-router-dom';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import InsertChartOutlinedTwoToneIcon from '@mui/icons-material/InsertChartOutlinedTwoTone';
-const iconComponent=[<GridViewOutlinedIcon/>,<InsertChartOutlinedTwoToneIcon/>,<ForumOutlinedIcon/>,<SettingsOutlinedIcon/>]
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+const iconComponent=[<GridViewOutlinedIcon/>,<InsertChartOutlinedTwoToneIcon/>,<ForumOutlinedIcon/>,<SearchOutlinedIcon/>,<SettingsOutlinedIcon/>]
 export default function Item({text,to,val}) {
   return (
     <MotionAnimate reset={true}>
