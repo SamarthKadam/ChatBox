@@ -4,9 +4,9 @@ import Title from '../components/ChatComponents/Title'
 import Menu from '../components/RootComponents/Menu'
 import { Outlet } from 'react-router-dom';
 import UserCard from '../components/RootComponents/UserCard';
-import { MotionAnimate } from 'react-motion-animate';
-
 export default function Root() {
+
+
   return (
     <div className='h-[100vh] flex flex-row'>
     <div className='h-[100vh] w-[20vw] grid grid-rows-[1fr,6fr,0.8fr]'>

@@ -4,8 +4,9 @@ import ChatBar from '../components/ChatComponents/ChatBar';
 import ChatTitle from '../components/ChatComponents/ChatTitle';
 import ChatMessages from '../components/ChatComponents/ChatMessages';
 import Type from '../components/ChatComponents/Type';
-
 export default function HomeChat() {
+
+
   return (
     <div className='grid w-[80vw] relative grid-rows-[1fr,7fr] grid-cols-[3.5fr,7fr] '>
     <TopBar></TopBar>
