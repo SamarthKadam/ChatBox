@@ -19,7 +19,8 @@ exports.signup=catchAsync(async(req,res,next)=>{
         name:req.body.name,
         email:req.body.email,
         password:req.body.password,
-        confirmEmail:req.body.confirmEmail 
+        confirmEmail:req.body.confirmEmail,
+        pic:req.body.pic
     })
     const token=signToken(user._id);
     res.cookie('jwt',token,{

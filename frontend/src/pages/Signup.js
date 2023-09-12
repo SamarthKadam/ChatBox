@@ -17,7 +17,8 @@ export async function action({request})
   const authData={
     name:data.get('name'),
     email:data.get('email'),
-    password:data.get('password')
+    password:data.get('password'),
+    pic:data.get('pic')
   }
 
   const isGoogleSignIn=data.get('isGoogle');

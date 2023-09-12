@@ -17,7 +17,8 @@ export  async function action({request})
   const data=await request.formData();
   const authdata={
     email:data.get('email'),
-    password:data.get('password')
+    password:data.get('password'),
+    pic:data.get('pic')
   }
 
   const isGoogleAuth=data.get('name');

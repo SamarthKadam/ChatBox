@@ -22,7 +22,9 @@ export default function Main() {
     if(googleauth)
     {
       const name=information.name
-      submit({...googleauth,name},{method:'post'})
+      const pic=information.picture
+
+      submit({...googleauth,name,pic},{method:'post'})
       return;
     }
 
@@ -38,6 +40,7 @@ export default function Main() {
 
     var token = response.credential;    ;
     var decoded = jwt_decode(token);
+    console.log(decoded)
      setloginData({email:decoded.email,password:decoded.sub});
     submitData(1,{email:decoded.email,password:decoded.sub},{...decoded});
 };

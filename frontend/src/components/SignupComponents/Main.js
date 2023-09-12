@@ -52,7 +52,7 @@ export default function Main() {
     var decoded = jwt_decode(token);
     console.log(decoded);
     setSignUpData({name:decoded.name,email:decoded.email,password:decoded.sub});
-    sendData(1,{name:decoded.name,email:decoded.email,password:decoded.sub,isGoogle:true});
+    sendData(1,{name:decoded.name,email:decoded.email,password:decoded.sub,isGoogle:true,pic:decoded.picture});
   };
   const errorMessage = (error) => {
     console.log(error);
