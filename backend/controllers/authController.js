@@ -109,6 +109,7 @@ exports.protect=catchAsync(async(req,res,next)=>{
 exports.send=catchAsync(async(req,res,next)=>{
 
     res.status(200).json({
-        status:'success'
+        status:'success',
+        user:req.user
     })
 })

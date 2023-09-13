@@ -1,8 +1,8 @@
-import taskReducer from "./taskReducer";
 import { combineReducers } from "redux";
+import userReducer from "./userReducer";
 
 const rootReducer = combineReducers({
-  tasks: taskReducer,
+  user:userReducer
 });
 
 export default rootReducer;

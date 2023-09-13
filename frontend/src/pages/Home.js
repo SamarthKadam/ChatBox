@@ -34,7 +34,7 @@ export default function Home() {
 
   }
     checkIfLoggedIn()
-  })
+  },[navigate])
 
   return (
      <div>

@@ -12,7 +12,7 @@ import Analitycs from './pages/Analitycs';
 import Dashboard from './pages/Dashboard';
 import Settings from './pages/Settings';
 
-import Root from './pages/Root';
+import Root,{loader as loadingAction} from './pages/Root';
 import Search from './pages/Search';
 
 
@@ -38,6 +38,7 @@ const router = createBrowserRouter([
   {
     path:'home',
     element:<Root></Root>,
+    loader:loadingAction,
     children:[
       {
         path:'message',

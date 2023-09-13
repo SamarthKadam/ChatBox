@@ -4,8 +4,43 @@ import Title from '../components/ChatComponents/Title'
 import Menu from '../components/RootComponents/Menu'
 import { Outlet } from 'react-router-dom';
 import UserCard from '../components/RootComponents/UserCard';
-export default function Root() {
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../services/Actions/User/actions';
+import { redirect } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 
+
+export default function Root() {
+ const dispatch=useDispatch();
+  const navigate=useNavigate();
+  const data=useLoaderData()
+  dispatch(setUser(data));
+
+//   useEffect(()=>{
+    
+//     const checkIfTokenExpired=async()=>{
+//       const cookie=localStorage.getItem('jwt');
+//       const response=await fetch(`http://127.0.0.1:4000/api/v1/users/protect`,{
+//       method:'post',
+//       headers:{
+//         'Content-type':'application/json',
+//         'Authorization':`Bearer ${cookie}`
+//       }
+//     })
+  
+//     const data=await response.json();
+//     if(data.status==='success')
+//     {
+//       dispatch(setUser(data.user));
+//     }
+//     else{
+//       navigate('/');
+//     }
+//   }
+//     checkIfTokenExpired()
+//   },[dispatch,navigate])
 
   return (
     <div className='h-[100vh] flex flex-row'>
@@ -24,3 +59,22 @@ export default function Root() {
     </div>
   )
 }
+
+export  async function loader({request})
+{
+    const cookie=localStorage.getItem('jwt');
+    const response=await fetch(`http://127.0.0.1:4000/api/v1/users/protect`,{
+    method:'post',
+    headers:{
+      'Content-type':'application/json',
+      'Authorization':`Bearer ${cookie}`
+    }
+  })
+
+  const data=await response.json();
+  if(data.status!=='success')
+  {
+    return redirect('/');
+  }
+  return data.user;
+} 
