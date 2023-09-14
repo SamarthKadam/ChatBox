@@ -8,7 +8,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 
-export default function SearchBar({Search}) {
+export default function SearchBar({onChange,searchHandler}) {
   return (
     <div className=' h-[10%] w-[100%] flex box-border justify-center py-2 relative'>
         {/* <SearchOutlined className='absolute l-[0%]'></SearchOutlined>
@@ -16,12 +16,13 @@ export default function SearchBar({Search}) {
         <FormControl sx={{ m: 1, width: '60%' }} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">Search</InputLabel>
           <OutlinedInput
-          onChange={Search}
+          onChange={onChange}
             id="outlined-adornment-password"
             type='text'
+            spellCheck={false}
             endAdornment={
               <InputAdornment position="end">
-                <IconButton>
+                <IconButton onClick={searchHandler}>
                 <SearchOutlined></SearchOutlined>
                 </IconButton>
             </InputAdornment>
