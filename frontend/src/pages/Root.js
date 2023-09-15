@@ -5,7 +5,6 @@ import Menu from '../components/RootComponents/Menu'
 import { Outlet } from 'react-router-dom';
 import UserCard from '../components/RootComponents/UserCard';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../services/Actions/User/actions';
 import { redirect } from 'react-router-dom';
@@ -14,9 +13,12 @@ import { useLoaderData } from 'react-router-dom';
 
 export default function Root() {
  const dispatch=useDispatch();
-  const navigate=useNavigate();
   const data=useLoaderData()
-  dispatch(setUser(data));
+
+  useEffect(()=>{
+    dispatch(setUser(data));
+  },[dispatch,data])
+
 
 //   useEffect(()=>{
     
@@ -47,7 +49,7 @@ export default function Root() {
     <div className='h-[100vh] w-[20vw] grid grid-rows-[1fr,6fr,0.8fr]'>
     <div className=" flex  flex-row  items-center border-[1px] border-[#f5f5f5]">
       <div className='flex flex-row ml-[15%]  items-center'>
-     <img className="h-8 mr-1" src={logo}></img> <Title title='ChatBox'></Title>
+     <img alt='logo' className="h-8 mr-1" src={logo}></img> <Title title='ChatBox'></Title>
       </div>
     </div>
     <div className='border-[1px] border-[#f5f5f5]'><Menu></Menu></div>
@@ -72,6 +74,11 @@ export  async function loader({request})
   })
 
   const data=await response.json();
+
+  const parsed=JSON.stringify(data.user);
+  localStorage.setItem('info',parsed);
+
+
   if(data.status!=='success')
   {
     return redirect('/');

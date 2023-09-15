@@ -4,8 +4,13 @@ import Loading from '../components/SearchComponents/Loading'
 import User from '../components/SearchComponents/User'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { AddUser } from '../services/Actions/Chat/action';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 export default function Search() {
+
+  const dispatch=useDispatch();
+  const navigate=useNavigate()
 
   const notify = (value)=>{
     return toast.info(`Added ${value}`, {
@@ -62,9 +67,13 @@ export default function Search() {
 
   }
 
-  const accessChatHandler=(value)=>{
-    notify(value);
-  }
+    const accessChatHandler=(values)=>{
+      dispatch(AddUser(values))
+      notify(values.name);
+      setTimeout(()=>{
+        navigate('/home/message')
+      },2000)
+    }
 
   return (
     <div className='w-[80vw] relative flex flex-col'>

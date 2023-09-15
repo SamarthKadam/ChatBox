@@ -3,7 +3,8 @@ import { Avatar } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 export default function UserCard() {
-  const data=useSelector((state)=>state.user.userInfo)
+  // const data=useSelector((state)=>state.user.userInfo)
+  const data=JSON.parse(localStorage.getItem('info'));
   const navigate=useNavigate();
 
   const logoutHandler=()=>{

@@ -1,15 +1,15 @@
 const chatState = {
     AllChats:[],
-    activeChat
+    activeChat:null
     };
     
-    const userReducer = (state = userState, action) => {
+    const chatReducer= (state = chatState, action) => {
       switch (action.type) {
   
-        case 'SET_USER':
+        case 'ADD_USER':
+        state.AllChats.unshift(action.payload);
         return {
           ...state,
-          userInfo:action.payload
         }
   
         default:
@@ -18,4 +18,4 @@ const chatState = {
     };
     
   
-    export default userReducer
+  export default chatReducer;

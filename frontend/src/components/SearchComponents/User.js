@@ -2,12 +2,13 @@ import React from 'react'
 import { Avatar } from '@mui/material'
 import { MotionAnimate } from 'react-motion-animate'
 import image from '../../assets/images/user-img.jpg'
+import { useEffect } from 'react'
 
 export default function User({values,accessChat}) {
-
-const accessChatHandler=()=>{
-    accessChat(values.name)
-  }
+  
+    const accessChatHandler=()=>{
+      accessChat(values)
+    }
 
   return (
     <MotionAnimate reset={true}>  
