@@ -5,7 +5,6 @@ import image from '../../assets/images/user-img.jpg'
 import { useEffect } from 'react'
 
 export default function User({values,accessChat}) {
-  
     const accessChatHandler=()=>{
       accessChat(values)
     }

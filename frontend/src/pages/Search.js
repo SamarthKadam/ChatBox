@@ -27,19 +27,19 @@ export default function Search() {
 
   const[isLoading,SetisLoading]=useState(false);
   const [users,SetUsers]=useState([])
-  const[query,setQuery]=useState('');
+  // const[query,setQuery]=useState('');
   const[resultsEmpty,setResultsEmpty]=useState(false);
 
 
   const onChangeTextHandler=(e)=>{
-    setQuery(e.target.value);
+    // setQuery(e.target.value);
     if(!e.target.value)
     {
       return;
     }
 
    const timeout=setTimeout(() => {
-      searchHandler()
+      searchHandler(e.target.value)
     }, 1000);
 
     return ()=>{
@@ -47,11 +47,11 @@ export default function Search() {
     }
   }
 
-  const searchHandler=async()=>{
+  const searchHandler=async(value)=>{
 
     SetisLoading(true);
     const cookie=localStorage.getItem('jwt');
-    const response=await fetch(`http://127.0.0.1:4000/api/v1/users?search=${query}`,{
+    const response=await fetch(`http://127.0.0.1:4000/api/v1/users?search=${value}`,{
     headers:{
       'Content-type':'application/json',
       'Authorization':`Bearer ${cookie}`
@@ -59,6 +59,7 @@ export default function Search() {
   })
   const data=await response.json();
   SetisLoading(false);
+  data.users.length=data.users.length>2?data.users.length=2:data.users.length;
   SetUsers(data.users)
   if(data.users.length===0)
   setResultsEmpty(true)
