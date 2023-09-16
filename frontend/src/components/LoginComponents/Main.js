@@ -40,7 +40,6 @@ export default function Main() {
 
     var token = response.credential;    ;
     var decoded = jwt_decode(token);
-    console.log(decoded)
      setloginData({email:decoded.email,password:decoded.sub});
     submitData(1,{email:decoded.email,password:decoded.sub},{...decoded});
 };

@@ -50,7 +50,6 @@ export default function Main() {
   const responseMessage = (response) => {
     var token = response.credential;    ;
     var decoded = jwt_decode(token);
-    console.log(decoded);
     setSignUpData({name:decoded.name,email:decoded.email,password:decoded.sub});
     sendData(1,{name:decoded.name,email:decoded.email,password:decoded.sub,isGoogle:true,pic:decoded.picture});
   };

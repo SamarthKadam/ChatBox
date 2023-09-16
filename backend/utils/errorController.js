@@ -23,7 +23,6 @@ const HandleValidationError=(err)=>{
 module.exports=(err,req,res,next)=>{
 
     let error;
-    console.log(err);
     if(err.message==='TypeError')
     {
      error=HandleTypeError(err,req);

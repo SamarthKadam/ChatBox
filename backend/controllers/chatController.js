@@ -2,11 +2,19 @@ const Chat=require('../models/chatModel')
 const catchAsync=require('../utils/catchAsync');
 const AppError = require('../utils/AppError');
 const User = require('../models/userModel');
+const { ObjectId } = require('mongodb');
 
 
 exports.acessChat=catchAsync(async(req,res,next)=>{
 
     const {userId}=req.body;
+
+     const objectId=req.user._id;
+     const stringId = objectId.toString();
+    req.user._id=stringId;
+
+
+
     if(!userId)
     {
         return next(new AppError("Something went wrong",400))
@@ -14,8 +22,9 @@ exports.acessChat=catchAsync(async(req,res,next)=>{
 
     var isChat=await Chat.find({isGroupChat:false,$and:[
         {
-            users:{$elemMatch:{$eq:userId}},
-            users:{$elemMatch:{$eq:req.user._id}}
+            users:{$elemMatch:{$eq:req.user._id}},
+        },{
+            users:{$elemMatch:{$eq:userId}}
         }
     ]}).populate('users','-password').populate('latestMessage');
 
@@ -50,6 +59,8 @@ exports.acessChat=catchAsync(async(req,res,next)=>{
 
 
 exports.fetchChats=catchAsync(async(req,res,next)=>{
+
+
     try{
         Chat.find({users:{$elemMatch:{$eq:req.user._id}}}).populate('users',"-password").populate('groupAdmin','-password').populate('latestMessage').sort({updatedAt:-1})
         .then(async(data)=>{

@@ -8,7 +8,6 @@ export default function UserCard() {
   const navigate=useNavigate();
 
   const logoutHandler=()=>{
-    console.log("this is clicked");
     localStorage.removeItem('jwt');
     navigate('/');
   }

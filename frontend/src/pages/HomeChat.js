@@ -5,10 +5,34 @@ import ChatTitle from '../components/ChatComponents/ChatTitle';
 import ChatMessages from '../components/ChatComponents/ChatMessages';
 import Type from '../components/ChatComponents/Type';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { InitializeChat } from '../services/Actions/Chat/action';
 export default function HomeChat() {
 
   const state=useSelector((state)=>state.chat.AllChats)
-  console.log(state);
+  const dispatch=useDispatch();
+
+  useEffect(()=>{
+
+    const getAllChats=async()=>{
+
+      const cookie=localStorage.getItem('jwt');
+      const response=await fetch(`http://127.0.0.1:4000/api/v1/chat`,{
+        headers:{
+          'Content-type':'application/json',
+          'Authorization':`Bearer ${cookie}`
+        }
+      })
+      const data=await response.json();
+      dispatch(InitializeChat(data.data));
+      
+    }
+
+  getAllChats();
+
+
+  },[])
 
 
   return (
@@ -16,7 +40,7 @@ export default function HomeChat() {
     <TopBar></TopBar>
     <div className='flex flex-row items-center  border-[1px] border-[#f5f5f5]'><ChatTitle></ChatTitle></div>
     <div className=' border-[1px] border-[#f5f5f5]'>
-    {state.map((data,index)=>{
+    {state&&state.map((data,index)=>{
       return   <ChatBar data={data} key={index}></ChatBar>
     })}
     </div>

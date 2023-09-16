@@ -7,10 +7,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { AddUser } from '../services/Actions/Chat/action';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 export default function Search() {
 
   const dispatch=useDispatch();
   const navigate=useNavigate()
+  const state=useSelector((state)=>state.chat.AllChats)
 
   const notify = (value)=>{
     return toast.info(`Added ${value}`, {
@@ -69,7 +71,7 @@ export default function Search() {
   }
 
     const accessChatHandler=(values)=>{
-      dispatch(AddUser(values))
+      dispatch(AddUser(values,state))
       notify(values.name);
       setTimeout(()=>{
         navigate('/home/message')

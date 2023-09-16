@@ -22,7 +22,6 @@ export  async function action({request})
   }
 
   const isGoogleAuth=data.get('name');
-  console.log(isGoogleAuth);
   if(isGoogleAuth){
     const response=await fetch(`http://127.0.0.1:4000/api/v1/users/login`,{
       method:request.method,
@@ -33,7 +32,6 @@ export  async function action({request})
     })
   
     const responseData=await response.json();
-    console.log(responseData);
   
     if(responseData.status!=='fail')
     {
@@ -42,7 +40,6 @@ export  async function action({request})
     }
 
     const authData2={...authdata,name:isGoogleAuth}
-    console.log(authData2);
     const response2=await fetch(`http://127.0.0.1:4000/api/v1/users/signup`,{
       method:request.method,
       headers:{
@@ -55,7 +52,6 @@ export  async function action({request})
 
   if(responseData2.status==='fail')
   {
-    console.log(responseData2);
     alert('error')
     return null;
   }
@@ -75,7 +71,6 @@ export  async function action({request})
   })
 
   const responseData=await response.json();
-  console.log(responseData);
 
   if(responseData.status==='fail')
   {

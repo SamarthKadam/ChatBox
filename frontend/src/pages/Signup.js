@@ -53,7 +53,6 @@ export async function action({request})
 
   if(responseData.status==='fail')
   {
-    console.log(responseData);
     alert('error')
     return null;
   }
