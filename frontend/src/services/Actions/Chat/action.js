@@ -10,14 +10,7 @@ export const AddUser= (user,users) => {
 
   return async (dispatch,getState)=>{
 
-    const present=users.find((data)=>data._id===user._id);    
-    if(present!==undefined)
-    {
-      console.log("Yes it is present so don't make an http request");
-      dispatch({type:"SKIP"})
-    }
-    else{
-
+    console.log('then external');
       const info={userId:user._id};
       const cookie=localStorage.getItem('jwt');
       const response=await fetch(`http://127.0.0.1:4000/api/v1/chat/`,{
@@ -34,7 +27,6 @@ export const AddUser= (user,users) => {
         type : 'ADD_USER',
         payload : {...data}
       });
-    }
 }
 };
 

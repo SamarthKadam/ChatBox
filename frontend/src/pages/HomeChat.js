@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { InitializeChat } from '../services/Actions/Chat/action';
+import LoadingPage from './LoadingPage';
 export default function HomeChat() {
 
   const state=useSelector((state)=>state.chat.AllChats)
@@ -25,6 +26,7 @@ export default function HomeChat() {
         }
       })
       const data=await response.json();
+      console.log(data.data);
       dispatch(InitializeChat(data.data));
       
     }
