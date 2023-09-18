@@ -79,7 +79,7 @@ export  async function action({request})
   }
 
   localStorage.setItem('jwt',responseData.token);
-  return redirect('/home')
+  return redirect('/home/message')
 
 
 } 

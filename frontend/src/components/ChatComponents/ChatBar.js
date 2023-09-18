@@ -7,8 +7,6 @@ import { getSender } from '../../utils/Reusable'
 export default function ChatBar({data}) {
 
   const user=getSender(data.users);
-  console.log("this is logged user");
-  console.log(user);
 
   return (
     <div className='flex flex-row items-center justify-between rounded-md cursor-pointer mx-[2%] my-[5%] hover:bg-gray-100 px-[5%] py-[2%]'>

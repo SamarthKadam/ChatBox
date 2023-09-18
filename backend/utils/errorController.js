@@ -22,6 +22,8 @@ const HandleValidationError=(err)=>{
 
 module.exports=(err,req,res,next)=>{
 
+    console.log(err);
+
     let error;
     if(err.message==='TypeError')
     {

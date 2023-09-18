@@ -1,6 +1,7 @@
 const User=require('../models/userModel');
 const catchAsync=require('../utils/catchAsync');
 const AppError = require('../utils/AppError');
+const Chat=require('../models/chatModel');
 
 exports.getAllUsers=catchAsync(async(req,res)=>{
 
@@ -12,4 +13,9 @@ exports.getAllUsers=catchAsync(async(req,res)=>{
         users
     })
 
+})
+
+exports.AvailableUsersToCreateGroup=catchAsync(async(req,res)=>{
+
+    
 })

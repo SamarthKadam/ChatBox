@@ -7,12 +7,19 @@ import Type from '../components/ChatComponents/Type';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import { useState } from 'react';
 import { InitializeChat } from '../services/Actions/Chat/action';
-import LoadingPage from './LoadingPage';
+import BasicModal from '../components/ChatComponents/BasicModel';
 export default function HomeChat() {
 
   const state=useSelector((state)=>state.chat.AllChats)
   const dispatch=useDispatch();
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+  }
+
 
   useEffect(()=>{
 
@@ -37,9 +44,18 @@ export default function HomeChat() {
   },[])
 
 
+  const createGroupChat=()=>{
+    handleOpen();
+  }
+
+
+
+
+
   return (
     <div className='grid w-[80vw] relative grid-rows-[1fr,7fr] grid-cols-[3.5fr,7fr] '>
-    <TopBar></TopBar>
+    <BasicModal handleClose={handleClose} open={open}></BasicModal>
+    <TopBar createGroup={createGroupChat}></TopBar>
     <div className='flex flex-row items-center  border-[1px] border-[#f5f5f5]'><ChatTitle></ChatTitle></div>
     <div className=' border-[1px] border-[#f5f5f5]'>
     {state&&state.map((data,index)=>{
