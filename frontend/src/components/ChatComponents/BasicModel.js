@@ -4,6 +4,7 @@ import Modal from '@mui/material/Modal';
 import GroupUserList from './GroupUserList';
 import { useState } from 'react';
 import User from './User';
+import Loading from './Loading';
 
 const style = {
   position: 'absolute',
@@ -26,8 +27,10 @@ export default function BasicModal({handleClose,open}) {
   const [searchResults,setSearchResults]=useState([]);
   const [isEmptyResults,setIsEmptyResults]=useState(false);
   const [selectedUsers,setSelectedUsers]=useState([]);
+  const [isLoading,setIsLoading]=useState(false);
 
   const searchHandler=async(value)=>{
+    setIsLoading(true)
     const cookie=localStorage.getItem('jwt');
     const response=await fetch(`http://127.0.0.1:4000/api/v1/users?search=${value}`,{
     headers:{
@@ -37,6 +40,8 @@ export default function BasicModal({handleClose,open}) {
   })
   const data=await response.json();
   data.users.length=data.users.length>2?data.users.length=2:data.users.length;
+
+  setIsLoading(false);
 
   if(data.users.length==0)
   setIsEmptyResults(true)
@@ -52,6 +57,15 @@ export default function BasicModal({handleClose,open}) {
     setTimeout(()=>{
       searchHandler(e.target.value)
     },2000)
+  }
+
+
+  const addUserToGroup=(values)=>{
+    setSelectedUsers((users)=>[...users,values])
+  }
+
+  const removeUserFromGroup=()=>{
+
   }
 
 
@@ -77,8 +91,12 @@ export default function BasicModal({handleClose,open}) {
           <div className='text-2xl font-Poppins'>Create a group Chat</div>
           <input spellCheck='false' placeholder='Chat Name' className=' text-lg h-[16%] w-[100%] mt-5 font-thin px-1 py-2 outline-none bg-[#F6F8FC]'></input>
           <input onChange={inputHandler} spellCheck="false" placeholder='Add Users: Steve,Jeff,Makr' className='text-lg h-[16%] w-[100%] px-1 py-2 mt-3 outline-none font-thin bg-[#F6F8FC]'></input>
-          <div className='w-[100%]'>{searchResults.map((data,index)=><User values={data} key={index}></User>)}{isEmptyResults?<p>No results found</p>:null}</div>
-          <GroupUserList></GroupUserList>
+          <div className='w-[100%]'>
+            {!isLoading&&searchResults&&searchResults.length>0&&searchResults.map((data,index)=><User add={addUserToGroup} remove={removeUserFromGroup} values={data} key={index}></User>)}
+            {!isLoading&&isEmptyResults?<p>No results found</p>:null}
+            {isLoading&&<Loading></Loading>}
+            </div>
+         {selectedUsers.length>0&&<GroupUserList users={selectedUsers}></GroupUserList>}
           <button onClick={handleClose} className='bg-[#0147FF] text-white text-xl px-4 py-2 mt-4 rounded-lg'>Create Chat</button>
         </Box>
       </Modal>
