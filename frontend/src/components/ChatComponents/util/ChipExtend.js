@@ -4,12 +4,12 @@ import Avatar from '@mui/material/Avatar'
 import img from '../../../assets/images/user-img.jpg'
 import {randomColor} from 'randomcolor'
 
-export default function ChipExtend({value}) {
+export default function ChipExtend({value,remove}) {
 
     const color=randomColor({luminosity:"dark"});
     console.log(value);
     const handleDelete=()=>{
-
+      remove(value._id);
     }
 
 

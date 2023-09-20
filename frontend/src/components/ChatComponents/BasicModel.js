@@ -43,7 +43,7 @@ export default function BasicModal({handleClose,open}) {
 
   setIsLoading(false);
 
-  if(data.users.length==0)
+  if(data.users.length===0)
   setIsEmptyResults(true)
   else
   setIsEmptyResults(false);
@@ -61,10 +61,26 @@ export default function BasicModal({handleClose,open}) {
 
 
   const addUserToGroup=(values)=>{
-    setSelectedUsers((users)=>[...users,values])
+
+
+    setSelectedUsers((users)=>{
+
+    const present=users.find((data)=>data._id===values._id);
+    if(present!==undefined)
+    return [...users];
+
+    return [...users,values]
+    } 
+      )
   }
 
-  const removeUserFromGroup=()=>{
+  const removeUserFromGroup=(value)=>{
+
+    console.log("this id needs to be deleted",value);
+    setSelectedUsers((users)=>{
+     const result=users.filter((data)=>data._id!==value)
+      return result;
+    })
 
   }
 
@@ -92,11 +108,11 @@ export default function BasicModal({handleClose,open}) {
           <input spellCheck='false' placeholder='Chat Name' className=' text-lg h-[16%] w-[100%] mt-5 font-thin px-1 py-2 outline-none bg-[#F6F8FC]'></input>
           <input onChange={inputHandler} spellCheck="false" placeholder='Add Users: Steve,Jeff,Makr' className='text-lg h-[16%] w-[100%] px-1 py-2 mt-3 outline-none font-thin bg-[#F6F8FC]'></input>
           <div className='w-[100%]'>
-            {!isLoading&&searchResults&&searchResults.length>0&&searchResults.map((data,index)=><User add={addUserToGroup} remove={removeUserFromGroup} values={data} key={index}></User>)}
+            {!isLoading&&searchResults&&searchResults.length>0&&searchResults.map((data,index)=><User add={addUserToGroup} values={data} key={index}></User>)}
             {!isLoading&&isEmptyResults?<p>No results found</p>:null}
             {isLoading&&<Loading></Loading>}
             </div>
-         {selectedUsers.length>0&&<GroupUserList users={selectedUsers}></GroupUserList>}
+         {selectedUsers&&selectedUsers.length>0&&<GroupUserList remove={removeUserFromGroup} users={selectedUsers}></GroupUserList>}
           <button onClick={handleClose} className='bg-[#0147FF] text-white text-xl px-4 py-2 mt-4 rounded-lg'>Create Chat</button>
         </Box>
       </Modal>
