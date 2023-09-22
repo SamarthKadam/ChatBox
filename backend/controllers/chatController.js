@@ -87,14 +87,13 @@ exports.createGroupChat=catchAsync(async(req,res,next)=>{
         return next(new AppError('Please Fill all the fields',400));
     }
 
-
     var users=JSON.parse(req.body.users);
     if(users.length<2)
     {
         return next(new AppError("Group should require atleast 3 users",400))
     }
     users.push(req.user);
-
+    console.log("Does it go here?");
 
     try{
         const groupChat=await Chat.create({

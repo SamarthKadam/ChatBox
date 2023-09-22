@@ -10,7 +10,6 @@ export const AddUser= (user,users) => {
 
   return async (dispatch,getState)=>{
 
-    console.log('then external');
       const info={userId:user._id};
       const cookie=localStorage.getItem('jwt');
       const response=await fetch(`http://127.0.0.1:4000/api/v1/chat/`,{

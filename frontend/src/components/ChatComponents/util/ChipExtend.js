@@ -7,7 +7,6 @@ import {randomColor} from 'randomcolor'
 export default function ChipExtend({value,remove}) {
 
     const color=randomColor({luminosity:"dark"});
-    console.log(value);
     const handleDelete=()=>{
       remove(value._id);
     }
