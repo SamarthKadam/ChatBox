@@ -19,6 +19,12 @@ const chatState = {
         return  {
           ...state
         }
+
+        case "ADD_GROUP":
+        state.AllChats.unshift(action.payload)
+        return {
+          ...state
+        }
   
         default:
           return state;

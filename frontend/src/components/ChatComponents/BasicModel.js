@@ -6,6 +6,8 @@ import { useState } from 'react';
 import User from './User';
 import Loading from './Loading';
 import { useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { AddGroup } from '../../services/Actions/Chat/action';
 
 const style = {
   position: 'absolute',
@@ -30,6 +32,7 @@ export default function BasicModal({handleClose,open}) {
   const [selectedUsers,setSelectedUsers]=useState([]);
   const [isLoading,setIsLoading]=useState(false);
   const Valref=useRef();
+  const dispatch=useDispatch();
 
   const searchHandler=async(value)=>{
     setIsLoading(true)
@@ -89,9 +92,8 @@ export default function BasicModal({handleClose,open}) {
     const userdata=selectedUsers.map((data)=>data._id);
     const bodyData={
       name:Valref.current.value,
-      users:userdata
+      users:JSON.stringify(userdata)
     }
-
 
     const cookie=localStorage.getItem('jwt');
     const response=await fetch(`http://127.0.0.1:4000/api/v1/chat/group`,{
@@ -103,7 +105,7 @@ export default function BasicModal({handleClose,open}) {
       body:JSON.stringify(bodyData)
     })
     const data=await response.json();
-    console.log(data);
+    dispatch(AddGroup(data.fgroupChat));
     handleClose();
   }
 

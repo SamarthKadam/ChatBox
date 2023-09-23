@@ -86,7 +86,6 @@ exports.createGroupChat=catchAsync(async(req,res,next)=>{
     if(!req.body.users||!req.body.name){
         return next(new AppError('Please Fill all the fields',400));
     }
-
     var users=JSON.parse(req.body.users);
     if(users.length<2)
     {

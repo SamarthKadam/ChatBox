@@ -6,7 +6,15 @@ import { getSender } from '../../utils/Reusable'
 
 export default function ChatBar({data}) {
 
-  const user=getSender(data.users);
+  const isGroupChat=data.isGroupChat;
+  let user;
+  if(isGroupChat)
+  {
+    user={name:data.chatName}
+  }
+  else{
+    user=getSender(data.users);
+  }
 
   return (
     <div className='flex flex-row items-center justify-between rounded-md cursor-pointer mx-[2%] my-[5%] hover:bg-gray-100 px-[5%] py-[2%]'>

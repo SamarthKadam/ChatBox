@@ -29,6 +29,14 @@ export const AddUser= (user,users) => {
 }
 };
 
+
+export const AddGroup=(group)=>{
+  return {
+    type:"ADD_GROUP",
+    payload:group
+  }
+}
+
 export const InitializeChat=(chats)=>{
   return {
     type:"INIT_CHATS",
