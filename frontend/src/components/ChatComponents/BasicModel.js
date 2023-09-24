@@ -8,6 +8,7 @@ import Loading from './Loading';
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { AddGroup } from '../../services/Actions/Chat/action';
+import { ToastContainer, toast } from 'react-toastify';
 
 const style = {
   position: 'absolute',
@@ -33,6 +34,34 @@ export default function BasicModal({handleClose,open}) {
   const [isLoading,setIsLoading]=useState(false);
   const Valref=useRef();
   const dispatch=useDispatch();
+
+  const notify = (value,errorname)=>{
+
+    if(value==='error')
+    return toast.error(`${errorname}`, {
+      position: "top-right",
+      autoClose: 2222,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+      
+
+
+    return toast.info(`Successfully group created`, {
+      position:"top-right",
+      autoClose: 2222,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+  };
 
   const searchHandler=async(value)=>{
     setIsLoading(true)
@@ -90,6 +119,15 @@ export default function BasicModal({handleClose,open}) {
   const createGroupHandler=async()=>{
     
     const userdata=selectedUsers.map((data)=>data._id);
+
+    if(Valref.current.value==='')
+    {
+     return notify('error',"Please specify the group name!");
+    }
+    else if(selectedUsers.length<2)
+    {
+     return notify("error","Should add atleast 2 people!")
+    }
     const bodyData={
       name:Valref.current.value,
       users:JSON.stringify(userdata)
@@ -105,7 +143,13 @@ export default function BasicModal({handleClose,open}) {
       body:JSON.stringify(bodyData)
     })
     const data=await response.json();
+    if(data.status==='success')
+    {
+      notify();
+    }
     dispatch(AddGroup(data.fgroupChat));
+    setSearchResults([]);
+    setSelectedUsers([]);
     handleClose();
   }
 
@@ -116,6 +160,7 @@ export default function BasicModal({handleClose,open}) {
 
   return (
     <div className='absolute'>
+      <ToastContainer/>
       <Modal
         open={open}
         onClose={handleClose}
