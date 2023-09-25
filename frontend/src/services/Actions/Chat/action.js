@@ -43,5 +43,11 @@ export const InitializeChat=(chats)=>{
     payload:[...chats]
   }
 }
+export const SetActiveChat=(chatId)=>{
+  return {
+    type:"ACTIVE_CHAT",
+    payload:chatId
+  }
+}
 
 

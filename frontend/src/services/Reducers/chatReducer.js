@@ -25,6 +25,12 @@ const chatState = {
         return {
           ...state
         }
+
+        case "ACTIVE_CHAT":
+          state.activeChat=action.payload
+          return {
+            ...state
+          }
   
         default:
           return state;

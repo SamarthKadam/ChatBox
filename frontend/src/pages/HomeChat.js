@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { InitializeChat } from '../services/Actions/Chat/action';
 import BasicModal from '../components/ChatComponents/BasicModel';
+import { SetActiveChat } from '../services/Actions/Chat/action';
 export default function HomeChat() {
 
   const state=useSelector((state)=>state.chat.AllChats)
@@ -24,7 +25,6 @@ export default function HomeChat() {
   useEffect(()=>{
 
     const getAllChats=async()=>{
-
       const cookie=localStorage.getItem('jwt');
       const response=await fetch(`http://127.0.0.1:4000/api/v1/chat`,{
         headers:{
@@ -33,6 +33,7 @@ export default function HomeChat() {
         }
       })
       const data=await response.json();
+      console.log(data.data);
       dispatch(InitializeChat(data.data));
       
     }
@@ -42,6 +43,10 @@ export default function HomeChat() {
 
   },[])
 
+
+  const selectChat=(data)=>{
+    dispatch(SetActiveChat(data))
+  }
 
   const createGroupChat=()=>{
     handleOpen();
@@ -58,7 +63,7 @@ export default function HomeChat() {
     <div className='flex flex-row items-center  border-[1px] border-[#f5f5f5]'><ChatTitle></ChatTitle></div>
     <div className=' border-[1px] border-[#f5f5f5]'>
     {state&&state.map((data,index)=>{
-      return   <ChatBar data={data} key={index}></ChatBar>
+      return   <ChatBar select={selectChat} data={data} key={index}></ChatBar>
     })}
     </div>
     <div className='bg-[#F6F8FC] flex flex-col relative'>
