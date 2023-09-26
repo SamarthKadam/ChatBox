@@ -11,10 +11,12 @@ import { useState } from 'react';
 import { InitializeChat } from '../services/Actions/Chat/action';
 import BasicModal from '../components/ChatComponents/BasicModel';
 import { SetActiveChat } from '../services/Actions/Chat/action';
+import ChatDetails from '../components/ChatComponents/ChatDetails';
 export default function HomeChat() {
 
   const state=useSelector((state)=>state.chat.AllChats)
   const dispatch=useDispatch();
+  const[chatModel,setChatModel]=useState(false);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -52,6 +54,13 @@ export default function HomeChat() {
     handleOpen();
   }
 
+  const openChatDetails=()=>{
+    setChatModel(true);
+  }
+  const closeChatDetails=()=>{
+    setChatModel(false)
+  }
+
 
 
 
@@ -59,8 +68,9 @@ export default function HomeChat() {
   return (
     <div className='grid w-[80vw] relative grid-rows-[1fr,7fr] grid-cols-[3.5fr,7fr] '>
     <BasicModal handleClose={handleClose} open={open}></BasicModal>
+    <ChatDetails closeChat={closeChatDetails} chatModel={chatModel}></ChatDetails>
     <TopBar createGroup={createGroupChat}></TopBar>
-    <div className='flex flex-row items-center  border-[1px] border-[#f5f5f5]'><ChatTitle></ChatTitle></div>
+    <div className='flex flex-row items-center  border-[1px] border-[#f5f5f5]'><ChatTitle openChatModel={openChatDetails}></ChatTitle></div>
     <div className=' border-[1px] border-[#f5f5f5]'>
     {state&&state.map((data,index)=>{
       return   <ChatBar select={selectChat} data={data} key={index}></ChatBar>
