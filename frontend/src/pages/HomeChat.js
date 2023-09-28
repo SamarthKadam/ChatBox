@@ -12,6 +12,7 @@ import { InitializeChat } from '../services/Actions/Chat/action';
 import BasicModal from '../components/ChatComponents/BasicModel';
 import { SetActiveChat } from '../services/Actions/Chat/action';
 import ChatDetails from '../components/ChatComponents/ChatDetails';
+import Loading from './util/Loading';
 export default function HomeChat() {
 
   const state=useSelector((state)=>state.chat.AllChats)
@@ -42,7 +43,6 @@ export default function HomeChat() {
 
   getAllChats();
 
-
   },[])
 
 
@@ -72,6 +72,7 @@ export default function HomeChat() {
     <TopBar createGroup={createGroupChat}></TopBar>
     <div className='flex flex-row items-center  border-[1px] border-[#f5f5f5]'><ChatTitle openChatModel={openChatDetails}></ChatTitle></div>
     <div className=' border-[1px] border-[#f5f5f5]'>
+    {state.length===0&&<Loading></Loading>}
     {state&&state.map((data,index)=>{
       return   <ChatBar select={selectChat} data={data} key={index}></ChatBar>
     })}
