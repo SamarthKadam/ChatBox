@@ -176,7 +176,7 @@ export default function BasicModal({handleClose,open}) {
           </Typography> */}
           <div className='text-2xl font-Poppins'>Create a group Chat</div>
           <input ref={Valref} spellCheck='false' placeholder='Chat Name' className=' text-lg h-[16%] w-[100%] mt-5 font-thin px-1 py-2 outline-none bg-[#F6F8FC]'></input>
-          <input onChange={inputHandler} spellCheck="false" placeholder='Add Users: Steve,Jeff,Makr' className='text-lg h-[16%] w-[100%] px-1 py-2 mt-3 outline-none font-thin bg-[#F6F8FC]'></input>
+          <input onChange={inputHandler} spellCheck="false" placeholder='Add your Friends' className='text-lg h-[16%] w-[100%] px-1 py-2 mt-3 outline-none font-thin bg-[#F6F8FC]'></input>
           <div className='w-[100%]'>
             {!isLoading&&searchResults&&searchResults.length>0&&searchResults.map((data,index)=><User add={addUserToGroup} values={data} key={index}></User>)}
             {!isLoading&&isEmptyResults?<p>No results found</p>:null}

@@ -31,6 +31,7 @@ const chatState = {
           return {
             ...state
           }
+        
   
         default:
           return state;

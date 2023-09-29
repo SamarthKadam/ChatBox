@@ -50,4 +50,11 @@ export const SetActiveChat=(chatId)=>{
   }
 }
 
+export const updateChatDetails=(chatId)=>{
+  return {
+    type:"UPDATE_CHAT",
+    payload:chatId
+  }
+}
+
 
