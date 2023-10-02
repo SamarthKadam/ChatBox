@@ -61,7 +61,10 @@ export default function ChatDetails({chatModel,closeChat}) {
       body:JSON.stringify(bodyData)
     })
     const data=await response.json();
-    console.log(data);
+    if(data.status==='success')
+    {
+      closeChat();
+    }
   }
 
 

@@ -36,14 +36,13 @@ export default function HomeChat() {
         }
       })
       const data=await response.json();
-      console.log(data.data);
       dispatch(InitializeChat(data.data));
       
     }
 
   getAllChats();
 
-  },[])
+  },[chatModel])
 
 
   const selectChat=(data)=>{
