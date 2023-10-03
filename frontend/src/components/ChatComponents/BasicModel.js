@@ -183,7 +183,14 @@ export default function BasicModal({handleClose,open}) {
             {isLoading&&<Loading></Loading>}
             </div>
          {selectedUsers&&selectedUsers.length>0&&<GroupUserList remove={removeUserFromGroup} users={selectedUsers}></GroupUserList>}
+         <div>
           <button onClick={createGroupHandler} className='bg-[#0147FF] text-white text-xl px-4 py-2 mt-4 rounded-lg'>Create Chat</button>
+          <button onClick={()=>{
+             setSearchResults([]);
+             setSelectedUsers([]);
+             handleClose();
+          }} className='bg-[#FF0000] text-white text-xl px-4 py-2 ml-2 mt-4 rounded-lg'>Cancel</button>
+         </div>
         </Box>
       </Modal>
     </div>

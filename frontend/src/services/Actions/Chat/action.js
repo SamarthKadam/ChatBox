@@ -57,4 +57,18 @@ export const updateChatDetails=(chatId)=>{
   }
 }
 
+export const addNewUserToGroup=(user,activeChatId)=>{
+  return {
+    type:"ADD_USER_GROUP",
+    payload:{user,activeChatId}
+  }
+}
+
+export const RenameChat=(name,activeChatId)=>{
+  return{
+    type:"EDIT_ACTIVE_CHAT",
+    payload:{name,activeChatId}
+  }
+}
+
 

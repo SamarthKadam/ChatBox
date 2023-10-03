@@ -37,12 +37,12 @@ export default function HomeChat() {
       })
       const data=await response.json();
       dispatch(InitializeChat(data.data));
-      
+      console.log("rerendered home component");
     }
 
   getAllChats();
 
-  },[chatModel])
+  },[chatModel,open,dispatch])
 
 
   const selectChat=(data)=>{

@@ -31,7 +31,24 @@ const chatState = {
           return {
             ...state
           }
-        
+
+          case "ADD_USER_GROUP":
+            return {
+              ...state,
+              AllChats: state.AllChats.map(chat => {
+                if (chat._id === action.payload.activeChatId) {
+                  return {
+                    ...chat,
+                    users: [...chat.users, action.payload.user]
+                  };
+                }
+                return chat;
+              })
+            };
+
+            
+          case "EDIT_ACTIVE_CHAT":
+
   
         default:
           return state;

@@ -6,8 +6,11 @@ import { getSender } from '../../helper/Reusable';
 import GroupUserList from './GroupUserList';
 import { getUsersLeavingMe } from '../../helper/Reusable';
 import CancelIcon from '@mui/icons-material/Cancel';
-import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
-import { useRef } from 'react';
+import { useRef,useState} from 'react';
+import User from './User';
+import Loading from './Loading';
+import { useDispatch } from 'react-redux';
+import { addNewUserToGroup } from '../../services/Actions/Chat/action';
 const style = {
   position: 'absolute',
   top: '50%',
@@ -27,14 +30,18 @@ const style = {
 export default function ChatDetails({chatModel,closeChat}) {
 
   const activeUser=useSelector((state)=>state.chat.activeChat);
+  console.log(activeUser);
+  const dispatch=useDispatch();
   let data;
   const ref=useRef();
+  const [Results,setResults]=useState([]);
+  const [isEmptyResults,setIsEmptyResults]=useState(false);
+  const [isLoading,setIsLoading]=useState(false);
+
 
 
   if(activeUser===null)
   return <></>
-
-
 
   if(activeUser.isGroupChat)
   {
@@ -42,6 +49,36 @@ export default function ChatDetails({chatModel,closeChat}) {
   }
   else{
     data=getSender(activeUser.users)
+  }
+
+
+  const searchHandler=async(value)=>{
+
+    setIsLoading(true)
+    const cookie=localStorage.getItem('jwt');
+    const response=await fetch(`http://127.0.0.1:4000/api/v1/users?search=${value}`,{
+    headers:{
+      'Content-type':'application/json',
+      'Authorization':`Bearer ${cookie}`
+    }
+  })
+
+  setIsLoading(false);
+  const data=await response.json();
+  data.users.length=data.users.length>2?data.users.length=2:data.users.length;
+  setResults(data.users);
+  if(data.users.length===0)
+  setIsEmptyResults(true);
+  else
+  setIsEmptyResults(false);
+
+  }
+
+
+  const inputHandler=(e)=>{
+    setTimeout(()=>{
+      searchHandler(e.target.value)
+    },2000)
   }
 
   const updateInfo=async()=>{
@@ -67,6 +104,29 @@ export default function ChatDetails({chatModel,closeChat}) {
     }
   }
 
+  const addHandler=async(user)=>{
+
+    const cookie=localStorage.getItem('jwt');
+    const bodyData={
+      chatId:activeUser._id,
+      userId:user._id
+    }
+
+    const response=await fetch(`http://127.0.0.1:4000/api/v1/chat/groupadd`,{
+      method:'put',
+      headers:{
+        'Content-type':'application/json',
+        'Authorization':`Bearer ${cookie}`
+      },
+      body:JSON.stringify(bodyData)
+    })
+    const data=await response.json();
+    if(data.status==='success')
+    {
+      dispatch(addNewUserToGroup(user,activeUser._id));
+    }
+  }
+
 
 
 
@@ -80,11 +140,19 @@ export default function ChatDetails({chatModel,closeChat}) {
       >
         <Box sx={style}>
         <div className='text-2xl font-Poppins'>Info</div>
+          <div className='flex w-[100%]'>
           <input ref={ref} defaultValue={activeUser.isGroupChat?activeUser.chatName:data.name}  spellCheck='false' placeholder='Chat Name' className=' text-lg h-[16%] w-[100%] mt-5 font-thin px-1 py-2 outline-none bg-[#F6F8FC]'></input>
-         {data.isGroupChat&&<GroupUserList notCancelable={true} users={getUsersLeavingMe(data.users)}></GroupUserList>}
+         {data.isGroupChat&&<button onClick={updateInfo} className='bg-[#014DFE] text-white text-lg  ml-2 px-2 py-1 mt-4 rounded-sm'>Change</button>}
+          </div>
+          {data.isGroupChat&&<input onChange={inputHandler} spellCheck="false" placeholder='Add your Friends' className='text-lg h-[16%] w-[100%] px-1 py-2 mt-3 outline-none font-thin bg-[#F6F8FC]'></input>}
+          {data.isGroupChat&&(<div className='w-[100%]'>
+        {!isLoading&&Results&&Results.length>0&&Results.map((data,index)=><User add={addHandler} values={data} key={index}></User>)}
+         {!isLoading&&isEmptyResults?<p>No results found</p>:null}
+         {isLoading&&<Loading></Loading>}
+         {<GroupUserList users={getUsersLeavingMe(data.users)}></GroupUserList>}
+          </div>)}
          <div>
-         <button onClick={updateInfo} className='bg-[#0147FF] text-white text-lg px-2 py-1 mt-4 rounded-lg'><ChangeCircleIcon></ChangeCircleIcon> Update</button>
-         <button onClick={closeChat} className='bg-[#FF0000] text-white text-lg  ml-2 px-2 py-1 mt-4 rounded-lg'><CancelIcon></CancelIcon> Cancel</button>
+         <button onClick={closeChat} className='bg-[#FF0000] text-white text-lg  ml-2 px-2 py-1 mt-4 rounded-lg'><CancelIcon className="mr-2"></CancelIcon>Leave Group</button>
          </div>
         </Box>
       </Modal>
