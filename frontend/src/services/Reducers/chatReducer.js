@@ -47,9 +47,17 @@ const chatState = {
             };
 
             
+          case "ADD_USER_ACTIVE":
+          state.activeChat.users.push(action.payload)
+          return {
+            ...state
+          } 
+          
           case "EDIT_ACTIVE_CHAT":
-
-  
+            state.activeChat.chatName=action.payload
+            return {
+              ...state
+            }
         default:
           return state;
       }

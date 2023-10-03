@@ -64,10 +64,18 @@ export const addNewUserToGroup=(user,activeChatId)=>{
   }
 }
 
-export const RenameChat=(name,activeChatId)=>{
+
+export const addNewUserToActive=(user)=>{
+return {
+  type:"ADD_USER_ACTIVE",
+  payload:user
+}
+}
+
+export const RenameChat=(name)=>{
   return{
     type:"EDIT_ACTIVE_CHAT",
-    payload:{name,activeChatId}
+    payload:name
   }
 }
 

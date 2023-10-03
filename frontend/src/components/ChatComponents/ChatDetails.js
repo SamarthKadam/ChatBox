@@ -11,6 +11,10 @@ import User from './User';
 import Loading from './Loading';
 import { useDispatch } from 'react-redux';
 import { addNewUserToGroup } from '../../services/Actions/Chat/action';
+import { addNewUserToActive } from '../../services/Actions/Chat/action';
+import { RenameChat } from '../../services/Actions/Chat/action';
+import { ToastContainer, toast } from 'react-toastify';
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -50,6 +54,21 @@ export default function ChatDetails({chatModel,closeChat}) {
   else{
     data=getSender(activeUser.users)
   }
+
+  const notify = (errorname)=>{
+
+    return toast.error(`${errorname}`, {
+      position: "top-center",
+      autoClose: 2222,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+      
+  };
 
 
   const searchHandler=async(value)=>{
@@ -101,6 +120,7 @@ export default function ChatDetails({chatModel,closeChat}) {
     if(data.status==='success')
     {
       closeChat();
+      dispatch(RenameChat(ref.current.value))
     }
   }
 
@@ -111,6 +131,9 @@ export default function ChatDetails({chatModel,closeChat}) {
       chatId:activeUser._id,
       userId:user._id
     }
+    const loggedUser=JSON.parse(localStorage.getItem('info'));
+    if(loggedUser._id!==activeUser.groupAdmin._id)
+    return notify("Only administrators are allowed to add new users.")
 
     const response=await fetch(`http://127.0.0.1:4000/api/v1/chat/groupadd`,{
       method:'put',
@@ -124,6 +147,7 @@ export default function ChatDetails({chatModel,closeChat}) {
     if(data.status==='success')
     {
       dispatch(addNewUserToGroup(user,activeUser._id));
+      dispatch(addNewUserToActive(user))
     }
   }
 
@@ -132,6 +156,7 @@ export default function ChatDetails({chatModel,closeChat}) {
 
   return (
     <div className='absolute'>
+      <ToastContainer></ToastContainer>
       <Modal
         open={chatModel}
         onClose={closeChat}
