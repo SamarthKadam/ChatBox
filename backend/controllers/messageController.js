@@ -1,5 +1,37 @@
 const catchAsync = require("../utils/catchAsync");
+const AppError = require('../utils/AppError');
+const Message=require('../models/messageModel')
+const User=require('../models/userModel')
+const Chat=require('../models/chatModel');
 
-// exports.sendMessage=catchAsync(async(req,res)=>{
 
-// })
+exports.sendMessage=catchAsync(async(req,res,next)=>{
+
+    const {content,chatId}=req.body;
+
+    if(!content||!chatId)
+    {
+        return next(new AppError("Invalid data passed into request",400))
+    }
+
+    let newMessage={
+        sender:req.user._id,
+        content:content,
+        chat:chatId
+    };
+
+    let message=await Message.create(newMessage);
+    message=await message.populate("sender","name pic").execPopulate();
+    message=await message.populate("chat").execPopulate();
+    message=await User.populate(message,{
+        path:'chat.users',
+        select:'name pic email'
+    })
+
+    await Chat.findByIdAndUpdate(req.body.chatId,{latestMessage:message})
+    res.status(200).json({
+        status:'success',
+        data:message
+    })
+
+})
