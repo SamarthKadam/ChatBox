@@ -64,6 +64,13 @@ export const addNewUserToGroup=(user,activeChatId)=>{
   }
 }
 
+export const removeUserFromGroup=(userId,activeChatId)=>{
+  return {
+    type:"REMOVE_USER_GROUP",
+    payload:{userId,activeChatId}
+  }
+}
+
 
 export const addNewUserToActive=(user)=>{
 return {
@@ -71,6 +78,14 @@ return {
   payload:user
 }
 }
+
+export const removeUserFromActive=(userId)=>{
+  return{
+    type:"REMOVE_USER_ACTIVE",
+    payload:userId
+  }
+}
+
 
 export const RenameChat=(name)=>{
   return{

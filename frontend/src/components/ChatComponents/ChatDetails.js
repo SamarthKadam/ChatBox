@@ -14,6 +14,8 @@ import { addNewUserToGroup } from '../../services/Actions/Chat/action';
 import { addNewUserToActive } from '../../services/Actions/Chat/action';
 import { RenameChat } from '../../services/Actions/Chat/action';
 import { ToastContainer, toast } from 'react-toastify';
+import { removeUserFromGroup } from '../../services/Actions/Chat/action';
+import { removeUserFromActive } from '../../services/Actions/Chat/action';
 
 const style = {
   position: 'absolute',
@@ -34,7 +36,6 @@ const style = {
 export default function ChatDetails({chatModel,closeChat}) {
 
   const activeUser=useSelector((state)=>state.chat.activeChat);
-  console.log(activeUser);
   const dispatch=useDispatch();
   let data;
   const ref=useRef();
@@ -71,6 +72,11 @@ export default function ChatDetails({chatModel,closeChat}) {
   };
 
 
+
+  const closeModelHandler=()=>{
+    setResults([]);
+    closeChat()
+  }
   const searchHandler=async(value)=>{
 
     setIsLoading(true)
@@ -135,6 +141,14 @@ export default function ChatDetails({chatModel,closeChat}) {
     if(loggedUser._id!==activeUser.groupAdmin._id)
     return notify("Only administrators are allowed to add new users.")
 
+
+
+    const isPresent=activeUser.users.find((data)=>data._id===user._id);
+    if(isPresent!==undefined)
+    {
+      return notify("error","User already in the group!");
+    }
+
     const response=await fetch(`http://127.0.0.1:4000/api/v1/chat/groupadd`,{
       method:'put',
       headers:{
@@ -148,6 +162,33 @@ export default function ChatDetails({chatModel,closeChat}) {
     {
       dispatch(addNewUserToGroup(user,activeUser._id));
       dispatch(addNewUserToActive(user))
+    }
+  }
+
+  const removeHandler=async(userId)=>{
+    
+    const cookie=localStorage.getItem('jwt');
+    const bodyData={
+      chatId:activeUser._id,
+      userId:userId
+    }
+    const loggedUser=JSON.parse(localStorage.getItem('info'));
+    if(loggedUser._id!==activeUser.groupAdmin._id)
+    return notify("Only administrators are allowed to remove users.")
+
+    const response=await fetch(`http://127.0.0.1:4000/api/v1/chat/groupremove`,{
+      method:'put',
+      headers:{
+        'Content-type':'application/json',
+        'Authorization':`Bearer ${cookie}`
+      },
+      body:JSON.stringify(bodyData)
+    })
+    const data=await response.json();
+    if(data.status==='success')
+    {
+      dispatch(removeUserFromGroup(userId,activeUser._id))
+      dispatch(removeUserFromActive(userId))
     }
   }
 
@@ -174,10 +215,11 @@ export default function ChatDetails({chatModel,closeChat}) {
         {!isLoading&&Results&&Results.length>0&&Results.map((data,index)=><User add={addHandler} values={data} key={index}></User>)}
          {!isLoading&&isEmptyResults?<p>No results found</p>:null}
          {isLoading&&<Loading></Loading>}
-         {<GroupUserList users={getUsersLeavingMe(data.users)}></GroupUserList>}
+         {<GroupUserList remove={removeHandler} users={getUsersLeavingMe(data.users)}></GroupUserList>}
           </div>)}
          <div>
-         <button onClick={closeChat} className='bg-[#FF0000] text-white text-lg  ml-2 px-2 py-1 mt-4 rounded-lg'><CancelIcon className="mr-2"></CancelIcon>Leave Group</button>
+         <button onClick={closeModelHandler} className=' text-[#FF0000] border-solid border-2 border-[#FF0000] text-lg  ml-2 px-2 py-1 mt-4 rounded-lg'>Cancel</button>
+         <button onClick={closeModelHandler} className='bg-[#FF0000] text-white text-lg  ml-2 px-2 py-1 mt-4 rounded-lg'><CancelIcon className="mr-2"></CancelIcon>{data.isGroupChat?'Leave Group':'Leave Chat'}</button>
          </div>
         </Box>
       </Modal>

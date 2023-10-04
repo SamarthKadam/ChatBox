@@ -98,10 +98,12 @@ export default function BasicModal({handleClose,open}) {
 
 
     setSelectedUsers((users)=>{
-
     const present=users.find((data)=>data._id===values._id);
     if(present!==undefined)
-    return [...users];
+    {
+      notify("error","User already in the group!")
+      return [...users];
+    }
 
     return [...users,values]
     } 

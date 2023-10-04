@@ -46,6 +46,26 @@ const chatState = {
               })
             };
 
+            case "REMOVE_USER_GROUP":
+              return {
+                ...state,
+                AllChats:state.AllChats.map(chat=>{
+                  if(chat._id===action.payload.activeChatId)
+                  {
+                    return {
+                      ...chat,
+                      users:chat.users.filter((data)=>data._id!==action.payload.userId)
+                    }
+                  }
+                  return chat;
+                })
+              }
+
+            case "REMOVE_USER_ACTIVE":
+              state.activeChat.users=state.activeChat.users.filter((data)=>data._id!==action.payload)
+              return {
+                ...state
+              }
             
           case "ADD_USER_ACTIVE":
           state.activeChat.users.push(action.payload)
