@@ -56,7 +56,21 @@ export default function ChatDetails({chatModel,closeChat}) {
     data=getSender(activeUser.users)
   }
 
-  const notify = (errorname)=>{
+  const notify = (errorname,value)=>{
+
+    if(errorname==='error')
+    {
+      return toast.error(`${value}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    }
 
     return toast.error(`${errorname}`, {
       position: "top-center",
@@ -188,7 +202,7 @@ export default function ChatDetails({chatModel,closeChat}) {
     if(data.status==='success')
     {
       dispatch(removeUserFromGroup(userId,activeUser._id))
-      dispatch(removeUserFromActive(userId))
+      dispatch(removeUserFromActive(userId));
     }
   }
 
