@@ -92,7 +92,6 @@ exports.createGroupChat=catchAsync(async(req,res,next)=>{
         return next(new AppError("Group should require atleast 3 users",400))
     }
     users.push(req.user);
-    console.log("Does it go here?");
 
     try{
         const groupChat=await Chat.create({

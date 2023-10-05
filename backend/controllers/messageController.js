@@ -21,8 +21,8 @@ exports.sendMessage=catchAsync(async(req,res,next)=>{
     };
 
     let message=await Message.create(newMessage);
-    message=await message.populate("sender","name pic").execPopulate();
-    message=await message.populate("chat").execPopulate();
+    message=await message.populate("sender","name pic")
+    message=await message.populate("chat")
     message=await User.populate(message,{
         path:'chat.users',
         select:'name pic email'
@@ -32,6 +32,22 @@ exports.sendMessage=catchAsync(async(req,res,next)=>{
     res.status(200).json({
         status:'success',
         data:message
+    })
+
+})
+
+exports.getAllMessages=catchAsync(async(req,res,next)=>{
+
+    const message=await Message.find({chat:req.params.chatId}).populate('sender',"name pic email");
+
+    if(!message)
+    {
+        next(new AppError('Something went wrong while fetching messages',400))
+    }
+    
+    res.status(200).json({
+        status:'success',
+        message:message
     })
 
 })

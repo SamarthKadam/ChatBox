@@ -15,7 +15,7 @@ exports.getAllUsers=catchAsync(async(req,res)=>{
 
 })
 
-exports.AvailableUsersToCreateGroup=catchAsync(async(req,res)=>{
+// exports.AvailableUsersToCreateGroup=catchAsync(async(req,res)=>{
 
     
-})
+// })
