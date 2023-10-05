@@ -16,6 +16,7 @@ import { RenameChat } from '../../services/Actions/Chat/action';
 import { ToastContainer, toast } from 'react-toastify';
 import { removeUserFromGroup } from '../../services/Actions/Chat/action';
 import { removeUserFromActive } from '../../services/Actions/Chat/action';
+import { NullifyActiveChat } from '../../services/Actions/Chat/action';
 
 const style = {
   position: 'absolute',
@@ -207,6 +208,29 @@ export default function ChatDetails({chatModel,closeChat}) {
   }
 
 
+  const deleteChatHandler=()=>{
+    const deleteData=async()=>{
+
+    const bodyData={
+      chatId:activeUser._id
+    }
+    const cookie=localStorage.getItem('jwt');
+    const response=await fetch(`http://127.0.0.1:4000/api/v1/chat/deleteChat`,{
+      method:'delete',
+      headers:{
+        'Content-type':'application/json',
+        'Authorization':`Bearer ${cookie}`
+      },
+      body:JSON.stringify(bodyData)
+    })
+    dispatch(NullifyActiveChat());
+    // const data=await response.json();
+  }
+    deleteData();
+    closeModelHandler();
+  }
+
+
 
 
   return (
@@ -233,7 +257,7 @@ export default function ChatDetails({chatModel,closeChat}) {
           </div>)}
          <div>
          <button onClick={closeModelHandler} className=' text-[#FF0000] border-solid border-2 border-[#FF0000] text-lg  ml-2 px-2 py-1 mt-4 rounded-lg'>Cancel</button>
-         <button onClick={closeModelHandler} className='bg-[#FF0000] text-white text-lg  ml-2 px-2 py-1 mt-4 rounded-lg'><CancelIcon className="mr-2"></CancelIcon>{data.isGroupChat?'Leave Group':'Leave Chat'}</button>
+         <button onClick={deleteChatHandler} className='bg-[#FF0000] text-white text-lg  ml-2 px-2 py-1 mt-4 rounded-lg'><CancelIcon className="mr-2"></CancelIcon>{data.isGroupChat?'Delete Group':'Delete Chat'}</button>
          </div>
         </Box>
       </Modal>

@@ -9,6 +9,7 @@ router.post('/group',authController.protect,chatController.createGroupChat)
 router.put('/rename',authController.protect,chatController.renameGroup)
 router.put('/groupadd',authController.protect,chatController.AddPersonGroup)
 router.put('/groupremove',authController.protect,chatController.RemovePersonGroup)
+router.delete('/deleteChat',authController.protect,chatController.DeleteChat)
 
 
 

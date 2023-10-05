@@ -78,6 +78,12 @@ const chatState = {
             return {
               ...state
             }
+
+          case "NULL_ACTIVE_CHAT":
+            state.activeChat=null
+            return {
+              ...state
+            }  
         default:
           return state;
       }

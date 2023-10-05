@@ -86,7 +86,6 @@ export const removeUserFromActive=(userId)=>{
   }
 }
 
-
 export const RenameChat=(name)=>{
   return{
     type:"EDIT_ACTIVE_CHAT",
@@ -94,4 +93,8 @@ export const RenameChat=(name)=>{
   }
 }
 
-
+export const NullifyActiveChat=()=>{
+  return {
+    type:"NULL_ACTIVE_CHAT",
+  }
+}

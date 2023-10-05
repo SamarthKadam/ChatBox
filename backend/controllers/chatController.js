@@ -173,3 +173,13 @@ exports.RemovePersonGroup=catchAsync(async(req,res,next)=>{
         removed
     })
 })
+
+exports.DeleteChat=catchAsync(async(req,res,next)=>{
+    const {chatId}=req.body;
+    const user=await Chat.findByIdAndDelete(chatId)
+
+    res.status(204).json({
+        status:'success',
+        user
+    })
+})
