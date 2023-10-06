@@ -47,7 +47,7 @@ export default function ChatMessages() {
   if (isSender(val.sender._id))
     return <SenderMessage content={val.content} key={index}></SenderMessage>; 
   else
-    return <RecieverMessage messages={data} index={index} content={val.content} key={index}></RecieverMessage>
+    return <RecieverMessage isGroupChat={isSet.isGroupChat} name={val.sender.name} img={val.sender.pic} messages={data} index={index} content={val.content} key={index}></RecieverMessage>
 })}
       </div>}
     </div>

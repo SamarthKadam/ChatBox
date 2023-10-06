@@ -1,11 +1,11 @@
 import React from 'react'
 import { Avatar } from '@mui/material'
-import image from '../../assets/images/user-img.jpg'
 import { isSameUser } from '../../helper/Reusable'
+import Tooltip from '@mui/material/Tooltip';
 
-export default function RecieverMessage({content,messages,index}) {
+export default function RecieverMessage({img,content,messages,index,name,isGroupChat}) {
 
-  if(isSameUser(messages,index))
+  if(isSameUser(messages,index)&&isGroupChat)
   {
     return (<div className='flex flex-row justify-start my-1'>
    <div className='bg-[#FFFFFF] rounded-tr-xl ml-[45px] font-Roboto rounded-br-xl rounded-bl-xl box-border px-2 py-2'>{content}</div>
@@ -14,7 +14,9 @@ export default function RecieverMessage({content,messages,index}) {
 
   return (
     <div className='flex flex-row justify-start my-1'>
-      <Avatar referrerPolicy="no-referrer" src={image}></Avatar>
+      <Tooltip title={name} arrow placement="top-start">
+     {isGroupChat&&<Avatar referrerPolicy="no-referrer" src={img}></Avatar>}
+      </Tooltip>
      <div className='bg-[#FFFFFF] rounded-tr-xl ml-[1%] font-Roboto rounded-br-xl rounded-bl-xl box-border px-2 py-2'>{content}</div>
     </div>
   )
