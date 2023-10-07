@@ -17,8 +17,6 @@
 
  export const isSameUser=(messages,index)=>{
 
-  console.log(messages,index);
-
   if(index!==0&&messages[index].sender._id===messages[index-1].sender._id)
   return true;
   else

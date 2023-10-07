@@ -1,17 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import MicIcon from '@mui/icons-material/Mic';
 import SendIcon from '@mui/icons-material/Send';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import { socket } from '../../socket/socket';
 
 export default function Type() {
 
   const isSet=useSelector((state)=>state.chat.activeChat);
   const [message,setMessage]=useState('');
+  const [socketConnected,setSocketConnected]=useState(false);
 
   const messageHandler=(e)=>{
     setMessage(e.target.value);
   }
+
+
+  useEffect(()=>{
+
+    if(isSet===null)
+    return;
+
+    const loggedUser=JSON.parse(localStorage.getItem('info'));
+    socket.emit("setup",loggedUser)
+    socket.on("connected",()=>{setSocketConnected(true)});
+
+    socket.emit('join chat',isSet._id);
+  },[isSet])
+
 
   const sendMessage=async(event)=>{
 
@@ -35,8 +51,7 @@ export default function Type() {
     })
 
     const data=await response.json();
-
-
+    socket.emit("new message",data.data);
   }
 
 

@@ -41,9 +41,6 @@ const server=app.listen(port,()=>{
 
 
 
-
-
-
 const io = require('socket.io')(server, {
   cors: {
       origin: 'http://localhost:3000',
@@ -52,14 +49,30 @@ const io = require('socket.io')(server, {
 
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
-  console.log(socket.id)
-  socket.join("room1");
 
-  socket.on('sendmessage',(data)=>{
-      socket.to("room1").emit("recievemessage",data);
+   
+    socket.on("setup", (userData) => {
+        console.log("a user connected");
+        socket.join(userData._id);
+        socket.emit("connected");
+      });
+
+  socket.on("join chat", (room) => {
+    socket.join(room);
+    console.log("User Joined Room: " + room);
+  });
+
+  socket.on("new message",(newMessageRecieved)=>{
+    var chat=newMessageRecieved.chat;
+
+    if(!chat.users)return chat.users("users not defined");
+
+    chat.users.forEach((user)=>{
+        if(user._id===newMessageRecieved.sender._id)return;
+
+        socket.in(user._id).emit('message recieved',newMessageRecieved);
+    })
   })
-
 
 
 });

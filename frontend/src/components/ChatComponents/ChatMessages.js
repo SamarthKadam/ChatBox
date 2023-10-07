@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import Advertisement from './Advertisement';
 import CircularLoading from './CircularLoading';
 import { isSender } from '../../helper/Reusable';
+import { socket } from '../../socket/socket';
 
 export default function ChatMessages() {
   const isSet=useSelector((state)=>state.chat.activeChat);
@@ -29,12 +30,24 @@ export default function ChatMessages() {
     if(data.status==='success')
     {
       setData(data.message);
-      console.log(data.message);
     }
     setIsLoading(false);
   }
     getData()
   },[isSet])
+
+
+  useEffect(()=>{
+
+    socket.on("message recieved",(newMessageRecieved)=>{
+      if(isSet!==null&&isSender._id!==newMessageRecieved.chat._id)
+      {
+        ///chatnotification logic
+      }else{
+        setData((message)=>[...message,newMessageRecieved])
+      }
+    })
+  })
 
   if(isSet===null)
   return <Advertisement></Advertisement>
