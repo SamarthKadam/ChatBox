@@ -98,3 +98,17 @@ export const NullifyActiveChat=()=>{
     type:"NULL_ACTIVE_CHAT",
   }
 }
+
+export const InitializeChatMessages=(data)=>{
+  return {
+    type:"INIT_CHAT_MESSAGES",
+    payload:data
+  }
+}
+
+export const AddMessage=(message)=>{
+  return {
+    type:"ADD_MESSAGE",
+    payload:message
+  }
+}

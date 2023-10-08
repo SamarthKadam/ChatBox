@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react'
 import MicIcon from '@mui/icons-material/Mic';
 import SendIcon from '@mui/icons-material/Send';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { socket } from '../../socket/socket';
+import { AddMessage } from '../../services/Actions/Chat/action';
 
 export default function Type() {
 
   const isSet=useSelector((state)=>state.chat.activeChat);
   const [message,setMessage]=useState('');
   const [socketConnected,setSocketConnected]=useState(false);
+  const dispatch=useDispatch();
 
   const messageHandler=(e)=>{
     setMessage(e.target.value);
@@ -51,7 +53,11 @@ export default function Type() {
     })
 
     const data=await response.json();
+    dispatch(AddMessage(data.data));
     socket.emit("new message",data.data);
+
+    console.log(data.data);
+    
   }
 
 

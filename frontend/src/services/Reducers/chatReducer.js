@@ -1,6 +1,7 @@
 const chatState = {
     AllChats:[],
-    activeChat:null
+    activeChat:null,
+    activeChatMessages:[]
     };
     
     const chatReducer= (state = chatState, action) => {
@@ -83,7 +84,21 @@ const chatState = {
             state.activeChat=null
             return {
               ...state
-            }  
+            } 
+            
+          case "INIT_CHAT_MESSAGES":
+            state.activeChatMessages=action.payload;
+            return {
+              ...state
+            }
+
+          case "ADD_MESSAGE":
+            return {
+              ...state,
+              activeChatMessages:[...state.activeChatMessages,action.payload]
+            }
+
+            
         default:
           return state;
       }

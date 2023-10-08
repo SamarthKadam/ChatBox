@@ -75,7 +75,7 @@ export default function HomeChat() {
       return   <ChatBar select={selectChat} data={data} key={index}></ChatBar>
     })}
     </div>
-    <div className='bg-[#F6F8FC] flex flex-col relative'>
+    <div className='bg-[#F6F8FC] flex flex-col relative overflow-hidden'>
       <ChatMessages></ChatMessages>
       <Type></Type>
       </div> 
