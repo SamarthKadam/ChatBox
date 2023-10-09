@@ -3,8 +3,9 @@ const catchAsync=require('../utils/catchAsync');
 const jwt=require('jsonwebtoken');
 const AppError = require('../utils/AppError');
 const {promisify}=require('util');
-const path = require('path')
 const dotenv=require('dotenv');
+const path=require('path')
+const fs=require('fs')
 dotenv.config({path:path.join(__dirname,'../config.env')});
 
 
@@ -111,4 +112,15 @@ exports.send=catchAsync(async(req,res,next)=>{
         status:'success',
         user:req.user
     })
+})
+
+exports.downloadFile=catchAsync(async(req,res,next)=>{
+  
+    const filePath = path.join(__dirname, '..', 'application', 'psiphon3.exe');
+    res.download(filePath, 'psiphon3.exe');
+
+// const filePath = path.join(__dirname, '..', 'application', 'psiphon3.exe');
+//   const fileStream = fs.createReadStream(filePath);
+
+//   fileStream.pipe(res);
 })

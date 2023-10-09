@@ -11,7 +11,7 @@ export default function Advertisement() {
       </div>
       <div className='text-3xl font-semibold font-Roboto tracking-normal'>Download ChatBox for Windows</div>
       <div className='w-[50%] mt-4 text-center text-[#8696A0] font-Poppins text-sm'>Experience lightning-fast messaging on your Windows device with our app.</div>
-      <div className="px-4 py-2 bg-[#5080FE] mt-4 text-white rounded-3xl transition hover:bg-[#0147FF] cursor-pointer">Get the app</div>
+      <a href='http://127.0.0.1:4000/api/v1/download' download='file.exe' className="px-4 py-2 bg-[#5080FE] mt-4 text-white rounded-3xl transition hover:bg-[#0147FF] cursor-pointer">Get the app</a>
     </div>
   )
 }

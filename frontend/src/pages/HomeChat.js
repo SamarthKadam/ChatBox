@@ -16,8 +16,10 @@ import Loading from './util/Loading';
 export default function HomeChat() {
 
   const state=useSelector((state)=>state.chat.AllChats)
+  console.log(state);
   const dispatch=useDispatch();
   const[chatModel,setChatModel]=useState(false);
+  const [isLoading,setIsLoading]=useState(false);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -27,7 +29,9 @@ export default function HomeChat() {
 
   useEffect(()=>{
 
+
     const getAllChats=async()=>{
+      setIsLoading(true)
       const cookie=localStorage.getItem('jwt');
       const response=await fetch(`http://127.0.0.1:4000/api/v1/chat`,{
         headers:{
@@ -36,12 +40,13 @@ export default function HomeChat() {
         }
       })
       const data=await response.json();
+      setIsLoading(false)
       dispatch(InitializeChat(data.data));
     }
 
   getAllChats();
 
-  },[chatModel,open,dispatch])
+  },[dispatch,chatModel])
 
 
   const selectChat=(data)=>{
@@ -70,8 +75,8 @@ export default function HomeChat() {
     <TopBar createGroup={createGroupChat}></TopBar>
     <div className='flex flex-row items-center  border-[1px] border-[#f5f5f5]'><ChatTitle openChatModel={openChatDetails}></ChatTitle></div>
     <div className=' border-[1px] border-[#f5f5f5]'>
-    {state.length===0&&<Loading></Loading>}
-    {state&&state.map((data,index)=>{
+    {isLoading&&<Loading></Loading>}
+    {!isLoading&&state&&state.map((data,index)=>{
       return   <ChatBar select={selectChat} data={data} key={index}></ChatBar>
     })}
     </div>
