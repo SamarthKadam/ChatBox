@@ -17,6 +17,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { removeUserFromGroup } from '../../services/Actions/Chat/action';
 import { removeUserFromActive } from '../../services/Actions/Chat/action';
 import { NullifyActiveChat } from '../../services/Actions/Chat/action';
+import { removeChat } from '../../services/Actions/Chat/action';
 
 const style = {
   position: 'absolute',
@@ -224,8 +225,12 @@ export default function ChatDetails({chatModel,closeChat}) {
       body:JSON.stringify(bodyData)
     })
     dispatch(NullifyActiveChat());
+    dispatch(removeChat(activeUser._id));
     // const data=await response.json();
   }
+  const loggedUser=JSON.parse(localStorage.getItem('info'));
+  if(loggedUser._id!==activeUser.groupAdmin._id)
+  return notify("Only administrators are allowed to delete the group.")
     deleteData();
     closeModelHandler();
   }
@@ -245,7 +250,7 @@ export default function ChatDetails({chatModel,closeChat}) {
         <Box sx={style}>
         <div className='text-2xl font-Poppins'>Info</div>
           <div className='flex w-[100%]'>
-          <input ref={ref} defaultValue={activeUser.isGroupChat?activeUser.chatName:data.name}  spellCheck='false' placeholder='Chat Name' className=' text-lg h-[16%] w-[100%] mt-5 font-thin px-1 py-2 outline-none bg-[#F6F8FC]'></input>
+          <input ref={ref} defaultValue={activeUser.isGroupChat?activeUser.chatName:data.name} disabled={!data.isGroupChat}  spellCheck='false' placeholder='Chat Name' className=' text-lg h-[16%] w-[100%] mt-5 font-thin px-1 py-2 outline-none bg-[#F6F8FC]'></input>
          {data.isGroupChat&&<button onClick={updateInfo} className='bg-[#014DFE] text-white text-lg  ml-2 px-2 py-1 mt-4 rounded-sm'>Change</button>}
           </div>
           {data.isGroupChat&&<input onChange={inputHandler} spellCheck="false" placeholder='Add your Friends' className='text-lg h-[16%] w-[100%] px-1 py-2 mt-3 outline-none font-thin bg-[#F6F8FC]'></input>}

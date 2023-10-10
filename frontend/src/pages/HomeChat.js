@@ -16,7 +16,6 @@ import Loading from './util/Loading';
 export default function HomeChat() {
 
   const state=useSelector((state)=>state.chat.AllChats)
-  console.log(state);
   const dispatch=useDispatch();
   const[chatModel,setChatModel]=useState(false);
   const [isLoading,setIsLoading]=useState(false);
@@ -46,7 +45,7 @@ export default function HomeChat() {
 
   getAllChats();
 
-  },[dispatch,chatModel])
+  },[dispatch])
 
 
   const selectChat=(data)=>{
@@ -74,7 +73,7 @@ export default function HomeChat() {
     <ChatDetails closeChat={closeChatDetails} chatModel={chatModel}></ChatDetails>
     <TopBar createGroup={createGroupChat}></TopBar>
     <div className='flex flex-row items-center  border-[1px] border-[#f5f5f5]'><ChatTitle openChatModel={openChatDetails}></ChatTitle></div>
-    <div className=' border-[1px] border-[#f5f5f5]'>
+    <div className=' border-[1px] overflow-y-scroll no-scrollbar border-[#f5f5f5]'>
     {isLoading&&<Loading></Loading>}
     {!isLoading&&state&&state.map((data,index)=>{
       return   <ChatBar select={selectChat} data={data} key={index}></ChatBar>

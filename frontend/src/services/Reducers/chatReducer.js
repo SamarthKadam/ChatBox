@@ -98,6 +98,11 @@ const chatState = {
               activeChatMessages:[...state.activeChatMessages,action.payload]
             }
 
+          case "REMOVE_CHAT":
+            state.AllChats=state.AllChats.filter((data)=>data._id!==action.payload);
+            return {
+              ...state
+            }
             
         default:
           return state;

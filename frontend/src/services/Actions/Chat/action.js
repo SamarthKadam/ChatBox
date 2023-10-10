@@ -112,3 +112,9 @@ export const AddMessage=(message)=>{
     payload:message
   }
 }
+export const removeChat=(id)=>{
+  return {
+    type:"REMOVE_CHAT",
+    payload:id
+  }
+}

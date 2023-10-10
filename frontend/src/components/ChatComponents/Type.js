@@ -55,8 +55,6 @@ export default function Type() {
     const data=await response.json();
     dispatch(AddMessage(data.data));
     socket.emit("new message",data.data);
-
-    console.log(data.data);
     
   }
 
