@@ -229,7 +229,7 @@ export default function ChatDetails({chatModel,closeChat}) {
     // const data=await response.json();
   }
   const loggedUser=JSON.parse(localStorage.getItem('info'));
-  if(loggedUser._id!==activeUser.groupAdmin._id)
+  if(activeUser.isGroupChat&&loggedUser._id!==activeUser.groupAdmin._id)
   return notify("Only administrators are allowed to delete the group.")
     deleteData();
     closeModelHandler();

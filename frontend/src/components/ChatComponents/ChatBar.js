@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 
 export default function ChatBar({data,select}) {
 
+  console.log(data);
   const val=useSelector((state)=>state.chat.activeChat);
   const isGroupChat=data.isGroupChat;
   let user;
@@ -24,7 +25,7 @@ export default function ChatBar({data,select}) {
     <Avatar alt="User-pic" referrerPolicy="no-referrer" sx={{width:48,height:48}} src={user.pic} />
     <div className='flex flex-col ml-2'>
         <div className='font-bold font-Roboto text-sm'>{user.name}</div>
-        <div className="text-xs text-[#979797]">Hey how are you?</div>
+        <div className="text-xs text-[#979797]">{data.latestMessage?.content}</div>
     </div>
       </div>
       <div className='flex flex-col items-end'>
