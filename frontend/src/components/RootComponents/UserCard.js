@@ -9,7 +9,7 @@ export default function UserCard() {
 
   const logoutHandler=()=>{
     localStorage.removeItem('jwt');
-    navigate('/');
+    navigate('/',{replace:true});
   }
 
 

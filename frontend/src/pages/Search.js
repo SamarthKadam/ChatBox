@@ -78,7 +78,7 @@ export default function Search() {
       dispatch(AddUser(values,state))
       notify(values.name);
       setTimeout(()=>{
-        navigate('/home/message')
+        navigate('/home/message',{replace:true})
       },2000)
     }
 

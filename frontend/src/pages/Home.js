@@ -26,7 +26,7 @@ export default function Home() {
     const data=await response.json();
     if(data.status==='success')
     {
-     navigate('/home/message')
+     navigate('/home/message',{replace:true})
     }
     else{
       setIsLoading(false);

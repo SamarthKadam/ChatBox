@@ -59,9 +59,8 @@ export default function Type() {
     if(message.length===0)
     return;
 
-    if(event.key=='Enter'||event.type==='click')
+    if(event.key==='Enter'||event.type==='click')
     {
-
     event.preventDefault();
     const cookie=localStorage.getItem('jwt');
     const bodyData={
@@ -93,7 +92,7 @@ export default function Type() {
   return (
     <div className="border-[1px] border-[#f5f5f5] bg-[#FFFFFF] h-[12%] flex flex-row justify-center items-center relative">
       <MicIcon sx={{width:22,cursor:'pointer'}} style={{position:'absolute',top:'50%',left:'4%',translate:'-4% -50%'}} color="info"></MicIcon>
-      <div onClick={sendMessage} style={{position:'absolute',top:'50%',left:'95%',translate:'-95% -50%'}}>
+      <div onClick={sendMessage} style={{position:'absolute',top:'50%',left:'95%',translate:'-95% -50%',cursor:'pointer'}}>
       <SendIcon color="action" sx={{width:22}}></SendIcon>
       </div>
       <textarea value={message} onKeyDown={sendMessage} onChange={messageHandler} spellCheck="false"  data-gramm="false" type='text' placeholder='Type a message' className=' bg-gray-100 font-Roboto box-border px-[5%] flex  text-md w-[95%] py-[1%] outline-none h-[70%] rounded-3xl'></textarea>
