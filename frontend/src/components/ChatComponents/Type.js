@@ -95,7 +95,7 @@ export default function Type() {
       <div onClick={sendMessage} style={{position:'absolute',top:'50%',left:'95%',translate:'-95% -50%',cursor:'pointer'}}>
       <SendIcon color="action" sx={{width:22}}></SendIcon>
       </div>
-      <textarea value={message} onKeyDown={sendMessage} onChange={messageHandler} spellCheck="false"  data-gramm="false" type='text' placeholder='Type a message' className=' bg-gray-100 font-Roboto box-border px-[5%] flex  text-md w-[95%] py-[1%] outline-none h-[70%] rounded-3xl'></textarea>
+      <textarea value={message} onKeyDown={sendMessage} onChange={messageHandler} spellCheck="false"  data-gramm="false" type='text' placeholder='Type a message' className=' bg-gray-100 resize-none font-Roboto box-border px-[5%] flex  text-md w-[95%] py-[1%] outline-none h-[70%] rounded-3xl'></textarea>
     </div>
   )
 }

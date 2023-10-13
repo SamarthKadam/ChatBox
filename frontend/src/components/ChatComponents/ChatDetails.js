@@ -10,7 +10,7 @@ import { useRef,useState} from 'react';
 import User from './User';
 import Loading from './Loading';
 import { useDispatch } from 'react-redux';
-import { addNewUserToGroup } from '../../services/Actions/Chat/action';
+import { RenameGlobalChat, addNewUserToGroup } from '../../services/Actions/Chat/action';
 import { addNewUserToActive } from '../../services/Actions/Chat/action';
 import { RenameChat } from '../../services/Actions/Chat/action';
 import { ToastContainer, toast } from 'react-toastify';
@@ -143,6 +143,7 @@ export default function ChatDetails({chatModel,closeChat}) {
     {
       closeChat();
       dispatch(RenameChat(ref.current.value))
+      dispatch(RenameGlobalChat(ref.current.value,activeUser._id));
     }
   }
 

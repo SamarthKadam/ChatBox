@@ -9,6 +9,7 @@ import { socket } from '../../socket/socket';
 import { InitializeChatMessages } from '../../services/Actions/Chat/action';
 import { useDispatch } from 'react-redux';
 import { AddMessage } from '../../services/Actions/Chat/action';
+import EmptyMessages from './EmptyMessages';
 
 export default function ChatMessages() {
   const isSet=useSelector((state)=>state.chat.activeChat);
@@ -78,6 +79,7 @@ export default function ChatMessages() {
   return (
     <div ref={div} className='w-[100%] h-[88%] px-[3%] overflow-y-scroll no-scrollbar py-[2%] box-border relative flex flex-col'>
       {isLoading&&<CircularLoading></CircularLoading>}
+      {!isLoading&&data.length===0&&<EmptyMessages></EmptyMessages>}
       {!isLoading&&data.length>0&&<>
         {data.map((val,index) => {
   if (isSender(val.sender._id))

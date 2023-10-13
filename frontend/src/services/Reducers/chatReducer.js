@@ -80,6 +80,17 @@ const chatState = {
               ...state
             }
 
+            case "RENAME_CHAT":
+              state.AllChats = state.AllChats.map((data) => {
+                if (data._id === action.payload.id) {
+                  return { ...data, chatName: action.payload.name };
+                }
+                return data;
+              });
+              return {
+                ...state,
+              };
+
           case "NULL_ACTIVE_CHAT":
             state.activeChat=null
             return {

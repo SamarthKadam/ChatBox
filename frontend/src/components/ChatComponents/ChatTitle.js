@@ -39,7 +39,7 @@ export default function ChatTitle({openChatModel}) {
         <Avatar referrerPolicy="no-referrer" alt="Group-pic" sx={{width:48,height:48}} src={user.pic}></Avatar>
         <div className='flex flex-col ml-3'>
          <div className='text-xl font-Roboto font-semibold'>{user.name}</div>
-         {isTyping&&<div className="text-xs font-normal  text-[#30C730]">{user.name} is typing...</div>}
+         {isTyping&&<div className="text-xs font-normal  text-[#30C730]">{data.isGroupChat?'Someone':user.name} is typing...</div>}
         </div>
         </div>
         <div onClick={openChatModel}>

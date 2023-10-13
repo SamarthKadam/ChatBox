@@ -93,6 +93,13 @@ export const RenameChat=(name)=>{
   }
 }
 
+export const RenameGlobalChat=(name,id)=>{
+  return {
+    type:"RENAME_CHAT",
+    payload:{name,id}
+  }
+}
+
 export const NullifyActiveChat=()=>{
   return {
     type:"NULL_ACTIVE_CHAT",

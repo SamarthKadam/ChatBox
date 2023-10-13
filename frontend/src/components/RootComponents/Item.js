@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import InsertChartOutlinedTwoToneIcon from '@mui/icons-material/InsertChartOutlinedTwoTone';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-const iconComponent=[<GridViewOutlinedIcon/>,<InsertChartOutlinedTwoToneIcon/>,<ForumOutlinedIcon/>,<SearchOutlinedIcon/>,<SettingsOutlinedIcon/>]
+const iconComponent=[<GridViewOutlinedIcon/>,<ForumOutlinedIcon/>,<SearchOutlinedIcon/>,<SettingsOutlinedIcon/>]
 export default function Item({text,to,val}) {
   return (
     <MotionAnimate reset={true}>
