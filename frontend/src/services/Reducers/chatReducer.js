@@ -114,6 +114,22 @@ const chatState = {
             return {
               ...state
             }
+          case "CHAT_NOTIFY":
+            state.AllChats=state.AllChats.map((val)=>{
+              if(val._id===action.payload)
+              {
+                return {...val,notify:true}
+              }
+              return val;
+            })
+
+          // case "INACT_CHAT_NOTIFY":
+          //   state.AllChats=state.AllChats.map((data)=>{
+          //     if(data._id===action.payload)
+          //     {
+
+          //     }
+          //   })
             
         default:
           return state;

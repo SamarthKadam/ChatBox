@@ -125,3 +125,15 @@ export const removeChat=(id)=>{
     payload:id
   }
 }
+export const ActiveChatNotify=(chatId)=>{
+  return {
+    type:"CHAT_NOTIFY",
+    payload:chatId
+  }
+}
+export const InActivateNotify=(chatId)=>{
+  return {
+    type:"INACT_CHAT_NOTIFY",
+    payload:chatId
+  }
+}
