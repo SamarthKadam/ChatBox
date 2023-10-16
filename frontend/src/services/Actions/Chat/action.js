@@ -137,3 +137,10 @@ export const InActivateNotify=(chatId)=>{
     payload:chatId
   }
 }
+
+export const moveChatToTop=(chatId)=>{
+  return {
+    type:"MOVE_TO_TOP_CHAT",
+    payload:chatId
+  }
+}

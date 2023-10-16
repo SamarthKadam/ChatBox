@@ -10,6 +10,7 @@ import { InitializeChatMessages } from "../../services/Actions/Chat/action";
 import { useDispatch } from "react-redux";
 import { AddMessage } from "../../services/Actions/Chat/action";
 import EmptyMessages from "./EmptyMessages";
+import { moveChatToTop } from "../../services/Actions/Chat/action";
 import { ActiveChatNotify } from "../../services/Actions/Chat/action";
 
 export default function ChatMessages() {
@@ -54,6 +55,7 @@ export default function ChatMessages() {
           "Add a notification on chatId",
           newMessageRecieved.chat._id
         );
+        dispatch(moveChatToTop(newMessageRecieved.chat._id));
         // dispatch(ActiveChatNotify(newMessageRecieved.chat._id));
       } else if (isSet !== null && isSet._id === newMessageRecieved.chat._id) {
         console.log("why here?");
