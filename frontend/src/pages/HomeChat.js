@@ -41,9 +41,8 @@ export default function HomeChat() {
       setIsLoading(false);
       dispatch(InitializeChat(data.data));
     };
-    if (state.length !== 0) return;
     getAllChats();
-  }, [dispatch, state]);
+  }, [dispatch]);
 
   const selectChat = (data) => {
     const isPresent = data.hasOwnProperty("notify");
@@ -74,14 +73,14 @@ export default function HomeChat() {
         <ChatTitle openChatModel={openChatDetails}></ChatTitle>
       </div>
         <div className=" border-[1px] overflow-y-scroll no-scrollbar border-[#f5f5f5]">
-          {isLoading && <Loading></Loading>}
+          {isLoading&&<Loading></Loading>}
           {!isLoading && state.length === 0 && <NoChats></NoChats>}
           {!isLoading &&
             state &&
             state.map((data, index) => {
               return (
-                <MotionAnimate animation="fadeInUp">
-                  <ChatBar select={selectChat} data={data} key={index}></ChatBar>
+                <MotionAnimate key={index} animation="fadeInUp">
+                  <ChatBar select={selectChat} data={data}></ChatBar>
                 </MotionAnimate>
               );
             })}

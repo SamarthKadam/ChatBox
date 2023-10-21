@@ -16,10 +16,11 @@ export default function ChatTitle({ openChatModel }) {
     const setTypeHandler=()=>{
       setIsTyping(true)
     }
-
+  
     const unsetTypeHandler=()=>{
       setIsTyping(false);
     }
+  
 
     socket.on("typing", setTypeHandler);
     socket.on("stop typing",unsetTypeHandler);

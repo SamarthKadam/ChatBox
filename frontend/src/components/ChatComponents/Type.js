@@ -18,6 +18,9 @@ export default function Type() {
   const messageHandler = (e) => {
     setMessage(e.target.value);
 
+    if(!socketConnected)
+    return;
+
     if (!typing) {
       setTyping(true);
       socket.emit("typing", isSet._id);
