@@ -13,11 +13,11 @@ export default function ChatTitle({ openChatModel }) {
     if (data === null) return;
 
 
-    const setTypeHandler=()=>{
-      setIsTyping(true)
+    const setTypeHandler=(room)=>{
+      setIsTyping(data._id===room)
     }
   
-    const unsetTypeHandler=()=>{
+    const unsetTypeHandler=(room)=>{
       setIsTyping(false);
     }
   

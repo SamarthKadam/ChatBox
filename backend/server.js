@@ -63,10 +63,9 @@ io.on('connection', (socket) => {
   });
 
   socket.on("typing",(room)=>{
-    console.log(room);
-    socket.to(room).emit("typing")
+    socket.to(room).emit("typing",room)
   })
-  socket.on("stop typing",(room)=>socket.to(room).emit("stop typing"));
+  socket.on("stop typing",(room)=>socket.to(room).emit("stop typing",room));
 
   socket.on("new message",(newMessageRecieved)=>{
     var chat=newMessageRecieved.chat;
