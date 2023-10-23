@@ -119,34 +119,42 @@ const chatReducer = (state = chatState, action) => {
       return {
         ...state,
       };
-    // case "CHAT_NOTIFY":
-    //   state.AllChats = state.AllChats.map((val) => {
-    //     if (val._id === action.payload) {
-    //       return { ...val, notify: true };
-    //     }
-    //     return val;
-    //   });
+    case "CHAT_NOTIFY":
+      state.AllChats = state.AllChats.map((val) => {
+        if (val._id === action.payload) {
+          return { ...val, notify: true };
+        }
+        return val;
+      });
+      return {
+        ...state
+      }
 
     case "MOVE_TO_TOP_CHAT":
       const index = state.AllChats.findIndex(
         (data) => data._id === action.payload
       );
       const elem = state.AllChats[index];
-      const updatedAllChats = [...state.AllChats]; // Create a shallow copy of the array
+      const updatedAllChats = [...state.AllChats]; 
       updatedAllChats.splice(index, 1);
       updatedAllChats.unshift(elem);
       return {
         ...state,
-        AllChats: updatedAllChats, // Update the AllChats array
+        AllChats: updatedAllChats, 
       };
 
-    // case "INACT_CHAT_NOTIFY":
-    //   state.AllChats=state.AllChats.map((data)=>{
-    //     if(data._id===action.payload)
-    //     {
-
-    //     }
-    //   })
+    case "INACT_CHAT_NOTIFY":
+      state.AllChats=state.AllChats.map((data)=>{
+        if(data._id===action.payload)
+        {
+          delete data.notify;
+          return {...data}
+        }
+        return data;
+      })
+      return {
+        ...state
+      }
 
     default:
       return state;

@@ -71,7 +71,6 @@ export default function Type() {
         },
         body: JSON.stringify(bodyData),
       });
-
       const data = await response.json();
       dispatch(AddMessage(data.data));
       if (AllChats[0]._id !== isSet._id) {
