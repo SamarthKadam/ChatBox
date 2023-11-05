@@ -6,6 +6,7 @@ const userController=require('../controllers/userController');
 
 router.get('/',authController.protect,userController.getAllUsers)
 // router.get('/groupUsers',authController.protect,userController.AvailableUsersToCreateGroup)
+router.post('/updateMe',authController.protect,userController.UpdateMe)
 router.post('/signup',authController.signup);
 router.post('/login',authController.login);
 router.post('/ispresent',authController.isUserPresent)

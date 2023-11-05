@@ -14,12 +14,14 @@ export default function RecieverMessage({img,content,messages,index,name,isGroup
 
 
   return (
+    <div className='w-[60%]'>
     <div className='flex flex-row justify-start my-1'>
       {isGroupChat&&(
       <Tooltip title={name} arrow placement="top-start">
      <Avatar referrerPolicy="no-referrer" src={img}></Avatar>
       </Tooltip>)}
      <div className='bg-[#FFFFFF]  rounded-tr-xl ml-[1%] font-Roboto rounded-br-xl rounded-bl-xl box-border px-2 py-2'>{content}</div>
+    </div>
     </div>
   )
 }
