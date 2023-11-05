@@ -12,13 +12,17 @@ export default function Profile() {
     setSelectedFile(file);
   };
 
+  let image=data.pic;
+  if(data.pic.startsWith('user'))
+  image=`http://127.0.0.1:4000/${data.pic}`
+
   return (
     <div className="flex flex-row items-center gap-10 mt-[2%]">
       <Avatar
         referrerPolicy="no-referrer"
         alt="User-pic"
         sx={{ width: 150, height: 150 }}
-        src={data.pic}
+        src={image}
       />
       <div className="flex flex-col gap-5">
         <label
