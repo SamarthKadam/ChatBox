@@ -71,11 +71,6 @@ exports.UpdateMe=catchAsync(async(req,res,next)=>{
 
 exports.UploadPhoto=catchAsync(async(req,res,next)=>{
 
-
-  console.log(req.file)
-  console.log(req.body);
-
-
   let data;
   if (req.file)
   data= req.file.filename;

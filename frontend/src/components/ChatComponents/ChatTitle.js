@@ -4,6 +4,7 @@ import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 import { useSelector } from "react-redux";
 import { getSender } from "../../helper/Reusable";
 import { socket } from "../../socket/socket";
+import groupLogo from '../../assets/images/group.png'
 
 export default function ChatTitle({ openChatModel }) {
   const data = useSelector((state) => state.chat.activeChat);
@@ -49,7 +50,7 @@ export default function ChatTitle({ openChatModel }) {
           referrerPolicy="no-referrer"
           alt="Group-pic"
           sx={{ width: 48, height: 48 }}
-          src={user.pic}
+          src={isGroupChat?groupLogo:(user.pic.startsWith('user')?`http://127.0.0.1:4000/${user.pic}`:user.pic)}
         ></Avatar>
         <div className="flex flex-col ml-3">
           <div className="text-xl font-Roboto font-semibold">{user.name}</div>

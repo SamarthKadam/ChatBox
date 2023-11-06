@@ -47,15 +47,8 @@ export default function ChatMessages() {
     if (isSet == null) return;
 
     const messageFn = (newMessageRecieved) => {
-      console.log("-------------------------------");
-      console.log(isSet._id, newMessageRecieved.chat._id);
 
       if (isSet !== null && isSet._id !== newMessageRecieved.chat._id) {
-        console.log(
-          "Add a notification on chatId",
-          newMessageRecieved.chat._id
-        );
-        console.log("is this new message")
         dispatch(moveChatToTop(newMessageRecieved.chat._id));
       } else if (isSet !== null && isSet._id === newMessageRecieved.chat._id) {
         dispatch(AddMessage(newMessageRecieved));

@@ -7,14 +7,36 @@ export default function Profile() {
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    // Handle the selected file here, e.g., you can upload it to a server or display a preview.
-    // For this example, we will simply update the selected file in the state.
     setSelectedFile(file);
   };
 
-  let image=data.pic;
-  if(data.pic.startsWith('user'))
-  image=`http://127.0.0.1:4000/${data.pic}`
+  const handleUpload = () => {
+    if (selectedFile) {
+      const formData = new FormData();
+      console.log(selectedFile);
+      formData.append("photo", selectedFile);
+
+      const cookie = localStorage.getItem("jwt");
+      fetch("http://127.0.0.1:4000/api/v1/users/uploadPhoto", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${cookie}`,
+        },
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          // Handle any errors that occur during the upload.
+          console.error("Error uploading image:", error);
+        });
+    }
+  };
+
+  let image = data.pic;
+  if (data.pic.startsWith("user")) image = `http://127.0.0.1:4000/${data.pic}`;
 
   return (
     <div className="flex flex-row items-center gap-10 mt-[2%]">
@@ -38,8 +60,11 @@ export default function Profile() {
           accept="image/*"
           onChange={handleFileChange}
         />
-        <div className="font-medium border-[1px] cursor-pointer border-[#000000] px-4 py-2 rounded-md font-Roboto tracking-tight">
-          Delete picture
+        <div
+          onClick={handleUpload}
+          className="font-medium border-[1px] cursor-pointer border-[#000000] px-4 py-2 rounded-md font-Roboto tracking-tight"
+        >
+          Upload Picture
         </div>
       </div>
     </div>

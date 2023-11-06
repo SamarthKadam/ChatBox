@@ -17,7 +17,6 @@ import NoChats from "./util/NoChats";
 import { MotionAnimate } from "react-motion-animate";
 export default function HomeChat() {
   const state = useSelector((state) => state.chat.AllChats);
-  console.log("component rerendering again");
   const dispatch = useDispatch();
   const [chatModel, setChatModel] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
