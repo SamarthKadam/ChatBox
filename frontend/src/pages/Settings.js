@@ -2,10 +2,14 @@ import React from "react";
 import Profile from "../components/SettingsComponents/Profile";
 import InputName from "../components/SettingsComponents/InputName";
 import InputEmail from "../components/SettingsComponents/InputEmail";
-import { useState } from "react";
+import { useState,useEffect} from "react";
+import {setUser} from '../services/Actions/User/actions'
+import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from "react-toastify";
 
 export default function Settings() {
+
+  const dispatch=useDispatch();
   const storedData = JSON.parse(localStorage.getItem("info"));
   const [name, setName] = useState(storedData.name);
   const [email, setEmail] = useState(storedData.email);
@@ -15,11 +19,17 @@ export default function Settings() {
     setEmail(storedData.email);
   };
 
+  useEffect(()=>{
+    window.onstorage = () => {
+      console.log(JSON.parse(window.localStorage.getItem("info")));
+    };
+  },[])
+
   const notify = (value) => {
     if (value === "error")
       return toast.error("Someting went wrong!", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 2500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -30,7 +40,7 @@ export default function Settings() {
 
     return toast.success("Successfuly updated!", {
       position: "top-center",
-      autoClose: 5000,
+      autoClose: 2500,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -59,7 +69,12 @@ export default function Settings() {
         }
       );
       const data = await response.json();
-      if (data.status === "success") notify("success");
+      if (data.status === "success")
+      {
+        notify("success");
+        dispatch(setUser(data.updatedUser));
+      }
+        
       else notify("error");
     };
     updateData();

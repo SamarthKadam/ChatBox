@@ -1,9 +1,23 @@
-import React, { useState } from "react";
+import React, { useState,useEffect} from "react";
 import { Avatar } from "@mui/material";
+import { useDispatch,useSelector} from "react-redux";
+import { setUser } from "../../services/Actions/User/actions";
 
 export default function Profile() {
+  const dispatch=useDispatch();
+  const dataredux=useSelector((state)=>state.user.userInfo)
+
   const data = JSON.parse(localStorage.getItem("info"));
+  const[Pic,setPic]=useState(data.pic);
   const [selectedFile, setSelectedFile] = useState(null);
+
+
+  useEffect(()=>{
+    if(dataredux===null)
+    return;
+
+    setPic(dataredux.pic);
+  },[dataredux])
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -26,7 +40,7 @@ export default function Profile() {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          dispatch(setUser(data.data.user));
         })
         .catch((error) => {
           // Handle any errors that occur during the upload.
@@ -35,8 +49,8 @@ export default function Profile() {
     }
   };
 
-  let image = data.pic;
-  if (data.pic.startsWith("user")) image = `http://127.0.0.1:4000/${data.pic}`;
+  let image = Pic;
+  if (Pic.startsWith("user")) image = `http://127.0.0.1:4000/${Pic}`;
 
   return (
     <div className="flex flex-row items-center gap-10 mt-[2%]">
@@ -46,7 +60,7 @@ export default function Profile() {
         sx={{ width: 150, height: 150 }}
         src={image}
       />
-      <div className="flex flex-col gap-5">
+      <div className="flex justify-center flex-col gap-5">
         <label
           htmlFor="fileInput"
           className="bg-[#202142] hover:bg-[#202162] text-white cursor-pointer px-4 py-2 rounded-md font-Roboto tracking-tight"
