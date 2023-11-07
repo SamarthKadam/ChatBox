@@ -6,6 +6,7 @@ import { useState,useEffect} from "react";
 import {setUser} from '../services/Actions/User/actions'
 import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from "react-toastify";
+import InfoIcon from '@mui/icons-material/Info';
 
 export default function Settings() {
 
@@ -88,6 +89,10 @@ export default function Settings() {
         <div className="px-[5%] py-[2%]">
           <div className="font-Poppins font-semibold text-2xl">
             Public profile
+          </div>
+          <div className="flex items-center mt-2">
+          <InfoIcon fontSize='10' color="info"></InfoIcon>
+          <div className="font-Poppins  text-xs">To update your profile picture, select an image and upload it.</div>
           </div>
           <Profile></Profile>
           <div className="mt-[3%] flex flex-col gap-8">
