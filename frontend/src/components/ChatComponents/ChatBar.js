@@ -22,6 +22,9 @@ export default function ChatBar({data,select}) {
   if(data.latestMessage&&data.latestMessage.content.length>35)
     isExcedding=true;
 
+  
+    const dateObject = new Date(data.updatedAt);
+
 
   return (
     <div style={{backgroundColor:val&&val._id===data._id?'#F3F4F6':null}} onClick={select.bind(this,data)} className='flex flex-row items-center justify-between rounded-md cursor-pointer mx-[2%] my-[5%] hover:bg-gray-100 px-[5%] py-[2%]'>
@@ -33,7 +36,7 @@ export default function ChatBar({data,select}) {
     </div>
       </div>
       <div className='flex flex-col items-end'>
-        <div className='text-xs font-medium cursor-pointer text-[#979797]' >06:11 PM</div>
+        <div className='text-xs font-medium cursor-pointer text-[#979797]' >{`${String(dateObject.getHours()).padStart(2,'0')}:${String(dateObject.getMinutes()).padStart(2,'0')} ${dateObject.getHours()>=12?'PM':'AM'}`}</div>
         <div className='mt-1'>
         {data.notify&&<Badge>1</Badge>}
         </div>

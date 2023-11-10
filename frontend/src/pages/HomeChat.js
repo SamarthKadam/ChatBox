@@ -20,6 +20,8 @@ export default function HomeChat() {
   const dispatch = useDispatch();
   const [chatModel, setChatModel] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [requestSent,setRequestSent]=useState(false);
+  const [isEmpty,setIsEmpty]=useState(false)
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -29,6 +31,7 @@ export default function HomeChat() {
   useEffect(() => {
     const getAllChats = async () => {
       setIsLoading(true);
+      setRequestSent(true);
       const cookie = localStorage.getItem("jwt");
       const response = await fetch(`http://127.0.0.1:4000/api/v1/chat`, {
         headers: {
@@ -37,7 +40,11 @@ export default function HomeChat() {
         },
       });
       const data = await response.json();
+      if(data.data.length===0)
+      setIsEmpty(true)
+
       setIsLoading(false);
+      console.log(data.data);
       dispatch(InitializeChat(data.data));
     };
     getAllChats();
@@ -73,7 +80,6 @@ export default function HomeChat() {
       </div>
         <div className=" border-[1px] overflow-y-scroll no-scrollbar border-[#f5f5f5]">
           {isLoading&&<Loading></Loading>}
-          {!isLoading && state.length === 0 && <NoChats></NoChats>}
           {!isLoading &&
             state &&
             state.map((data, index) => {
@@ -83,6 +89,7 @@ export default function HomeChat() {
                 </MotionAnimate>
               );
             })}
+            {isEmpty===true&&state.length === 0 && <NoChats></NoChats>}
         </div>
       <div className="bg-[#F6F8FC] flex flex-col relative overflow-hidden">
         <ChatMessages></ChatMessages>
