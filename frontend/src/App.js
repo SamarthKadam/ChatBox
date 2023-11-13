@@ -8,8 +8,7 @@ import Service from './pages/Service';
 import Login,{action as LoginAction}from './pages/Login';
 import Signup,{action as SignupAction} from './pages/Signup';
 import HomeChat from './pages/HomeChat';
-import Analitycs from './pages/Analitycs';
-import Dashboard from './pages/Dashboard';
+import Info from './pages/Info';
 import Settings from './pages/Settings';
 
 import Root,{loader as loadingAction} from './pages/Root';
@@ -45,12 +44,8 @@ const router = createBrowserRouter([
         element:<HomeChat></HomeChat>
       },
       {
-        path:'analitycs',
-        element:<Analitycs></Analitycs>
-      },
-      {
         path:'dashboard',
-        element:<Dashboard></Dashboard>
+        element:<Info></Info>
       },
       {
         path:"settings",

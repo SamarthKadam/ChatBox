@@ -47,6 +47,12 @@ export default function HomeChat() {
       console.log(data.data);
       dispatch(InitializeChat(data.data));
     };
+    if(state.length>0)
+    {
+      console.log("no need of fetching it again");
+      return;
+    }
+
     getAllChats();
   }, [dispatch]);
 

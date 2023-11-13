@@ -7,6 +7,8 @@ import jwt_decode from "jwt-decode";
 import { useSubmit } from 'react-router-dom'
 import { useNavigation } from 'react-router-dom'
 import { validate } from 'react-email-validator'
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 export default function Main() {
 
 
@@ -14,11 +16,12 @@ export default function Main() {
   const submit=useSubmit();
   const [loginData,setloginData]=useState({email:'',password:''});
   const isSubmitting=navigation.state==='submitting';
+  const [submitting,setSubmiting]=useState(false)
 
 
   function submitData(e,googleauth,information)
   {
-
+    setSubmiting(true);
     if(googleauth)
     {
       const name=information.name
@@ -61,7 +64,12 @@ export default function Main() {
   <Input onSetData={setloginData}  name='email' text="Email ID" placeholder="Email address" type='text'></Input>
   <Input onSetData={setloginData}  name='password'  text='Password' type='password' placeholder='Password'></Input>
   <div className='flex flex-row justify-center mt-10'>
-  <button onClick={submitData} className='px-10 rounded-[30px] bg-[#0270F7] text-lg font-medium py-4 hover:px-[44px] text-white '>LOG IN</button>
+  <div onClick={submitData} className='px-10 rounded-[30px] bg-[#0270F7] text-lg font-medium py-4 hover:px-[44px] text-white '>
+    {!submitting&&<div>LOG IN</div>}
+    {submitting&&<Box sx={{ display: 'flex' }}>
+      <CircularProgress size={25} style={{ color: '#FFFFFF' }} />
+    </Box>}
+  </div>
   </div>
   <div className='flex flex-row justify-center mt-[2%] items-center'>
   <div className='font-poppines text-xl font-bold '>Don't have an account?</div><Link to='/signup'className='text-[#0270F2] ml-1'> Create one</Link>

@@ -6,16 +6,21 @@ import jwt_decode from "jwt-decode";
 import {useNavigation} from 'react-router-dom'
 import { useSubmit } from 'react-router-dom';
 import { validate } from 'react-email-validator';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 export default function Main() {
 
 
   const navigation=useNavigation();
   const submit=useSubmit();
   const [SignUpData,setSignUpData]=useState({name:'',email:'',password:''});
+  const[submiting,setSubmiting]=useState(false);
 
   const isSubmitting=navigation.state==='submitting';
   function sendData(e,googleauth)
   {
+    console.log("loading dakai re?");
+    setSubmiting(true);
     if(googleauth)
     {
       submit(googleauth,{method:'post'})
@@ -69,7 +74,12 @@ export default function Main() {
   <Input onSetData={setSignUpData} name='email' text="Email ID" placeholder="Email address" type='text'></Input>
   <Input onSetData={setSignUpData} name='password'  text='Password' type='password' placeholder='Password'></Input>
   <div className='flex flex-row justify-center mt-10'>
-  <button onClick={sendData} className='px-10 rounded-[30px] bg-[#0270F7] text-lg font-medium py-4 hover:px-[44px] text-white '>SIGN IN</button>
+  <div onClick={sendData} className='px-10 rounded-[30px] bg-[#0270F7] text-lg font-medium py-4 hover:px-[44px] text-white '>
+    {!submiting&&<div>SIGN IN</div>}
+    {submiting&&<Box sx={{ display: 'flex' }}>
+      <CircularProgress size={25} style={{ color: '#FFFFFF' }} />
+    </Box>}
+    </div>
   </div>
   <div className='h-[1px] w-[100%] mt-10 bg-[#808080]'></div>
   <div className='flex flex-col items-center mt-6'>
