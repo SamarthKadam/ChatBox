@@ -20,6 +20,35 @@ export default function ChatMessages() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const loggedUser = JSON.parse(localStorage.getItem("info"));
+    socket.emit("setup", loggedUser);
+  }, []);
+
+  useEffect(() => {
+    const messageFn = (newMessageRecieved) => {
+
+      console.log("is it executin");
+      if (isSet !== null && isSet._id !== newMessageRecieved.chat._id) {
+        dispatch(moveChatToTop(newMessageRecieved.chat._id));
+      } else if (isSet !== null && isSet._id === newMessageRecieved.chat._id) {
+        dispatch(AddMessage(newMessageRecieved));
+        dispatch(moveChatToTop(newMessageRecieved.chat._id));
+      }
+      else if (isSet===null)
+      {
+        dispatch(moveChatToTop(newMessageRecieved.chat._id));
+      }
+    };
+
+    console.log("function handler setted up?");
+    console.log(socket.connected)
+    socket.on("message recieved", messageFn);
+    return () => {
+      socket.off("message recieved", messageFn);
+    };
+  }, [isSet,dispatch]);
+
+  useEffect(() => {
     if (isSet === null) return;
 
     const getData = async () => {
@@ -43,23 +72,6 @@ export default function ChatMessages() {
     getData();
   }, [isSet,dispatch]);
 
-  useEffect(() => {
-    if (isSet == null) return;
-
-    const messageFn = (newMessageRecieved) => {
-
-      if (isSet !== null && isSet._id !== newMessageRecieved.chat._id) {
-        dispatch(moveChatToTop(newMessageRecieved.chat._id));
-      } else if (isSet !== null && isSet._id === newMessageRecieved.chat._id) {
-        dispatch(AddMessage(newMessageRecieved));
-      }
-    };
-
-    socket.on("message recieved", messageFn);
-    return () => {
-      socket.off("message recieved", messageFn);
-    };
-  }, [isSet,dispatch]);
   useEffect(() => {
     if (data.length === 0) return;
 

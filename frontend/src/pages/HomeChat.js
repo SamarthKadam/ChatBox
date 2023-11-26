@@ -52,7 +52,6 @@ export default function HomeChat() {
       console.log("no need of fetching it again");
       return;
     }
-
     getAllChats();
   }, [dispatch]);
 

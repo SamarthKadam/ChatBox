@@ -15,7 +15,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '30%',
+  width: window.innerWidth/3,
   bgcolor: 'background.paper',
   boxShadow: 24,
   borderRadius:'14px',
@@ -191,7 +191,7 @@ export default function BasicModal({handleClose,open}) {
              setSearchResults([]);
              setSelectedUsers([]);
              handleClose();
-          }} className='bg-[#FF0000] text-white text-xl px-4 py-2 ml-2 mt-4 rounded-lg'>Cancel</button>
+          }} className=' text-[#0147FF] text-xl border-[2px] border-[#0147FF] px-4 py-1.5 ml-2 mt-4 rounded-lg'>Cancel</button>
          </div>
         </Box>
       </Modal>

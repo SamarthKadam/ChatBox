@@ -3,7 +3,11 @@ import { Avatar } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useEffect} from 'react'
+import {NullifyActiveChat} from '../../services/Actions/Chat/action'
+import { useDispatch } from 'react-redux'
+import { FlustAllChats } from '../../services/Actions/Chat/action'
 export default function UserCard() {
+  const dispatch=useDispatch();
   const dataredux=useSelector((state)=>state.user.userInfo)
 
   const Obj=JSON.parse(localStorage.getItem('info'))
@@ -25,6 +29,8 @@ export default function UserCard() {
   const logoutHandler=()=>{
     localStorage.removeItem('jwt');
     navigate('/',{replace:true});
+    dispatch(NullifyActiveChat());
+    dispatch(FlustAllChats());
   }
 
   let image=Pic;

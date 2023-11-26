@@ -27,7 +27,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "30%",
+  width: window.innerWidth/3,
   bgcolor: "background.paper",
   boxShadow: 24,
   borderRadius: "14px",
@@ -282,13 +282,13 @@ export default function ChatDetails({ chatModel, closeChat }) {
           <div>
             <button
               onClick={closeModelHandler}
-              className=" text-[#FF0000] border-solid border-2 border-[#FF0000] text-lg  ml-2 px-2 py-1 mt-4 rounded-lg"
+              className=" text-[#0147FF] text-xl border-[2px] border-[#0147FF] px-4 py-1 ml-2 mt-4 rounded-lg"
             >
               Cancel
             </button>
             <button
               onClick={deleteChatHandler}
-              className="bg-[#FF0000] text-white text-lg  ml-2 px-2 py-1 mt-4 rounded-lg"
+              className="bg-[#EF5350] text-white text-lg  ml-2 px-2 py-1.5 mt-4 rounded-lg"
             >
               <CancelIcon className="mr-2"></CancelIcon>
               {data.isGroupChat ? "Delete Group" : "Delete Chat"}

@@ -6,6 +6,7 @@ import whiteball from '../../assets/images/white-ball.png'
 import orangeball from '../../assets/images/orange-ball.png'
 import Chat from './Chat'
 import { useState,useEffect} from 'react'
+import Banner from './Banner'
 
 
 export default function Description() {
@@ -38,9 +39,10 @@ export default function Description() {
 
   return (
     <div className=' h-[85%] grid grid-cols-2 gap-4 max-[1400px]:grid-cols-[4fr,5fr] max-[1300px]:grid-cols-[3fr,5fr] max-[1127px]:grid-rows-2  max-[1127px]:grid-cols-[1fr] max-[451px]:grid-rows-1'>
-        <div className='flex flex-col justify-center'>
+        <div className='flex flex-col justify-center items-start'>
         <div className='text-white text-5xl font-semibold font-Poppins  max-[1300px]:text-3xl max-[1127px]:text-5xl max-[607px]:text-4xl'>Chat easy,chat instantly wherever you go</div>
         <p className='mt-10 text-white text-lg font-semibold font-Roboto'>The easiest & fasted way to live chat</p>
+        <Banner></Banner>
         </div>
         <div className='relative max-[451px]:hidden'>
             <div className="absolute  w-[50%] top-[20%] translate-y-[-20%] left-[95%] z-[555] translate-x-[-95%] max-[1127px]:top-[-15%]">

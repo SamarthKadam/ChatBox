@@ -43,6 +43,14 @@ export const InitializeChat=(chats)=>{
     payload:[...chats]
   }
 }
+
+export const FlustAllChats=()=>{
+  return {
+    type:"FLUSH_CHATS",
+  }
+}
+
+
 export const SetActiveChat=(chatId)=>{
   return {
     type:"ACTIVE_CHAT",

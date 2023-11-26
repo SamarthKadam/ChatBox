@@ -3,7 +3,7 @@ import Card from '../components/HomeComponents/Card'
 
 export default function Service() {
   return (
-    <div className='h-[100vh] px-40 max-[885px]:px-20 max-[653px]:px-14 py-[5%]'>
+    <div className='h-[100vh] px-40 max-[885px]:px-20 max-[653px]:px-14 py-[5%] flex justify-center items-center'>
     <div className='flex flex-col items-center'>
       <div className='w-[60%]'>
       <div className='text-[#384055] text-6xl text-center font-semibold font-Poppins max-[1127px]:text-5xl max-[607px]:text-4xl'>Get the best of all the features</div>
