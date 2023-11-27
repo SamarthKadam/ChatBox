@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { AddMessage } from "../../services/Actions/Chat/action";
 import EmptyMessages from "./EmptyMessages";
 import { moveChatToTop } from "../../services/Actions/Chat/action";
+import {updateChatBar} from '../../services/Actions/Chat/action'
 
 export default function ChatMessages() {
   const isSet = useSelector((state) => state.chat.activeChat);
@@ -27,16 +28,18 @@ export default function ChatMessages() {
   useEffect(() => {
     const messageFn = (newMessageRecieved) => {
 
-      console.log("is it executin");
       if (isSet !== null && isSet._id !== newMessageRecieved.chat._id) {
         dispatch(moveChatToTop(newMessageRecieved.chat._id));
+        dispatch(updateChatBar(newMessageRecieved.chat._id,newMessageRecieved.content))
       } else if (isSet !== null && isSet._id === newMessageRecieved.chat._id) {
         dispatch(AddMessage(newMessageRecieved));
         dispatch(moveChatToTop(newMessageRecieved.chat._id));
+        dispatch(updateChatBar(newMessageRecieved.chat._id,newMessageRecieved.content))
       }
       else if (isSet===null)
       {
         dispatch(moveChatToTop(newMessageRecieved.chat._id));
+        dispatch(updateChatBar(newMessageRecieved.chat._id,newMessageRecieved.content))
       }
     };
 

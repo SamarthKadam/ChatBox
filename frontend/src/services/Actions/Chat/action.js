@@ -152,3 +152,10 @@ export const moveChatToTop=(chatId)=>{
     payload:chatId
   }
 }
+
+export const updateChatBar=(chatId,latestMessage)=>{
+  return {
+    type:"UPDATE_CHAT_BAR",
+    payload:{id:chatId,latestMessage}
+  }
+}

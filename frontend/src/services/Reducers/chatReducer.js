@@ -160,7 +160,21 @@ const chatReducer = (state = chatState, action) => {
       })
       return {
         ...state
-      }
+      };
+    
+      case "UPDATE_CHAT_BAR":
+        state.AllChats = state.AllChats.map((val) => {
+        if (val._id === action.payload.id) {
+          const currentDate = new Date(); 
+        return {...val,latestMessage:{...val.latestMessage,content: action.payload.latestMessage},updatedAt:currentDate.toISOString()}
+        }
+        else
+        return val;
+        });
+        return {
+          ...state
+        }
+
 
     default:
       return state;
