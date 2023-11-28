@@ -16,11 +16,12 @@ export default function Main() {
   const [SignUpData,setSignUpData]=useState({name:'',email:'',password:''});
   const[submiting,setSubmiting]=useState(false);
 
-  const isSubmitting=navigation.state==='submitting';
   function sendData(e,googleauth)
   {
-    console.log("loading dakai re?");
     setSubmiting(true);
+    setTimeout(()=>{
+      setSubmiting(false);
+    },5000)
     if(googleauth)
     {
       submit(googleauth,{method:'post'})

@@ -2,14 +2,44 @@ import React from 'react'
 import Main from '../components/SignupComponents/Main'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import { redirect } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function Signup() {
   return (
     <GoogleOAuthProvider clientId="438058612514-mr6pvrfg97crajaid4grj88l95vo8u82.apps.googleusercontent.com">
+          <ToastContainer
+position="top-center"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="colored"
+/>
     <Main></Main>
   </GoogleOAuthProvider>
   )
 }
+
+const notify = (message) => {
+
+  return toast.error(message, {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+    });
+};
+
 
 export async function action({request})
 {
@@ -59,7 +89,7 @@ export async function action({request})
 
   if(responseData.status==='fail')
   {
-    alert('error')
+    notify('Something went wrong')
     return null;
   }
   localStorage.setItem('jwt',responseData.token);
