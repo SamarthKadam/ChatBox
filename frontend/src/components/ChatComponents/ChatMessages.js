@@ -12,6 +12,9 @@ import { AddMessage } from "../../services/Actions/Chat/action";
 import EmptyMessages from "./EmptyMessages";
 import { moveChatToTop } from "../../services/Actions/Chat/action";
 import {updateChatBar} from '../../services/Actions/Chat/action'
+import useSound from 'use-sound';
+import notifySound from '../../assets/sounds/notification.mp3';
+
 
 export default function ChatMessages() {
   const isSet = useSelector((state) => state.chat.activeChat);
@@ -19,6 +22,7 @@ export default function ChatMessages() {
   const data = useSelector((state) => state.chat.activeChatMessages);
   const div = useRef(null);
   const dispatch = useDispatch();
+  const [play] = useSound(notifySound);
 
   useEffect(() => {
     const loggedUser = JSON.parse(localStorage.getItem("info"));
@@ -27,7 +31,7 @@ export default function ChatMessages() {
 
   useEffect(() => {
     const messageFn = (newMessageRecieved) => {
-
+       play();
       if (isSet !== null && isSet._id !== newMessageRecieved.chat._id) {
         dispatch(moveChatToTop(newMessageRecieved.chat._id));
         dispatch(updateChatBar(newMessageRecieved.chat._id,newMessageRecieved.content))

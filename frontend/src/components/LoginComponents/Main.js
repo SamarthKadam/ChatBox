@@ -15,8 +15,9 @@ export default function Main() {
   const navigation=useNavigation();
   const submit=useSubmit();
   const [loginData,setloginData]=useState({email:'',password:''});
-  const isSubmitting=navigation.state==='submitting';
+  // const isSubmitting=navigation.state==='submitting';
   const [submitting,setSubmiting]=useState(false)
+
 
 
   function submitData(e,googleauth,information)

@@ -70,6 +70,7 @@ export default function Type() {
     if(isSet==null)
     return;
 
+    resetTranscript();
     SpeechRecognition.stopListening();
     setMircophone(false);
     setMessage('');
@@ -87,6 +88,7 @@ export default function Type() {
         content: message,
       };
       setMessage("");
+      resetTranscript();
       const response = await fetch(`http://127.0.0.1:4000/api/v1/message`, {
         method: "post",
         headers: {
