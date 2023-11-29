@@ -31,6 +31,8 @@ export default function ChatMessages() {
 
   useEffect(() => {
     const messageFn = (newMessageRecieved) => {
+
+      console.log(newMessageRecieved);
        play();
       if (isSet !== null && isSet._id !== newMessageRecieved.chat._id) {
         dispatch(moveChatToTop(newMessageRecieved.chat._id));

@@ -15,10 +15,12 @@ export default function ChatTitle({ openChatModel }) {
 
 
     const setTypeHandler=(room)=>{
+      console.log(data._id,room);
       setIsTyping(data._id===room)
     }
   
     const unsetTypeHandler=(room)=>{
+      console.log("Stop typing yuzai");
       setIsTyping(false);
     }
   

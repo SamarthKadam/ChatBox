@@ -10,6 +10,7 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import CancelIcon from "@mui/icons-material/Cancel";
+import {updateChatBar} from '../../services/Actions/Chat/action'
 
 export default function Type() {
   const isSet = useSelector((state) => state.chat.activeChat);
@@ -26,6 +27,8 @@ export default function Type() {
     resetTranscript,
     browserSupportsSpeechRecognition
   } = useSpeechRecognition();
+
+
 
   useEffect(() => {
     setMessage(transcript);
@@ -50,7 +53,9 @@ export default function Type() {
         socket.emit("stop typing", isSet._id);
         setTyping(false);
       }
+      socket.emit("stop typing",isSet._id);
     }, timerLength);
+
   };
 
   useEffect(() => {
@@ -61,7 +66,6 @@ export default function Type() {
     socket.on("connected", () => {
       setSocketConnected(true);
     });
-
     socket.emit("join chat", isSet._id);
   }, [isSet]);
 
@@ -99,6 +103,8 @@ export default function Type() {
       });
       const data = await response.json();
       dispatch(AddMessage(data.data));
+      dispatch(updateChatBar(isSet._id,data.data.content));
+      console.log("data.data",data.data);
       if (AllChats[0]._id !== isSet._id) {
         dispatch(moveChatToTop(isSet._id));
       }
