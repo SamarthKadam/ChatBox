@@ -42,8 +42,8 @@ export default function UserCard() {
     <div className='flex flex-row  items-center ml-[10%]'>
         <Avatar referrerPolicy="no-referrer" alt="User-pic" sx={{width:48,height:48}} src={image} />
         <div className='flex flex-col ml-2'>
-            <div className='font-bold font-Roboto text-sm'>{Name}</div>
-            <div onClick={logoutHandler} className="text-xs cursor-pointer text-[#979797]">Logout</div>
+            <div className='max-[1250px]:text-[12px] font-bold font-Roboto text-sm'>{Name}</div>
+            <div onClick={logoutHandler} className="max-[1250px]:text-[10px] text-xs cursor-pointer text-[#979797]">Logout</div>
         </div>
     </div>
   )

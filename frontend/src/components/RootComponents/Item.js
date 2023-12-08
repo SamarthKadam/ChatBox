@@ -11,7 +11,7 @@ const iconComponent=[<ForumOutlinedIcon/>,<SearchOutlinedIcon/>,<InfoIcon></Info
 export default function Item({text,to,val}) {
   return (
     <MotionAnimate reset={true}>
-    <NavLink to={to} style={(value)=>{return value.isActive?{backgroundColor:'#0147FF',color:'white'}:{}}} className='w-[80%] transition ease-in-out delay-250 flex flex-row px-[5%] py-[3%] rounded-lg my-[10%]'>
+    <NavLink to={to} style={(value)=>{return value.isActive?{backgroundColor:'#0147FF',color:'white'}:{}}} className='w-[80%] max-[1250px]:text-sm transition ease-in-out delay-250 flex flex-row px-[5%] py-[3%] rounded-lg my-[10%]'>
      {iconComponent[val]}
       <div className="ml-[12%]">{text}</div>
     </NavLink>

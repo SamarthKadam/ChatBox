@@ -46,10 +46,10 @@ export default function Root() {
 
   return (
     <div className='h-[100vh] flex flex-row'>
-    <div className='h-[100vh] w-[20vw] grid grid-rows-[1fr,6fr,0.8fr]'>
+    <div className='h-[100vh] max-[1250px]:bg-gray-900 w-[20vw] grid grid-rows-[1fr,6fr,0.8fr]'>
     <div className=" flex  flex-row  items-center border-[1px] border-[#f5f5f5]">
       <div className='flex flex-row ml-[15%]  items-center'>
-     <img alt='logo' className="h-8 mr-1" src={logo}></img> <Title black={true} title='ChatBox'></Title>
+     <img alt='logo' className="h-8 mr-1 max-[1250px]:h-7" src={logo}></img> <Title black={true} title='ChatBox'></Title>
       </div>
     </div>
     <div className='border-[1px] border-[#f5f5f5]'><Menu></Menu></div>
