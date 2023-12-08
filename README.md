@@ -41,30 +41,34 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
 1. Home Page <a id="home"> </a>
 
    - [Landing Page](https://anti-cheat-exam-app.vercel.app/) which lists all the features of the app
+    <br/><br/>
 
    <img width="1835" alt="HomePage" src="./backend/public/screenshots/Home.png">
    <br/><br/>
    <img width="1835" alt="Services" src="./backend/public/screenshots/Home2.png"
 
    <br/><br/>
+
 2. Login/Signup Page (Authentication) <a id="auth"> </a>
 
    - Fast and secure authentication
    - JWT tokens used to persist the authentication state
    - Enable swift and secure access with Google Sign-In/Login, seamlessly authenticating users using their Google credentials
-   <br/><br/>
-   <img width="1835" alt="Authentication" src="./backend/public/screenshots/Authentication.png">
+     <br/><br/>
+     <img width="1835" alt="Authentication" src="./backend/public/screenshots/Authentication.png">
 
    <br/><br/>
+
 3. Chats <a id="chats"> </a>
 
    - Conversation History: View a comprehensive list of all your past chats, including details about whom you've chatted with and the timestamps of each conversation.
 
    - One-Click Conversations: Initiate conversations effortlessly by simply clicking on any chat thread from the list, allowing instant connection and seamless interaction.
-   <br/><br/>
-   <img width="1835" alt="Chats" src="./backend/public/screenshots/Chats.png">
+     <br/><br/>
+     <img width="1835" alt="Chats" src="./backend/public/screenshots/Chats.png">
 
    <br/><br/>
+
 4. Messages <a id="messages"> </a>
 
    - Effortless Chatting: Easily communicate with others through Socket.IO's seamless functionality.
@@ -75,30 +79,27 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
 
    <img width="1835" alt="Messages" src="./backend/public/screenshots/Messages.png">
 
+<br/><br/> 5. Groups <a id="group"> </a>
+
+- Group Creation: Effortlessly create group chats with the people you need.
+
+- Admin Control: Admin privileges allow for group updates, including changing the group's name or managing user additions and deletions.
   <br/><br/>
-5. Groups <a id="group"> </a>
+  <img width="1835" alt="Group" src="./backend/public/screenshots/Group.png">
 
-   - Group Creation: Effortlessly create group chats with the people you need.
+<br/><br/> 6. Search <a id="search"> </a>
 
-   - Admin Control: Admin privileges allow for group updates, including changing the group's name or managing user additions and deletions.
-   <br/><br/>
-   <img width="1835" alt="Group" src="./backend/public/screenshots/Group.png">
+- Robust Search Functionality: Powerful search feature to easily find people within the application.
 
-  <br/><br/>
-6. Search <a id="search"> </a>
-
-   - Robust Search Functionality: Powerful search feature to easily find people within the application.
-
-   - Selection Capability: Select individuals from the search results to initiate conversations seamlessly.
+- Selection Capability: Select individuals from the search results to initiate conversations seamlessly.
 
   <img width="1835" alt="Group" src="./backend/public/screenshots/Search.png">
 
-  <br/><br/>
-7. Settings <a id="settings"> </a>
+<br/><br/> 7. Settings <a id="settings"> </a>
 
-   - Credential Updates: Easily modify your credentials such as email, name like information.
+- Credential Updates: Easily modify your credentials such as email, name like information.
 
-   - Profile Picture Upload: Upload your profile picture to personalize your account within the application.
+- Profile Picture Upload: Upload your profile picture to personalize your account within the application.
 
   <img width="1835" alt="Group" src="./backend/public/screenshots/Settings.png">
 
