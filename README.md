@@ -10,7 +10,7 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
 
 </p>
 
-- <a href="https://anti-cheat-exam-app.vercel.app/" target="_blank">Demo</a>
+- <a href="#" target="_blank">Demo</a>
 
 - [About Project](#about)
 
@@ -40,7 +40,7 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
 
 1. Home Page <a id="home"> </a>
 
-   - [Landing Page](https://anti-cheat-exam-app.vercel.app/) which lists all the features of the app
+   - [Landing Page](#) which lists all the features of the app
     <br/><br/>
 
    <img width="1835" alt="HomePage" src="./backend/public/screenshots/Home.png">
@@ -113,6 +113,7 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
 - Javascript
 - Redux
 - MaterialUI
+- TailWindCSS
 
 <a id="backend"> </a>
 
@@ -156,7 +157,7 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
 
 ## Useful Links
 
-- [Project Demo](https://anti-cheat-exam-app.vercel.app/)
+- [Project Demo](#)
 
 <a id="contact"> </a>
 
