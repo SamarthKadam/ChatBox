@@ -39,7 +39,7 @@ export default function UserCard() {
 
 
   return (
-    <div className='flex flex-row  items-center ml-[10%]'>
+    <div className='flex flex-row  items-center ml-[10%] max-[1024px]:hidden'>
         <Avatar referrerPolicy="no-referrer" alt="User-pic" sx={{width:48,height:48}} src={image} />
         <div className='flex flex-col ml-2'>
             <div className='max-[1250px]:text-[12px] font-bold font-Roboto text-sm'>{Name}</div>

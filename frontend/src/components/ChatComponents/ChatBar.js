@@ -6,6 +6,8 @@ import { useSelector } from 'react-redux'
 import groupLogo from '../../assets/images/group.png'
 
 export default function ChatBar({data,select}) {
+
+  console.log(data);
   const val=useSelector((state)=>state.chat.activeChat);
   const isGroupChat=data.isGroupChat;
   let user;
@@ -41,7 +43,7 @@ export default function ChatBar({data,select}) {
     </div>
       </div>
       <div className='flex flex-col items-end'>
-        <div className='text-xs font-medium cursor-pointer text-[#979797]' >{`${String(dateObject.getHours()%12).padStart(2,'0')}:${String(dateObject.getMinutes()).padStart(2,'0')} ${dateObject.getHours()>=12?'PM':'AM'}`}</div>
+        <div className='text-xs max-[800px]:hidden font-medium cursor-pointer text-[#979797]' >{`${String(dateObject.getHours()%12).padStart(2,'0')}:${String(dateObject.getMinutes()).padStart(2,'0')} ${dateObject.getHours()>=12?'PM':'AM'}`}</div>
         <div className='mt-1'>
         {data.notify&&<Badge>1</Badge>}
         </div>

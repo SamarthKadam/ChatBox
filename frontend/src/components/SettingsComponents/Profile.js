@@ -63,7 +63,7 @@ export default function Profile() {
       <div className="flex justify-center flex-col gap-5">
         <label
           htmlFor="fileInput"
-          className="bg-[#202142] hover:bg-[#202162] text-white cursor-pointer px-4 py-2 rounded-md font-Roboto tracking-tight"
+          className="bg-[#202142] hover:bg-[#202162] text-white cursor-pointer px-4 py-2 max-[1024px]:px-2 max-[1024px]:py-1 max-[1024px]:text-sm rounded-md font-Roboto tracking-tight"
         >
           Select Picture
         </label>
@@ -76,7 +76,7 @@ export default function Profile() {
         />
         <div
           onClick={handleUpload}
-          className="font-medium border-[1px] cursor-pointer border-[#000000] px-4 py-2 rounded-md font-Roboto tracking-tight"
+          className="font-medium border-[1px] cursor-pointer border-[#000000] px-4 py-2 rounded-md font-Roboto tracking-tight max-[1024px]:px-2 max-[1024px]:py-1 max-[1024px]:text-sm"
         >
           Upload Picture
         </div>

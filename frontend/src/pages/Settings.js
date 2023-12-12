@@ -87,7 +87,7 @@ export default function Settings() {
       <div className="border-[1px] border-[#f5f5f5]">
         <ToastContainer></ToastContainer>
         <div className="px-[5%] py-[2%]">
-          <div className="font-Poppins font-semibold text-2xl">
+          <div className="font-Poppins max-[1024px]:text-xl font-semibold text-2xl">
             Public profile
           </div>
           <div className="flex items-center mt-2">
@@ -102,13 +102,13 @@ export default function Settings() {
           <div className="flex flex-row mt-[2%] gap-2">
             <div
               onClick={updateHandler}
-              className=" bg-[#202142] hover:bg-[#202162] text-white font-medium  cursor-pointer border-[#000000]  px-4 py-2 rounded-md font-Roboto tracking-tight"
+              className=" bg-[#202142] hover:bg-[#202162] text-white font-medium  cursor-pointer border-[#000000]  px-4 py-2 max-[1024px]:px-2 max-[1024px]:py-1 max-[1024px]:text-sm rounded-md font-Roboto tracking-tight"
             >
               Update
             </div>
             <div
               onClick={resetData}
-              className=" bg-[#C6CED1] text-white font-medium  cursor-pointer border-[#000000]  px-4 py-2 rounded-md font-Roboto tracking-tight"
+              className=" bg-[#C6CED1] text-white font-medium  cursor-pointer border-[#000000]  px-4 py-2 rounded-md font-Roboto tracking-tight max-[1024px]:px-2 max-[1024px]:py-1 max-[1024px]:text-sm"
             >
               Reset
             </div>
