@@ -35,7 +35,7 @@ export default function UserCard() {
 
   let image=Pic;
   if(Pic.startsWith('user'))
-  image=`http://127.0.0.1:4000/${Pic}`
+  image=`${process.env.REACT_APP_API_URL}/${Pic}`
 
 
   return (

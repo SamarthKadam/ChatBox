@@ -11,6 +11,6 @@ export default function ChipExtend({value,remove}) {
 
 
   return (
-    <Chip color="primary"  style={{color:'black',fontSize:'14px',fontWeight:"bold",marginLeft:"5px",marginTop:"5px"}} avatar={<Avatar referrerPolicy="no-referrer" alt="Natacha" src={value.pic.startsWith('user')?`http://127.0.0.1:4000/${value.pic}`:`${value.pic}`}/>} onDelete={handleDelete} label={value.name.split(' ')[0]} variant="outlined"/>
+    <Chip color="primary"  style={{color:'black',fontSize:'14px',fontWeight:"bold",marginLeft:"5px",marginTop:"5px"}} avatar={<Avatar referrerPolicy="no-referrer" alt="Natacha" src={value.pic.startsWith('user')?`${process.env.REACT_APP_API_URL}/${value.pic}`:`${value.pic}`}/>} onDelete={handleDelete} label={value.name.split(' ')[0]} variant="outlined"/>
   )
 }

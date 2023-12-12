@@ -59,7 +59,7 @@ export default function Settings() {
     const updateData = async () => {
       const cookie = localStorage.getItem("jwt");
       const response = await fetch(
-        `http://127.0.0.1:4000/api/v1/users/updateMe`,
+        `${process.env.REACT_APP_API_URL}/api/v1/users/updateMe`,
         {
           method: "post",
           headers: {

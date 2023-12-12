@@ -54,7 +54,7 @@ export async function action({request})
   if(isGoogleSignIn)
   {
     const tData={...authData,pic:data.get('pic')}
-    const gresponse=await fetch(`http://127.0.0.1:4000/api/v1/users/ispresent`,{
+    const gresponse=await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users/ispresent`,{
       method:request.method,
       headers:{
         'Content-type':'application/json'
@@ -77,7 +77,7 @@ export async function action({request})
     information={...authData,pic:data.get('pic')}
   }
 
-  const response=await fetch(`http://127.0.0.1:4000/api/v1/users/signup`,{
+  const response=await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users/signup`,{
     method:request.method,
     headers:{
       'Content-type':'application/json'

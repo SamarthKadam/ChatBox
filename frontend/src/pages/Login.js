@@ -53,7 +53,7 @@ export  async function action({request})
 
   const isGoogleAuth=data.get('name');
   if(isGoogleAuth){
-    const response=await fetch(`http://127.0.0.1:4000/api/v1/users/login`,{
+    const response=await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users/login`,{
       method:request.method,
       headers:{
         'Content-type':'application/json'
@@ -70,7 +70,7 @@ export  async function action({request})
     }
 
     const authData2={...authdata,name:isGoogleAuth}
-    const response2=await fetch(`http://127.0.0.1:4000/api/v1/users/signup`,{
+    const response2=await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users/signup`,{
       method:request.method,
       headers:{
         'Content-type':'application/json'
@@ -92,7 +92,7 @@ export  async function action({request})
   }
 
 
-  const response=await fetch(`http://127.0.0.1:4000/api/v1/users/login`,{
+  const response=await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users/login`,{
     method:request.method,
     headers:{
       'Content-type':'application/json'

@@ -89,7 +89,7 @@ export default function ChatDetails({ chatModel, closeChat }) {
     setIsLoading(true);
     const cookie = localStorage.getItem("jwt");
     const response = await fetch(
-      `http://127.0.0.1:4000/api/v1/users?search=${value}`,
+      `${process.env.REACT_APP_API_URL}/api/v1/users?search=${value}`,
       {
         headers: {
           "Content-type": "application/json",
@@ -120,7 +120,7 @@ export default function ChatDetails({ chatModel, closeChat }) {
       chatName: ref.current.value,
     };
 
-    const response = await fetch(`http://127.0.0.1:4000/api/v1/chat/rename`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/chat/rename`, {
       method: "put",
       headers: {
         "Content-type": "application/json",
@@ -151,7 +151,7 @@ export default function ChatDetails({ chatModel, closeChat }) {
       return notify("error", "User already in the group!");
     }
 
-    const response = await fetch(`http://127.0.0.1:4000/api/v1/chat/groupadd`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/chat/groupadd`, {
       method: "put",
       headers: {
         "Content-type": "application/json",
@@ -177,7 +177,7 @@ export default function ChatDetails({ chatModel, closeChat }) {
       return notify("Only administrators are allowed to remove users.");
 
     const response = await fetch(
-      `http://127.0.0.1:4000/api/v1/chat/groupremove`,
+      `${process.env.REACT_APP_API_URL}/api/v1/chat/groupremove`,
       {
         method: "put",
         headers: {
@@ -201,7 +201,7 @@ export default function ChatDetails({ chatModel, closeChat }) {
       };
       const cookie = localStorage.getItem("jwt");
       const response = await fetch(
-        `http://127.0.0.1:4000/api/v1/chat/deleteChat`,
+        `${process.env.REACT_APP_API_URL}/api/v1/chat/deleteChat`,
         {
           method: "delete",
           headers: {

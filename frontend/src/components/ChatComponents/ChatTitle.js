@@ -52,7 +52,7 @@ export default function ChatTitle({ openChatModel }) {
           referrerPolicy="no-referrer"
           alt="Group-pic"
           sx={{ width: 48, height: 48 }}
-          src={isGroupChat?groupLogo:(user.pic.startsWith('user')?`http://127.0.0.1:4000/${user.pic}`:user.pic)}
+          src={isGroupChat?groupLogo:(user.pic.startsWith('user')?`${process.env.REACT_APP_API_URL}/${user.pic}`:user.pic)}
         ></Avatar>
         <div className="flex flex-col ml-3">
           <div className="text-xl font-Roboto font-semibold">{user.name}</div>

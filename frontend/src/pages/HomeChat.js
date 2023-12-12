@@ -33,7 +33,7 @@ export default function HomeChat() {
       setIsLoading(true);
       setRequestSent(true);
       const cookie = localStorage.getItem("jwt");
-      const response = await fetch(`http://127.0.0.1:4000/api/v1/chat`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/chat`, {
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${cookie}`,

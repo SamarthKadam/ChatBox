@@ -93,7 +93,7 @@ export default function Type() {
       };
       setMessage("");
       resetTranscript();
-      const response = await fetch(`http://127.0.0.1:4000/api/v1/message`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/message`, {
         method: "post",
         headers: {
           "Content-type": "application/json",

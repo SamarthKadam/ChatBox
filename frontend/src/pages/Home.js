@@ -15,7 +15,7 @@ export default function Home() {
     
     const checkIfLoggedIn=async()=>{
       const cookie=localStorage.getItem('jwt');
-      const response=await fetch(`http://127.0.0.1:4000/api/v1/users/protect`,{
+      const response=await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users/protect`,{
       method:'post',
       headers:{
         'Content-type':'application/json',

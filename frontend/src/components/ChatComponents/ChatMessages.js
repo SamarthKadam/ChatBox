@@ -64,7 +64,7 @@ export default function ChatMessages() {
       setIsLoading(true);
       const cookie = localStorage.getItem("jwt");
       const response = await fetch(
-        `http://127.0.0.1:4000/api/v1/message/${isSet._id}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/message/${isSet._id}`,
         {
           headers: {
             "Content-type": "application/json",

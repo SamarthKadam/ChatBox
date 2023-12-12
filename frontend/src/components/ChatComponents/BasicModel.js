@@ -66,7 +66,7 @@ export default function BasicModal({handleClose,open}) {
   const searchHandler=async(value)=>{
     setIsLoading(true)
     const cookie=localStorage.getItem('jwt');
-    const response=await fetch(`http://127.0.0.1:4000/api/v1/users?search=${value}`,{
+    const response=await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users?search=${value}`,{
     headers:{
       'Content-type':'application/json',
       'Authorization':`Bearer ${cookie}`
@@ -136,7 +136,7 @@ export default function BasicModal({handleClose,open}) {
     }
 
     const cookie=localStorage.getItem('jwt');
-    const response=await fetch(`http://127.0.0.1:4000/api/v1/chat/group`,{
+    const response=await fetch(`${process.env.REACT_APP_API_URL}/api/v1/chat/group`,{
       method:'post',
       headers:{
         'Content-type':'application/json',

@@ -31,7 +31,7 @@ export default function Profile() {
       formData.append("photo", selectedFile);
 
       const cookie = localStorage.getItem("jwt");
-      fetch("http://127.0.0.1:4000/api/v1/users/uploadPhoto", {
+      fetch(`${process.env.REACT_APP_API_URL}/api/v1/users/uploadPhoto`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${cookie}`,
@@ -50,7 +50,7 @@ export default function Profile() {
   };
 
   let image = Pic;
-  if (Pic.startsWith("user")) image = `http://127.0.0.1:4000/${Pic}`;
+  if (Pic.startsWith("user")) image = `${process.env.REACT_APP_API_URL}/${Pic}`;
 
   return (
     <div className="flex flex-row items-center gap-10 mt-[2%]">

@@ -12,7 +12,7 @@ export const AddUser= (user,users) => {
 
       const info={userId:user._id};
       const cookie=localStorage.getItem('jwt');
-      const response=await fetch(`http://127.0.0.1:4000/api/v1/chat/`,{
+      const response=await fetch(`${process.env.REACT_APP_API_URL}/api/v1/chat/`,{
         method:'post',
         headers:{
           'Content-type':'application/json',
