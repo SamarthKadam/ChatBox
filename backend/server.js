@@ -47,7 +47,6 @@ const io = require('socket.io')(server, {
   }
 });
 
-io.set('origins', '*:*');
 io.on('connection', (socket) => {
 
    
