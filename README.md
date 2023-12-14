@@ -10,7 +10,7 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
 
 </p>
 
-- <a href="#" target="_blank">Demo</a>
+- <a href="https://chat-box-samarthkadam.vercel.app/" target="_blank">Demo</a>
 
 - [About Project](#about)
 
@@ -40,8 +40,8 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
 
 1. Home Page <a id="home"> </a>
 
-   - [Landing Page](#) which lists all the features of the app
-    <br/><br/>
+   - [Landing Page](https://chat-box-samarthkadam.vercel.app/) which lists all the features of the app
+     <br/><br/>
 
    <img width="1835" alt="HomePage" src="./backend/public/screenshots/Home.png">
    <br/><br/>
@@ -103,6 +103,11 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
 
   <img width="1835" alt="Group" src="./backend/public/screenshots/Settings.png">
 
+<br/><br/>
+Demo
+<br/><br/>
+<video autoplay src='./backend/public/videos/Demo.mp4' width="1835"/>
+
 ## Tech stack
 
 <a id="frontend"> </a>
@@ -157,7 +162,7 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
 
 ## Useful Links
 
-- [Project Demo](#)
+- [Project Demo](https://chat-box-samarthkadam.vercel.app/)
 
 <a id="contact"> </a>
 
