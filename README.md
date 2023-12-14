@@ -103,10 +103,6 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
 
   <img width="1835" alt="Group" src="./backend/public/screenshots/Settings.png">
 
-<br/><br/>
-Demo
-<br/><br/>
-<video autoplay src='./backend/public/videos/Demo.mp4' width="1835"/>
 
 ## Tech stack
 
@@ -148,15 +144,39 @@ Demo
    - Install the required packages by navigating to the backend directory: cd backend and then run npm install.
    - Similarly, move to the frontend directory: cd frontend and execute npm install.
 
-3. Start Backend Server:
+
+3. To set up the frontend
+
+   - Create a `.env` file in the frontend directory.
+  
+   - Add the following values to the `.env` file:
+    REACT_APP_API_URL=http://127.0.0.1:4000
+    REACT_APP_SOCKET_URL=http://127.0.0.1:4000
+
+4. For configuring the backend:
+
+   - Establish your applications connection with MongoDB using following environment variables as key with your own values.
+   - Create a `config.env` file in the backend directory.
+   - Set the following environment variables in the `config.env` file:
+
+   - DBPASSWORD=<-yourmongodbpassword-><br>
+    DB=<-yourmongodbconnectionuri-><br>
+    PORT=4000<br>
+    DOMAIN=127.0.0.1<br>
+    JWTEXPIRES=90d<br>
+    JWTSECRET=<-giveanysecretkey-><br>
+    JWT_COOKIE_EXPIRES=90<br>
+
+
+5. Start Backend Server:
 
    - Start the backend server using the command: cd backend and then npm start.
 
-4. Start Frontend:
+6. Start Frontend:
 
    - Finally, initiate the frontend with the command: cd frontend and then npm start.
 
-5. Open `http://localhost:3000` with your browser to see the app
+7. Open `http://localhost:3000` with your browser to see the app
 
 <a id="links"> </a>
 
