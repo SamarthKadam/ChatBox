@@ -9,6 +9,8 @@ const chatRouter = require("./routes/chatRouter");
 const messageRouter = require("./routes/messageRouter");
 const downloadRouter = require("./routes/downloadRouter");
 
+
+const allowedOrigins = ['http://localhost:3000'];
 app.use(cors());
 app.use(cookieParser());
 app.use(express.json());

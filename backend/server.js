@@ -43,7 +43,7 @@ const server=app.listen(port,()=>{
 
 const io = require('socket.io')(server, {
   cors: {
-      origin: '*:*',
+      origin: ['https://chat-box-samarthkadam.vercel.app','http://localhost:3000'],
   }
 });
 
