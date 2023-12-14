@@ -27,7 +27,6 @@ export default function Profile() {
   const handleUpload = () => {
     if (selectedFile) {
       const formData = new FormData();
-      console.log(selectedFile);
       formData.append("photo", selectedFile);
 
       const cookie = localStorage.getItem("jwt");

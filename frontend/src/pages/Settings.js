@@ -19,13 +19,6 @@ export default function Settings() {
     setName(storedData.name);
     setEmail(storedData.email);
   };
-
-  useEffect(()=>{
-    window.onstorage = () => {
-      console.log(JSON.parse(window.localStorage.getItem("info")));
-    };
-  },[])
-
   const notify = (value) => {
     if (value === "error")
       return toast.error("Someting went wrong!", {

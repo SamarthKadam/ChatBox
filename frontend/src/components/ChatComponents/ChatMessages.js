@@ -32,7 +32,6 @@ export default function ChatMessages() {
   useEffect(() => {
     const messageFn = (newMessageRecieved) => {
 
-      console.log(newMessageRecieved);
        play();
       if (isSet !== null && isSet._id !== newMessageRecieved.chat._id) {
         dispatch(moveChatToTop(newMessageRecieved.chat._id));
@@ -49,8 +48,6 @@ export default function ChatMessages() {
       }
     };
 
-    console.log("function handler setted up?");
-    console.log(socket.connected)
     socket.on("message recieved", messageFn);
     return () => {
       socket.off("message recieved", messageFn);

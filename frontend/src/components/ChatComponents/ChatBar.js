@@ -7,7 +7,6 @@ import groupLogo from '../../assets/images/group.png'
 
 export default function ChatBar({data,select}) {
 
-  console.log(data);
   const val=useSelector((state)=>state.chat.activeChat);
   const isGroupChat=data.isGroupChat;
   let user;

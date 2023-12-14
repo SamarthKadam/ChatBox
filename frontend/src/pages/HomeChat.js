@@ -44,12 +44,10 @@ export default function HomeChat() {
       setIsEmpty(true)
 
       setIsLoading(false);
-      console.log(data.data);
       dispatch(InitializeChat(data.data));
     };
     if(state.length>0)
     {
-      console.log("no need of fetching it again");
       return;
     }
     getAllChats();
@@ -57,7 +55,6 @@ export default function HomeChat() {
 
   const selectChat = (data) => {
     const isPresent = data.hasOwnProperty("notify");
-    console.log(isPresent);
     dispatch(SetActiveChat(data));
   };
 

@@ -104,7 +104,6 @@ export default function Type() {
       const data = await response.json();
       dispatch(AddMessage(data.data));
       dispatch(updateChatBar(isSet._id,data.data.content));
-      console.log("data.data",data.data);
       if (AllChats[0]._id !== isSet._id) {
         dispatch(moveChatToTop(isSet._id));
       }
