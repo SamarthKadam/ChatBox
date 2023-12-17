@@ -4,7 +4,7 @@ import microsoft from '../../assets/images/microsoft.svg'
 
 export default function Banner() {
   return (
-    <a href='http://127.0.0.1:4000/api/v1/download' download='file.exe'className="cursor-pointer max-[1127px]:hidden">
+    <a href='#' className="cursor-pointer max-[1127px]:hidden">
     <div className='flex flex-row bg-black border-[0.2px] border-[#CFCFCF] rounded-md px-2 py-1 mt-6'>
        <img className='w-16' src={microsoft}></img> 
        <div className='flex flex-col text-white justify-center font-Roboto ml-2'>

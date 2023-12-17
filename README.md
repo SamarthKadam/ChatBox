@@ -104,9 +104,11 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
   <img width="1835" alt="Group" src="./backend/public/screenshots/Settings.png">
 
 <br/><br/>
-Demo
+## Demo
 
   <img width="1835" alt="Group" src="./backend/public/screenshots/Demonstration.gif">
+
+The illustration above showcases a conversation between two separate tabs opened in Chrome, simulating two seperate accounts chatting with each other. It demonstrates the transmission of messages along with the typing effect."
 
 ## Tech stack
 
