@@ -103,6 +103,10 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
 
   <img width="1835" alt="Group" src="./backend/public/screenshots/Settings.png">
 
+<br/><br/>
+Demo
+
+  <img width="1835" alt="Group" src="./backend/public/screenshots/Demonstration.gif">
 
 ## Tech stack
 
@@ -144,14 +148,13 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
    - Install the required packages by navigating to the backend directory: cd backend and then run npm install.
    - Similarly, move to the frontend directory: cd frontend and execute npm install.
 
-
 3. To set up the frontend
 
    - Create a `.env` file in the frontend directory.
-  
+
    - Add the following values to the `.env` file:
-    REACT_APP_API_URL=http://127.0.0.1:4000
-    REACT_APP_SOCKET_URL=http://127.0.0.1:4000
+     REACT_APP_API_URL=http://127.0.0.1:4000
+     REACT_APP_SOCKET_URL=http://127.0.0.1:4000
 
 4. For configuring the backend:
 
@@ -160,13 +163,12 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
    - Set the following environment variables in the `config.env` file:
 
    - DBPASSWORD=<-yourmongodbpassword-><br>
-    DB=<-yourmongodbconnectionuri-><br>
-    PORT=4000<br>
-    DOMAIN=127.0.0.1<br>
-    JWTEXPIRES=90d<br>
-    JWTSECRET=<-giveanysecretkey-><br>
-    JWT_COOKIE_EXPIRES=90<br>
-
+     DB=<-yourmongodbconnectionuri-><br>
+     PORT=4000<br>
+     DOMAIN=127.0.0.1<br>
+     JWTEXPIRES=90d<br>
+     JWTSECRET=<-giveanysecretkey-><br>
+     JWT_COOKIE_EXPIRES=90<br>
 
 5. Start Backend Server:
 
