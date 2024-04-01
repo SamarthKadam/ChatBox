@@ -11,13 +11,14 @@ import { useDispatch } from "react-redux";
 import { AddMessage } from "../../services/Actions/Chat/action";
 import EmptyMessages from "./EmptyMessages";
 import { moveChatToTop } from "../../services/Actions/Chat/action";
-import {updateChatBar} from '../../services/Actions/Chat/action'
-import useSound from 'use-sound';
-import notifySound from '../../assets/sounds/notification.mp3';
-
+import { updateChatBar } from "../../services/Actions/Chat/action";
+import useSound from "use-sound";
+import { addIncomingUserChatBar } from "../../services/Actions/Chat/action";
+import notifySound from "../../assets/sounds/notification.mp3";
 
 export default function ChatMessages() {
   const isSet = useSelector((state) => state.chat.activeChat);
+  const AllChats = useSelector((state) => state.chat.AllChats);
   const [isLoading, setIsLoading] = useState(false);
   const data = useSelector((state) => state.chat.activeChatMessages);
   const div = useRef(null);
@@ -31,20 +32,35 @@ export default function ChatMessages() {
 
   useEffect(() => {
     const messageFn = (newMessageRecieved) => {
+      const isChatBarPresent = AllChats.find(
+        (val) => val._id === newMessageRecieved.chat._id
+      );
 
-       play();
+      console.log("Lets test");
+      if (!isChatBarPresent)
+      {
+        dispatch(addIncomingUserChatBar(newMessageRecieved.chat));
+        dispatch(updateChatBar(newMessageRecieved.chat._id, newMessageRecieved.content));
+        return;
+      }
+
+      play();
       if (isSet !== null && isSet._id !== newMessageRecieved.chat._id) {
         dispatch(moveChatToTop(newMessageRecieved.chat._id));
-        dispatch(updateChatBar(newMessageRecieved.chat._id,newMessageRecieved.content))
+        dispatch(
+          updateChatBar(newMessageRecieved.chat._id, newMessageRecieved.content)
+        );
       } else if (isSet !== null && isSet._id === newMessageRecieved.chat._id) {
         dispatch(AddMessage(newMessageRecieved));
         dispatch(moveChatToTop(newMessageRecieved.chat._id));
-        dispatch(updateChatBar(newMessageRecieved.chat._id,newMessageRecieved.content))
-      }
-      else if (isSet===null)
-      {
+        dispatch(
+          updateChatBar(newMessageRecieved.chat._id, newMessageRecieved.content)
+        );
+      } else if (isSet === null) {
         dispatch(moveChatToTop(newMessageRecieved.chat._id));
-        dispatch(updateChatBar(newMessageRecieved.chat._id,newMessageRecieved.content))
+        dispatch(
+          updateChatBar(newMessageRecieved.chat._id, newMessageRecieved.content)
+        );
       }
     };
 
@@ -52,7 +68,7 @@ export default function ChatMessages() {
     return () => {
       socket.off("message recieved", messageFn);
     };
-  }, [isSet,dispatch]);
+  }, [isSet, dispatch, AllChats]);
 
   useEffect(() => {
     if (isSet === null) return;
@@ -76,7 +92,7 @@ export default function ChatMessages() {
       setIsLoading(false);
     };
     getData();
-  }, [isSet,dispatch]);
+  }, [isSet, dispatch]);
 
   useEffect(() => {
     if (data.length === 0) return;
@@ -93,7 +109,6 @@ export default function ChatMessages() {
       clearTimeout(timer);
     };
   }, [data]);
-
 
   if (isSet === null) return <Advertisement></Advertisement>;
 

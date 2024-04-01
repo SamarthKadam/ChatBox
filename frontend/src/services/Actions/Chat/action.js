@@ -159,3 +159,10 @@ export const updateChatBar=(chatId,latestMessage)=>{
     payload:{id:chatId,latestMessage}
   }
 }
+
+export const addIncomingUserChatBar=(data)=>{
+  return {
+    type:"ADD_INCOMING_USER_CHAT",
+    payload:data
+  }
+}

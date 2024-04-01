@@ -175,6 +175,12 @@ const chatReducer = (state = chatState, action) => {
           ...state
         }
 
+      case "ADD_INCOMING_USER_CHAT":
+      return {
+          ...state,
+          AllChats:[action.payload,...state.AllChats]
+        }
+
 
     default:
       return state;
