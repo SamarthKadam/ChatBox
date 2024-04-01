@@ -2,7 +2,7 @@
 
 # ChatBox-Web App🌟
 
-Welcome to Chatbox, your go-to platform for effortless and engaging conversations. Connect with friends, family, and new acquaintances in real-time with our user-friendly interface.Share messages in a secure and vibrant environment.Chatbox fosters seamless communication with its intuitive design and robust features. Stay connected, express yourself, and build meaningful connections with ease.
+Welcome to Chatbox, your go-to platform for effortless and engaging conversations. Connect with friends, family, and new acquaintances in real-time with our user-friendly interface.Share messages in a secure and vibrant environment.Chatbox fosters seamless communication with its intuitive design and robust features. Stay connected, express yourself, and build meaningful connections with ease.(Desktop Application Comming Soon)
 
 <p  align="center">
 
@@ -192,6 +192,7 @@ The illustration above showcases a conversation between two separate tabs opened
 
 ## Need help?
 
-Feel free to contact me on [Twitter](https://twitter.com/Samarth69908166) or [LinkedIn](https://www.linkedin.com/in/samarth-kadam-119a25209/)
+Feel free to contact me on [Twitter](https://twitter.com/Samarth69908166) or [LinkedIn](https://www.linkedin.com/in/samarth-kadam-119a25209/), know more about me at [samarthkadam.vercel.app](https://samarthkadam.vercel.app/)
+
 
 [![Twitter](https://img.shields.io/badge/Twitter-follow-blue.svg?logo=twitter&logoColor=white)](https://twitter.com/Samarth69908166)
