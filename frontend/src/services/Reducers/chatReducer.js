@@ -33,6 +33,7 @@ const chatReducer = (state = chatState, action) => {
         ...state,
       };
 
+
     case "FLUSH_CHATS":
       state.AllChats=[];
       return {

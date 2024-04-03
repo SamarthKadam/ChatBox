@@ -66,6 +66,13 @@ io.on('connection', (socket) => {
   })
   socket.on("stop typing",(room)=>socket.to(room).emit("stop typing",room));
 
+
+  socket.on("removechatbar-send",(chatId)=>{
+
+    console.log('remove chat bar for this id',chatId);
+    socket.to(chatId).emit("removechatbar-recieve",chatId)
+  })
+
   socket.on("new message",(newMessageRecieved)=>{
     var chat=newMessageRecieved.chat;
 

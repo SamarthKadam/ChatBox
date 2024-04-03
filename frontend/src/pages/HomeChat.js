@@ -13,8 +13,11 @@ import BasicModal from "../components/ChatComponents/BasicModel";
 import { SetActiveChat } from "../services/Actions/Chat/action";
 import ChatDetails from "../components/ChatComponents/ChatDetails";
 import Loading from "./util/Loading";
+import { socket } from "../socket/socket";
 import NoChats from "./util/NoChats";
 import { MotionAnimate } from "react-motion-animate";
+import { removeChat } from "../services/Actions/Chat/action";
+import { NullifyActiveChat } from "../services/Actions/Chat/action";
 export default function HomeChat() {
   const state = useSelector((state) => state.chat.AllChats);
   const dispatch = useDispatch();
@@ -27,6 +30,20 @@ export default function HomeChat() {
   const handleClose = () => {
     setOpen(false);
   };
+
+
+  useEffect(()=>{
+   const chatfn=(chatid)=>{
+      console.log("REmove the chatbar for the id",chatid)
+      dispatch(removeChat(chatid));
+      dispatch(NullifyActiveChat());
+    }
+
+    socket.on('removechatbar-recieve',chatfn)
+    return ()=>{
+      socket.off('removechatbar',chatfn);
+    }
+  },[])
 
   useEffect(() => {
     const getAllChats = async () => {

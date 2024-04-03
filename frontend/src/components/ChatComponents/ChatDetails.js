@@ -21,6 +21,8 @@ import { removeUserFromGroup } from "../../services/Actions/Chat/action";
 import { removeUserFromActive } from "../../services/Actions/Chat/action";
 import { NullifyActiveChat } from "../../services/Actions/Chat/action";
 import { removeChat } from "../../services/Actions/Chat/action";
+import { socket } from "../../socket/socket";
+
 
 const style = {
   position: "absolute",
@@ -211,6 +213,7 @@ export default function ChatDetails({ chatModel, closeChat }) {
           body: JSON.stringify(bodyData),
         }
       );
+      socket.emit("removechatbar-send",activeUser._id)
       dispatch(NullifyActiveChat());
       dispatch(removeChat(activeUser._id));
       // const data=await response.json();
