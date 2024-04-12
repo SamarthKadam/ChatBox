@@ -12,7 +12,7 @@ const downloadRouter = require("./routes/downloadRouter");
 
 const allowedOrigins = ['http://localhost:3000','https://chat-box-samarthkadam.vercel.app'];
 app.use(cors({
-  origin:allowedOrigins
+  origin:'*'
 }));
 app.use(cookieParser());
 app.use(express.json());
