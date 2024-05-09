@@ -165,7 +165,7 @@ The illustration above showcases a conversation between two separate tabs opened
    - Set the following environment variables in the `config.env` file:
 
    - DBPASSWORD=<-yourmongodbpassword-><br>
-     DB=<-yourmongodbconnectionuri->
+     DB=<-yourmongodbconnectionuri-><br>
      PORT=4000<br>
      DOMAIN=127.0.0.1<br>
      JWTEXPIRES=90d<br>
