@@ -172,6 +172,10 @@ The illustration above showcases a conversation between two separate tabs opened
      JWTSECRET=<-giveanysecretkey-><br>
      JWT_COOKIE_EXPIRES=90<br>
 
+     ```
+     Keep your mongodb connection uri (DB) in following format: mongodb+srv://samarthkadam:<password>@cluster0.jtoecjs.mongodb.net/ChatBox
+     ```
+
 
 5. Start Backend Server:
 
