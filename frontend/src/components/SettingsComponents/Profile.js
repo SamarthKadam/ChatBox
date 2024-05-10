@@ -1,23 +1,21 @@
-import React, { useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Avatar } from "@mui/material";
-import { useDispatch,useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../services/Actions/User/actions";
+import toast from "react-toastify";
 
 export default function Profile() {
-  const dispatch=useDispatch();
-  const dataredux=useSelector((state)=>state.user.userInfo)
+  const dispatch = useDispatch();
+  const dataredux = useSelector((state) => state.user.userInfo);
 
   const data = JSON.parse(localStorage.getItem("info"));
-  const[Pic,setPic]=useState(data.pic);
+  const [Pic, setPic] = useState(data.pic);
   const [selectedFile, setSelectedFile] = useState(null);
 
-
-  useEffect(()=>{
-    if(dataredux===null)
-    return;
-
+  useEffect(() => {
+    if (dataredux === null) return;
     setPic(dataredux.pic);
-  },[dataredux])
+  }, [dataredux]);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -26,6 +24,13 @@ export default function Profile() {
 
   const handleUpload = () => {
     if (selectedFile) {
+      // Ask for confirmation before uploading
+      const isConfirmed = window.confirm(
+        "Are you sure you want to upload this image?"
+      );
+
+      if (!isConfirmed) return;
+
       const formData = new FormData();
       formData.append("photo", selectedFile);
 
@@ -39,12 +44,16 @@ export default function Profile() {
       })
         .then((response) => response.json())
         .then((data) => {
+          // Alert if image uploaded successfully
+          alert("Image uploaded successfully!");
           dispatch(setUser(data.data.user));
         })
         .catch((error) => {
           // Handle any errors that occur during the upload.
           console.error("Error uploading image:", error);
         });
+    } else {
+      alert("Please select an image to upload.");
     }
   };
 
