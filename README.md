@@ -172,10 +172,6 @@ The illustration above showcases a conversation between two separate tabs opened
      JWTSECRET=<-giveanysecretkey-><br>
      JWT_COOKIE_EXPIRES=90<br>
 
-     ```
-     Keep your mongodb connection uri (DB) in following format: mongodb+srv://samarthkadam:<password>@cluster0.jtoecjs.mongodb.net/ChatBox
-     ```
-
 
 5. Start Backend Server:
 
@@ -186,6 +182,16 @@ The illustration above showcases a conversation between two separate tabs opened
    - Finally, initiate the frontend with the command: cd frontend and then npm start.
 
 7. Open `http://localhost:3000` with your browser to see the app
+
+
+## Quick-Setup
+If you want to eliminate the backend setup then head to .env file in frontend. Replace your values with this
+```
+REACT_APP_API_URL=https://chatbox-api-bj21.onrender.com
+REACT_APP_SOCKET_URL=https://chatbox-api-bj21.onrender.com
+```
+
+
 
 <a id="links"> </a>
 
