@@ -22,7 +22,6 @@ export default function Type() {
   const dispatch = useDispatch();
   const [typing, setTyping] = useState(false);
   const [Microphone, setMicrophone] = useState(false);
-  const [alertShown, setAlertShown] = useState(false); // New state to track if alert has been shown
 
   const {
     transcript,
@@ -79,40 +78,38 @@ export default function Type() {
   }, [isSet]);
 
   const sendMessage = async (event) => {
-    if (!alertShown && message.trim() === "") {
-      setAlertShown(true);
-      toast.error("Message cannot be empty!");
+    event.preventDefault();
+
+    if (message.trim() === "") {
+      toast.error("Please enter a message.");
       return;
     }
 
-    if (event.key === "Enter" || event.type === "click") {
-      event.preventDefault();
-      const cookie = localStorage.getItem("jwt");
-      const bodyData = {
-        chatId: isSet._id,
-        content: message,
-      };
-      setMessage("");
-      resetTranscript();
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/v1/message`,
-        {
-          method: "post",
-          headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${cookie}`,
-          },
-          body: JSON.stringify(bodyData),
-        }
-      );
-      const data = await response.json();
-      dispatch(AddMessage(data.data));
-      dispatch(updateChatBar(isSet._id, data.data.content));
-      if (AllChats[0]._id !== isSet._id) {
-        dispatch(moveChatToTop(isSet._id));
+    const cookie = localStorage.getItem("jwt");
+    const bodyData = {
+      chatId: isSet._id,
+      content: message,
+    };
+    setMessage("");
+    resetTranscript();
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/api/v1/message`,
+      {
+        method: "post",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${cookie}`,
+        },
+        body: JSON.stringify(bodyData),
       }
-      socket.emit("new message", data.data);
+    );
+    const data = await response.json();
+    dispatch(AddMessage(data.data));
+    dispatch(updateChatBar(isSet._id, data.data.content));
+    if (AllChats[0]._id !== isSet._id) {
+      dispatch(moveChatToTop(isSet._id));
     }
+    socket.emit("new message", data.data);
   };
 
   const startListening = () => {
@@ -169,11 +166,19 @@ export default function Type() {
             cursor: "pointer",
           }}
         >
-          <SendIcon color="action" sx={{ width: 22 }}></SendIcon>
+          <SendIcon
+            color={message.trim() === "" ? "disabled" : "action"}
+            sx={{ width: 22 }}
+          ></SendIcon>
         </div>
         <textarea
           value={message}
-          onKeyDown={sendMessage}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              sendMessage(e);
+            }
+          }}
           onChange={messageHandler}
           spellCheck="false"
           data-gramm="false"
