@@ -11,6 +11,8 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { updateChatBar } from "../../services/Actions/Chat/action";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Type() {
   const isSet = useSelector((state) => state.chat.activeChat);
@@ -19,7 +21,7 @@ export default function Type() {
   const [socketConnected, setSocketConnected] = useState(false);
   const dispatch = useDispatch();
   const [typing, setTyping] = useState(false);
-  const [Microphone, setMircophone] = useState(false);
+  const [Microphone, setMicrophone] = useState(false);
   const [alertShown, setAlertShown] = useState(false); // New state to track if alert has been shown
 
   const {
@@ -72,14 +74,14 @@ export default function Type() {
 
     resetTranscript();
     SpeechRecognition.stopListening();
-    setMircophone(false);
+    setMicrophone(false);
     setMessage("");
   }, [isSet]);
 
   const sendMessage = async (event) => {
     if (!alertShown && message.trim() === "") {
       setAlertShown(true);
-      alert("Message cannot be empty!");
+      toast.error("Message cannot be empty!");
       return;
     }
 
@@ -115,68 +117,71 @@ export default function Type() {
 
   const startListening = () => {
     SpeechRecognition.startListening({ continuous: true, language: "en-IN" });
-    setMircophone(true);
+    setMicrophone(true);
   };
 
   const stopListening = () => {
     SpeechRecognition.stopListening();
-    setMircophone(false);
+    setMicrophone(false);
   };
 
   if (isSet === null) return <></>;
 
   return (
-    <div className="border-[1px] border-[#f5f5f5] bg-[#FFFFFF] h-[12%] flex flex-row justify-center items-center relative">
-      {!Microphone && (
-        <div onClick={startListening}>
-          <MicIcon
-            sx={{ width: 22, cursor: "pointer" }}
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "4%",
-              translate: "-4% -50%",
-            }}
-            color="info"
-          ></MicIcon>
+    <>
+      <ToastContainer />
+      <div className="border-[1px] border-[#f5f5f5] bg-[#FFFFFF] h-[12%] flex flex-row justify-center items-center relative">
+        {!Microphone && (
+          <div onClick={startListening}>
+            <MicIcon
+              sx={{ width: 22, cursor: "pointer" }}
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "4%",
+                translate: "-4% -50%",
+              }}
+              color="info"
+            ></MicIcon>
+          </div>
+        )}
+        {Microphone && (
+          <div onClick={stopListening}>
+            <CancelIcon
+              sx={{ width: 22, cursor: "pointer" }}
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "4%",
+                translate: "-4% -50%",
+              }}
+              color="info"
+            ></CancelIcon>
+          </div>
+        )}
+        <div
+          onClick={sendMessage}
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "95%",
+            translate: "-95% -50%",
+            cursor: "pointer",
+          }}
+        >
+          <SendIcon color="action" sx={{ width: 22 }}></SendIcon>
         </div>
-      )}
-      {Microphone && (
-        <div onClick={stopListening}>
-          <CancelIcon
-            sx={{ width: 22, cursor: "pointer" }}
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "4%",
-              translate: "-4% -50%",
-            }}
-            color="info"
-          ></CancelIcon>
-        </div>
-      )}
-      <div
-        onClick={sendMessage}
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "95%",
-          translate: "-95% -50%",
-          cursor: "pointer",
-        }}
-      >
-        <SendIcon color="action" sx={{ width: 22 }}></SendIcon>
+        <textarea
+          value={message}
+          onKeyDown={sendMessage}
+          onChange={messageHandler}
+          spellCheck="false"
+          data-gramm="false"
+          type="text"
+          placeholder="Type a message"
+          className=" bg-gray-100 resize-none font-Roboto box-border max-[1024px]:px-8 px-[5%] flex  text-md max-[900px]:text-sm w-[95%] py-[1%] outline-none h-[70%] rounded-3xl"
+        ></textarea>
       </div>
-      <textarea
-        value={message}
-        onKeyDown={sendMessage}
-        onChange={messageHandler}
-        spellCheck="false"
-        data-gramm="false"
-        type="text"
-        placeholder="Type a message"
-        className=" bg-gray-100 resize-none font-Roboto box-border max-[1024px]:px-8 px-[5%] flex  text-md max-[900px]:text-sm w-[95%] py-[1%] outline-none h-[70%] rounded-3xl"
-      ></textarea>
-    </div>
+    </>
   );
 }
