@@ -9,6 +9,9 @@ import { useNavigation } from 'react-router-dom'
 import { validate } from 'react-email-validator'
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import { Button, Paper, Typography } from '@mui/material'
+import LockOpenIcon from '@mui/icons-material/LockOpen';
+
 export default function Main() {
 
 
@@ -58,25 +61,30 @@ export default function Main() {
 
 
   return (
-    <div className='flex flex-col  items-center py-[5%] h-[100vh] w-[100vw] relative overflow-hidden'>
+    <div className='flex flex-col items-center h-[100vh] w-[100vw] relative overflow-hidden px-2'>
     <Square></Square>
     <Square isRight={true}></Square>
-        <div className='font-Poppins text-3xl font-extrabold'>Login</div>
+  <Paper className='z-20 w-full max-w-[370px] p-[2rem] my-auto' elevation={3}>
+
+        <div className='font-Poppins text-3xl font-extrabold flex items-center flex-col'>
+        <LockOpenIcon fontSize='large' color='primary'/>
+          <Typography variant='h5'>Log In</Typography>
+        </div>
+<br />
 <hr></hr>
-<form className='w-[35%] mt-6 relative'>
+<form className='mt-6 relative'>
   <Input onSetData={setloginData}  name='email' text="Email ID" placeholder="Email address" type='text'></Input>
   <Input onSetData={setloginData}  name='password'  text='Password' type='password' placeholder='Password'></Input>
   <div className='flex flex-row justify-center mt-10'>
-  <div onClick={submitData} className='px-10 rounded-[30px] bg-[#0270F7] text-lg font-medium py-4 hover:px-[44px] text-white '>
+    <Button sx={{padding:".5rem 4rem"}} onClick={submitData} variant="contained">
     {!submitting&&<div>LOG IN</div>}
     {submitting&&<Box sx={{ display: 'flex' }}>
       <CircularProgress size={25} style={{ color: '#FFFFFF' }} />
     </Box>}
+    </Button>
   </div>
-  </div>
-  <div className='flex flex-row justify-center mt-[2%] items-center'>
-  <div className='font-poppines text-xl font-bold '>Don't have an account?</div><Link to='/signup'className='text-[#0270F2] ml-1'> Create one</Link>
-  </div>
+  <Typography className='text-center py-3'>Already have and account ? <Link className='text-blue-600' to="/signup">SignUp</Link></Typography>
+
   <div className='h-[1px] w-[100%] mt-10 bg-[#808080]'></div>
   <div className='flex flex-col items-center mt-6'>
       <div className='mt-[2%]'>
@@ -84,6 +92,7 @@ export default function Main() {
       </div>
   </div>
 </form>
+</Paper>
 </div>
   )
 }
