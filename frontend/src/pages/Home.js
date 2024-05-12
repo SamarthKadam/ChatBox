@@ -3,6 +3,7 @@ import NavBar from '../components/HomeComponents/NavBar'
 import Description from '../components/HomeComponents/Description'
 import Service from './Service'
 import { useState } from 'react'
+import Footer from '../components/HomeComponents/Footer/Footer'
 import LoadingPage from './LoadingPage'
 
 import { useNavigate } from 'react-router-dom'
@@ -43,7 +44,8 @@ export default function Home() {
         <NavBar/>
         <Description></Description>
      </div>
-     <Service></Service></>)}
+     <Service></Service>
+     <Footer/></>)}
      </div>
   )
 }
