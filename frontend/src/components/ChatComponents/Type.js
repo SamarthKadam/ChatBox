@@ -10,7 +10,9 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import CancelIcon from "@mui/icons-material/Cancel";
-import {updateChatBar} from '../../services/Actions/Chat/action'
+import { updateChatBar } from "../../services/Actions/Chat/action";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Type() {
   const isSet = useSelector((state) => state.chat.activeChat);
@@ -19,16 +21,14 @@ export default function Type() {
   const [socketConnected, setSocketConnected] = useState(false);
   const dispatch = useDispatch();
   const [typing, setTyping] = useState(false);
-  const [Microphone, setMircophone] = useState(false);
+  const [Microphone, setMicrophone] = useState(false);
 
   const {
     transcript,
     listening,
     resetTranscript,
-    browserSupportsSpeechRecognition
+    browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
-
-
 
   useEffect(() => {
     setMessage(transcript);
@@ -53,9 +53,8 @@ export default function Type() {
         socket.emit("stop typing", isSet._id);
         setTyping(false);
       }
-      socket.emit("stop typing",isSet._id);
+      socket.emit("stop typing", isSet._id);
     }, timerLength);
-
   };
 
   useEffect(() => {
@@ -70,109 +69,124 @@ export default function Type() {
   }, [isSet]);
 
   useEffect(() => {
-
-    if(isSet==null)
-    return;
+    if (isSet == null) return;
 
     resetTranscript();
     SpeechRecognition.stopListening();
-    setMircophone(false);
-    setMessage('');
-
+    setMicrophone(false);
+    setMessage("");
   }, [isSet]);
 
   const sendMessage = async (event) => {
-    if (message.length === 0) return;
+    event.preventDefault();
 
-    if (event.key === "Enter" || event.type === "click") {
-      event.preventDefault();
-      const cookie = localStorage.getItem("jwt");
-      const bodyData = {
-        chatId: isSet._id,
-        content: message,
-      };
-      setMessage("");
-      resetTranscript();
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/message`, {
+    if (message.trim() === "") {
+      toast.error("Please enter a message.");
+      return;
+    }
+
+    const cookie = localStorage.getItem("jwt");
+    const bodyData = {
+      chatId: isSet._id,
+      content: message,
+    };
+    setMessage("");
+    resetTranscript();
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/api/v1/message`,
+      {
         method: "post",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${cookie}`,
         },
         body: JSON.stringify(bodyData),
-      });
-      const data = await response.json();
-      dispatch(AddMessage(data.data));
-      dispatch(updateChatBar(isSet._id,data.data.content));
-      if (AllChats[0]._id !== isSet._id) {
-        dispatch(moveChatToTop(isSet._id));
       }
-      socket.emit("new message", data.data);
+    );
+    const data = await response.json();
+    dispatch(AddMessage(data.data));
+    dispatch(updateChatBar(isSet._id, data.data.content));
+    if (AllChats[0]._id !== isSet._id) {
+      dispatch(moveChatToTop(isSet._id));
     }
+    socket.emit("new message", data.data);
   };
 
-  const startListening=()=>{
-    SpeechRecognition.startListening({ continuous: true,language:'en-IN'})
-    setMircophone(true);
-  }
+  const startListening = () => {
+    SpeechRecognition.startListening({ continuous: true, language: "en-IN" });
+    setMicrophone(true);
+  };
 
-  const stopListening=()=>{
-    SpeechRecognition.stopListening()
-    setMircophone(false);
-  }
-
+  const stopListening = () => {
+    SpeechRecognition.stopListening();
+    setMicrophone(false);
+  };
 
   if (isSet === null) return <></>;
 
-
   return (
-    <div className="border-[1px] border-[#f5f5f5] bg-[#FFFFFF] h-[12%] flex flex-row justify-center items-center relative">
-      {!Microphone&&(<div onClick={startListening}>
-        <MicIcon
-          sx={{ width: 22, cursor: "pointer" }}
+    <>
+      <ToastContainer />
+      <div className="border-[1px] border-[#f5f5f5] bg-[#FFFFFF] h-[12%] flex flex-row justify-center items-center relative">
+        {!Microphone && (
+          <div onClick={startListening}>
+            <MicIcon
+              sx={{ width: 22, cursor: "pointer" }}
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "4%",
+                translate: "-4% -50%",
+              }}
+              color="info"
+            ></MicIcon>
+          </div>
+        )}
+        {Microphone && (
+          <div onClick={stopListening}>
+            <CancelIcon
+              sx={{ width: 22, cursor: "pointer" }}
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "4%",
+                translate: "-4% -50%",
+              }}
+              color="info"
+            ></CancelIcon>
+          </div>
+        )}
+        <div
+          onClick={sendMessage}
           style={{
             position: "absolute",
             top: "50%",
-            left: "4%",
-            translate: "-4% -50%",
+            left: "95%",
+            translate: "-95% -50%",
+            cursor: "pointer",
           }}
-          color="info"
-        ></MicIcon>
-        </div>)}
-      {Microphone&&(<div onClick={stopListening}><CancelIcon
-        sx={{ width: 22, cursor: "pointer" }}
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "4%",
-          translate: "-4% -50%",
-        }}
-        color="info"
-      ></CancelIcon>
-      </div>)
-      }
-      <div
-        onClick={sendMessage}
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "95%",
-          translate: "-95% -50%",
-          cursor: "pointer",
-        }}
-      >
-        <SendIcon color="action" sx={{ width: 22 }}></SendIcon>
+        >
+          <SendIcon
+            color={message.trim() === "" ? "disabled" : "action"}
+            sx={{ width: 22 }}
+          ></SendIcon>
+        </div>
+        <textarea
+          value={message}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              sendMessage(e);
+            }
+          }}
+          onChange={messageHandler}
+          spellCheck="false"
+          data-gramm="false"
+          type="text"
+          placeholder="Type a message"
+          className=" bg-gray-100 resize-none font-Roboto box-border max-[1024px]:px-8 px-[5%] flex  text-md max-[900px]:text-sm w-[95%] py-[1%] outline-none h-[70%] rounded-3xl"
+        ></textarea>
       </div>
-      <textarea
-        value={message}
-        onKeyDown={sendMessage}
-        onChange={messageHandler}
-        spellCheck="false"
-        data-gramm="false"
-        type="text"
-        placeholder="Type a message"
-        className=" bg-gray-100 resize-none font-Roboto box-border max-[1024px]:px-8 px-[5%] flex  text-md max-[900px]:text-sm w-[95%] py-[1%] outline-none h-[70%] rounded-3xl"
-      ></textarea>
-    </div>
+    </>
   );
 }
