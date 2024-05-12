@@ -126,7 +126,6 @@ export default function Type() {
 
   return (
     <>
-      <ToastContainer />
       <div className="border-[1px] border-[#f5f5f5] bg-[#FFFFFF] h-[12%] flex flex-row justify-center items-center relative">
         {!Microphone && (
           <div onClick={startListening}>
@@ -187,6 +186,14 @@ export default function Type() {
           className=" bg-gray-100 resize-none font-Roboto box-border max-[1024px]:px-8 px-[5%] flex  text-md max-[900px]:text-sm w-[95%] py-[1%] outline-none h-[70%] rounded-3xl"
         ></textarea>
       </div>
+    </>
+  );
+}
+
+export function TypeContainer() {
+  return (
+    <>
+      <ToastContainer />
     </>
   );
 }
