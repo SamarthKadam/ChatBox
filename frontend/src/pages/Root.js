@@ -52,7 +52,7 @@ export default function Root() {
      <img alt='logo' className="h-8 mr-1 max-[1250px]:h-7" src={logo}></img> <Title black={true} title='ChatBox'></Title>
       </div>
     </div>
-    <div className='border-[1px] border-[#f5f5f5]'><Menu></Menu></div>
+    <div className='border-[1px]  border-[#f5f5f5]'><Menu></Menu></div>
     <div className='border-[1px] border-[#f5f5f5] flex item-center'>
       <UserCard></UserCard>
     </div>
