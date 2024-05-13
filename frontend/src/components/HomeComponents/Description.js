@@ -40,7 +40,7 @@ export default function Description() {
   return (
     <div className=' h-[85%] grid grid-cols-2 gap-4 max-[1400px]:grid-cols-[4fr,5fr] max-[1300px]:grid-cols-[3fr,5fr] max-[1127px]:grid-rows-2  max-[1127px]:grid-cols-[1fr] max-[451px]:(grid-rows-2) mt-10 md:mt-0'>
         <div className='flex flex-col justify-center items-start'>
-        <div className='text-white text-2xl md:text-5xl font-semibold font-Poppins  max-[1300px]:text-3xl max-[1127px]:text-5xl max-[607px]:text-4xl'>Chat easy,chat instantly wherever you go</div>
+        <div className='text-white text-2xl md:text-5xl font-semibold font-Poppins  max-[1300px]:text-3xl max-[1127px]:text-5xl max-[607px]:text-2xl'>Chat easy,chat instantly wherever you go</div>
         <p className='mt-10 text-white text-lg font-semibold font-Roboto'>The easiest & fasted way to live chat</p>
         <Banner></Banner>
         </div>

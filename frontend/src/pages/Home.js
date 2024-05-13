@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import NavBar from '../components/HomeComponents/NavBar'
 import Description from '../components/HomeComponents/Description'
+import Footer from '../components/HomeComponents/Footer'
 import Service from './Service'
 import { useState } from 'react'
 import LoadingPage from './LoadingPage'
@@ -43,7 +44,9 @@ export default function Home() {
         <NavBar/>
         <Description></Description>
      </div>
-     <Service></Service></>)}
+     <Service></Service>
+     <Footer/>
+     </>)}
      </div>
   )
 }
