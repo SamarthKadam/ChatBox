@@ -44,7 +44,7 @@ export default function Description() {
         <p className='mt-10 text-white text-lg font-semibold font-Roboto'>The easiest & fasted way to live chat</p>
         <Banner></Banner>
         </div>
-        <div className='relative max-[451px]:hidden'>
+        <div className='relative  max-[640px]:hidden'>
             <div className="absolute  w-[50%] top-[20%] translate-y-[-20%] left-[95%] z-[555] translate-x-[-95%] max-[1127px]:top-[-15%]">
               {menChat.map((val,ind)=>{
                 return(
@@ -62,7 +62,7 @@ export default function Description() {
              }
             {/* <Chat message={`Yeah definitely!, I'll throw this evening.`}></Chat> */}
               </div>
-            <img alt='men pic' className="w-[55%] rounded-[20px] absolute top-[30%] z-50 translate-y-[-30%] max-[1127px]:top-[0%]  " src={MenImage}></img>
+            <img alt='men pic' className="w-[55%] rounded-[20px] absolute top-[30%] z-50 translate-y-[-30%] max-[1127px]:top-[0%] " src={MenImage}></img>
             <img alt='women pic' className="w-[55%] rounded-[20px] absolute top-[84%] translate-y-[-84%] z-30 left-[95%] max-[1127px]:top-[100%]  translate-x-[-95%]" src={WomenImage}></img>
             <img alt='dots pic' className='w-[30%] absolute top-[84%] translate-y-[-84%] left-[25%] translate-x-[-25%] ' src={design}></img>
             <img alt='ball' className='absolute top-[10%] translate-y-[-10%] left-[25%] translate-x-[-25%]  ' src={whiteball}></img>
