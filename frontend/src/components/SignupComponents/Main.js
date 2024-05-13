@@ -76,7 +76,7 @@ export default function Main() {
   <Input onSetData={setSignUpData} name='password'  text='Password' type='password' placeholder='Password'></Input>
   <div className='flex flex-row justify-center mt-10'>
   <div onClick={sendData} className='px-10 rounded-[30px] bg-[#0270F7] text-lg font-medium py-4 hover:px-[44px] text-white '>
-    {!submiting&&<div>SIGN IN</div>}
+    {!submiting&&<div>Sign up</div>}
     {submiting&&<Box sx={{ display: 'flex' }}>
       <CircularProgress size={25} style={{ color: '#FFFFFF' }} />
     </Box>}
