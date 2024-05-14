@@ -5,7 +5,10 @@ const AppError = require('../utils/AppError');
 const {promisify}=require('util');
 const dotenv=require('dotenv');
 const path=require('path')
-const fs=require('fs')
+const fs=require('fs');
+const { sendMail } = require('../utils/sendMail');
+const crypto = require('crypto');
+const bcrypt = require('bcryptjs')
 dotenv.config({path:path.join(__dirname,'../config.env')});
 
 
@@ -123,4 +126,74 @@ exports.downloadFile=catchAsync(async(req,res,next)=>{
 //   const fileStream = fs.createReadStream(filePath);
 
 //   fileStream.pipe(res);
+})
+
+//send reset password link on user email
+exports.sendForgetMail = catchAsync(async(req,res,next)=>{
+    const email = req.body.email;
+    const user = await User.findOne({email: email});
+    
+    if(!user){
+        return next(new AppError('User not found . Create one',400));
+    }
+    
+    const {unHashedToken, hashedToken, tokenExpiry } = User.generateTemporaryToken();
+    
+    await User.findByIdAndUpdate(
+        user._id,
+        {
+            forgetPasswordToken: hashedToken,
+            forgetPasswordExpiry: tokenExpiry
+        },
+        {
+            new: true,
+            runValidators: true
+        }
+    )
+    
+    await sendMail({
+        email: email,
+        subject: "Reset Password",
+        text: `${process.env.BASE_URL}/reset-password/${user._id}/${unHashedToken}`
+    });
+
+    res.status(200).json({message: "Reset password token sent successfully.", status: "success"});
+})
+
+//verify forget password token is valid or not
+exports.verifyForgetMail = catchAsync(async(req,res,next)=>{
+    const {userId, verificationToken} = req.body;
+
+    const hashedToken = crypto
+                            .createHash('sha256')
+                            .update(verificationToken)
+                            .digest('hex');
+    
+    const user = await User.findById(userId);
+    if(!user){
+        return next(new AppError('Something went wrong',500));
+    }
+
+    if((user.forgetPasswordToken !== hashedToken) || (user.forgetPasswordExpiry < Date.now())){
+        return next(new AppError('Token is invalid or expired', 401));
+    }
+
+    return res.status(200).json({message: "Token is valid", status: "success"});
+})
+
+//reset password 
+exports.resetPassword = catchAsync(async(req,res,next)=>{
+    const {userId, newPassword} = req.body;
+
+    const hashNewPassword = await bcrypt.hash(newPassword, 12);
+    const user = await User.findByIdAndUpdate(
+        userId,
+        {password: hashNewPassword}
+    )
+
+    if(!user){
+        return next(new AppError('Something went wrong', 500))
+    }
+
+    return res.status(200).json({message: 'Password Changed Successfully', status: 'success'})
 })
