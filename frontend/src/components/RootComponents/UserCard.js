@@ -90,7 +90,6 @@ export default function UserCard() {
               </div>
             </Box>
           ) : (
-            // Render content for small screen but not very small screen
 
             <Box
               sx={{
