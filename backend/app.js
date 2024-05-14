@@ -9,14 +9,19 @@ const chatRouter = require("./routes/chatRouter");
 const messageRouter = require("./routes/messageRouter");
 const downloadRouter = require("./routes/downloadRouter");
 
-
-const allowedOrigins = ['http://localhost:3000','https://chat-box-samarthkadam.vercel.app'];
-app.use(cors({
-  origin:'*'
-}));
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://chat-box-samarthkadam.vercel.app",
+];
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.use(cookieParser());
 app.use(express.json());
-app.use(express.static('public/img/user'));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public/img/user"));
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/chat", chatRouter);
