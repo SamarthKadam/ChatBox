@@ -84,7 +84,7 @@ export default function Main() {
   <Input onSetData={setSignUpData} name='password'  text='Password' type='password' placeholder='Password'></Input>
   <div className='flex flex-row justify-center mt-8'>
     <Button sx={{padding:".5rem 4rem"}} onClick={sendData} variant="contained">
-    {!submiting&&<div>SIGN IN</div>}
+    {!submiting&&<div>SIGN UP</div>}
     {submiting&&<Box sx={{ display: 'flex' }}>
       <CircularProgress size={25} style={{ color: '#FFFFFF' }} />
     </Box>}
