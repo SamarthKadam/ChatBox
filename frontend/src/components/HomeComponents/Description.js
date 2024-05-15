@@ -38,13 +38,13 @@ export default function Description() {
 
 
   return (
-    <div className=' h-[85%] grid grid-cols-2 gap-4 max-[1400px]:grid-cols-[4fr,5fr] max-[1300px]:grid-cols-[3fr,5fr] max-[1127px]:grid-rows-2  max-[1127px]:grid-cols-[1fr] max-[451px]:grid-rows-1'>
+    <div className=' h-[85%] grid grid-cols-2 gap-4 max-[1400px]:grid-cols-[4fr,5fr] max-[1300px]:grid-cols-[3fr,5fr] max-[1127px]:grid-rows-2  max-[1127px]:grid-cols-[1fr] max-[451px]:(grid-rows-2) mt-10 md:mt-0'>
         <div className='flex flex-col justify-center items-start'>
-        <div className='text-white text-5xl font-semibold font-Poppins  max-[1300px]:text-3xl max-[1127px]:text-5xl max-[607px]:text-4xl'>Chat easy,chat instantly wherever you go</div>
+        <div className='text-white text-2xl md:text-5xl font-semibold font-Poppins  max-[1300px]:text-3xl max-[1127px]:text-5xl max-[607px]:text-3xl'>Chat easy,chat instantly wherever you go</div>
         <p className='mt-10 text-white text-lg font-semibold font-Roboto'>The easiest & fasted way to live chat</p>
         <Banner></Banner>
         </div>
-        <div className='relative max-[451px]:hidden'>
+        <div className='relative mt-[20%] md:mt-0'>
             <div className="absolute  w-[50%] top-[20%] translate-y-[-20%] left-[95%] z-[555] translate-x-[-95%] max-[1127px]:top-[-15%]">
               {menChat.map((val,ind)=>{
                 return(
@@ -62,7 +62,7 @@ export default function Description() {
              }
             {/* <Chat message={`Yeah definitely!, I'll throw this evening.`}></Chat> */}
               </div>
-            <img alt='men pic' className="w-[55%] rounded-[20px] absolute top-[30%] z-50 translate-y-[-30%] max-[1127px]:top-[0%]  " src={MenImage}></img>
+            <img alt='men pic' className="w-[55%] rounded-[20px] absolute top-[30%] z-50 translate-y-[-30%] max-[1127px]:top-[0%]" src={MenImage}></img>
             <img alt='women pic' className="w-[55%] rounded-[20px] absolute top-[84%] translate-y-[-84%] z-30 left-[95%] max-[1127px]:top-[100%]  translate-x-[-95%]" src={WomenImage}></img>
             <img alt='dots pic' className='w-[30%] absolute top-[84%] translate-y-[-84%] left-[25%] translate-x-[-25%] ' src={design}></img>
             <img alt='ball' className='absolute top-[10%] translate-y-[-10%] left-[25%] translate-x-[-25%]  ' src={whiteball}></img>
