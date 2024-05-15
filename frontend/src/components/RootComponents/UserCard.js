@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Avatar, Box } from "@mui/material";
+import { Avatar, Box, IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { NullifyActiveChat } from "../../services/Actions/Chat/action";
 import { useDispatch } from "react-redux";
 import { FlustAllChats } from "../../services/Actions/Chat/action";
-import { ExitToApp } from "@mui/icons-material";
+import { ExitToApp, Logout } from "@mui/icons-material";
 export default function UserCard() {
   const dispatch = useDispatch();
   const dataredux = useSelector((state) => state.user.userInfo);
@@ -78,19 +78,18 @@ export default function UserCard() {
                 alignItems: "center",
                 height: "8vh",
                 paddingTop: "10px",
-                paddingLeft: "8px",
+                paddingLeft: "10px",
               }}
             >
-              <div>
-                <ExitToApp
-                  title="Logout"
-                  sx={{ width: 24, height: 24 }}
-                  onClick={logoutHandler}
-                />
-              </div>
+              <IconButton
+                title={"Logout"}
+                sx={{ width: 24, height: 24 }}
+                onClick={logoutHandler}
+              >
+                <ExitToApp />
+              </IconButton>
             </Box>
           ) : (
-
             <Box
               sx={{
                 display: "flex",
@@ -98,16 +97,16 @@ export default function UserCard() {
                 alignItems: "center",
                 height: "8vh",
                 paddingTop: "10px",
-                paddingLeft: "16px",
+                paddingLeft: "10px",
               }}
             >
-              <div>
-                <ExitToApp
-                  title="Logout"
-                  sx={{ width: 32, height: 32 }}
-                  onClick={logoutHandler}
-                />
-              </div>
+              <IconButton
+                title={"Logout"}
+                color="black"
+                onClick={logoutHandler}
+              >
+                <ExitToApp sx={{ width: 32, height: 32 }} />
+              </IconButton>
             </Box>
           )}
         </>
