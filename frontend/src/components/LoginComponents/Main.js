@@ -11,6 +11,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { Button, Paper, Typography } from '@mui/material'
 import LockOpenIcon from '@mui/icons-material/LockOpen';
+import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher'
 
 export default function Main() {
 
@@ -61,10 +62,11 @@ export default function Main() {
 
 
   return (
-    <div className='flex flex-col items-center h-[100vh] w-[100vw] relative overflow-hidden px-2'>
+    <div className='dark:bg-gray-700 flex flex-col items-center h-[100vh] w-[100vw] relative overflow-hidden px-2'>
+      <ThemeSwitcher/>
     <Square></Square>
     <Square isRight={true}></Square>
-  <Paper className='z-20 w-full max-w-[370px] p-[2rem] my-auto' elevation={3}>
+  <Paper className='dark:bg-gray-900 dark:text-gray-200 z-20 w-full max-w-[370px] p-[2rem] my-auto' elevation={3}>
 
         <div className='font-Poppins text-3xl font-extrabold flex items-center flex-col'>
         <LockOpenIcon fontSize='large' color='primary'/>
@@ -72,7 +74,7 @@ export default function Main() {
         </div>
 <br />
 <hr></hr>
-<form className='mt-6 relative'>
+<form className='mt-6 relative dark:text-gray-900'>
   <Input onSetData={setloginData}  name='email' text="Email ID" placeholder="Email address" type='text'></Input>
   <Input onSetData={setloginData}  name='password'  text='Password' type='password' placeholder='Password'></Input>
   <div className='flex flex-row justify-center mt-10'>

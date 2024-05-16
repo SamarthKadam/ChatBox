@@ -13,6 +13,7 @@ import Settings from './pages/Settings';
 
 import Root,{loader as loadingAction} from './pages/Root';
 import Search from './pages/Search';
+import ThemeSwitcher from './components/ThemeSwitcher/ThemeSwitcher';
 
 
 const router = createBrowserRouter([
@@ -60,7 +61,10 @@ const router = createBrowserRouter([
   }
 ]);
 function App() {
-  return (<RouterProvider router={router} />);
+  return ( <div className="relative">
+  <ThemeSwitcher />
+  <RouterProvider router={router} />
+</div>);
 }
 
 export default App;
