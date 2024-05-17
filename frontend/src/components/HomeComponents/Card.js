@@ -6,8 +6,8 @@ export default function Card({title,description}) {
     <div className='flex flex-row gap-2 w-[80%]'>
         <div className='mt-1'><BsCheckCircleFill color='#56D12C' fontSize={22}></BsCheckCircleFill></div>
         <div>
-        <div className="font-Roboto font-semibold text-xl">{title}</div>
-        <div className='mt-[2%] font-Roboto text-lg'>{description}</div>
+        <div className="font-Roboto font-semibold text-lg sm:text-xl">{title}</div>
+        <div className='mt-[2%] font-Roboto text-base sm:text-lg'>{description}</div>
         </div>
     </div>
   )
