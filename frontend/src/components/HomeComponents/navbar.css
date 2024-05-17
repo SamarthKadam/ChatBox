@@ -1,4 +1,17 @@
 ion-icon {
-    color: white;
-    font-size: 4vmax;
+  color: white;
+  font-size: 4vmax;
+}
+
+  .menulinks {
+    background-color: rgba(231, 216, 216, 0.151);
+    backdrop-filter: blur(10px);
+  }
+
+  @media (min-width: 768px) {
+    .menulinks {
+      background-color: transparent;
+      backdrop-filter: blur(0);
+    }   
+    
   }
