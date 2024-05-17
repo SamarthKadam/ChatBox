@@ -3,15 +3,17 @@ ion-icon {
   font-size: 4vmax;
 }
 
-  .menulinks {
+@media (max-width: 768px){
+  #menulinks {
     background-color: rgba(231, 216, 216, 0.151);
     backdrop-filter: blur(10px);
+    z-index:600;
   }
-
-  @media (min-width: 768px) {
+}
+   
     .menulinks {
       background-color: transparent;
       backdrop-filter: blur(0);
     }   
     
-  }
+  
