@@ -245,7 +245,7 @@ export default function Type() {
         data-gramm="false"
         type="text"
         placeholder="Type a message"
-        className="bg-gray-100 resize-none font-Roboto box-border max-[900px]:px-8 px-[5%] flex  text-md max-[900px]:text-sm w-[82%] py-[1%] outline-none h-[70%] rounded-3xl"
+        className="overflow-hidden bg-gray-100 resize-none font-Roboto box-border max-[900px]:px-8 px-[5%] flex  text-md max-[900px]:text-sm w-[82%] py-[1%] outline-none h-[70%] rounded-3xl"
       ></textarea>
     </div>
   );
