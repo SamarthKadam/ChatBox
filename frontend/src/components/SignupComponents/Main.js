@@ -10,6 +10,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { Button, Paper, Typography } from '@mui/material';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
+import { ToastContainer, toast } from "react-toastify";
 
 export default function Main() {
 
@@ -32,25 +33,29 @@ export default function Main() {
     }
     
     e.preventDefault();
-    const keys=Object.keys(SignUpData);
-    let CheckError=0;
-
-    keys.forEach((data)=>{
-      if(SignUpData[data]==='')
+    if(!SignUpData.email ||!SignUpData.password)
       {
-        CheckError=1;
+        return toast.error("Please fill all required the fields ", {
+          position: "top-center",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme:"colored"})
       }
-    })
-
-    if(!validate(SignUpData.email))
-    {
-      CheckError=1;
-    }
-
-    if(CheckError===1)
-    {
-      alert("error");
-    }
+      if (!validate(SignUpData.email)){
+        return toast.error("Please enter valid email", {
+          position: "top-center",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme:"colored"})
+      }
     else{
       submit(SignUpData,{method:'post'})
     }

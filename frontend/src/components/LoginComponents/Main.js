@@ -11,11 +11,10 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { Button, Paper, Typography } from '@mui/material'
 import LockOpenIcon from '@mui/icons-material/LockOpen';
-
+import { ToastContainer, toast } from "react-toastify";
 export default function Main() {
 
 
-  const navigation=useNavigation();
   const submit=useSubmit();
   const [loginData,setloginData]=useState({email:'',password:''});
   const [submitting,setSubmiting]=useState(false)
@@ -40,7 +39,17 @@ export default function Main() {
     e.preventDefault();
     if(!loginData.email || !validate(loginData.email) ||!loginData.password)
     {
-      alert('error');
+      return toast.error("Please enter valid email and password", {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme:"colored"
+      });
+        
     }
     submit(loginData,{method:'post'})
   }
