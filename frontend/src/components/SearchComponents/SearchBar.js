@@ -10,23 +10,24 @@ import FormControl from '@mui/material/FormControl';
 
 export default function SearchBar({onChange,searchHandler}) {
   return (
-    <div className=' h-[10%] w-[100%] flex box-border justify-center py-2 relative'>
+    <div className='dark:bg-gray-800 dark:text-white h-[10%] w-[100%] flex box-border justify-center py-2 relative'>
         {/* <SearchOutlined className='absolute l-[0%]'></SearchOutlined>
         <input className='w-[60%] font-Roboto text-lg border-2 p-2 rounded-md focus:border-[#4BB8FE] focus:outline-none' type='text'></input> */}
         <FormControl sx={{ m: 1, width: '60%' }} variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">Search</InputLabel>
+          <InputLabel className='dark:text-gray-200 ' htmlFor="outlined-adornment-password">Search</InputLabel>
           <OutlinedInput
           onChange={onChange}
             id="outlined-adornment-password"
             type='text'
+            style={{ color: 'white' }}
             spellCheck={false}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton onClick={searchHandler}>
-                <SearchOutlined></SearchOutlined>
+                <SearchOutlined className='text-white'></SearchOutlined>
                 </IconButton>
             </InputAdornment>
-            }
+            } 
             label="Search"
           />
         </FormControl>

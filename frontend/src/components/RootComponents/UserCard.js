@@ -39,11 +39,11 @@ export default function UserCard() {
 
 
   return (
-    <div className='flex flex-row  items-center ml-[10%] max-[1024px]:hidden'>
+    <div className='dark:bg-gray-950 flex flex-row  items-center ml-[10%] max-[1024px]:hidden'>
         <Avatar referrerPolicy="no-referrer" alt="User-pic" sx={{width:48,height:48}} src={image} />
-        <div className='flex flex-col ml-2'>
+        <div className='dark:text-yellow-400 flex flex-col ml-2'>
             <div className='max-[1250px]:text-[12px] font-bold font-Roboto text-sm'>{Name}</div>
-            <div onClick={logoutHandler} className="max-[1250px]:text-[10px] text-xs cursor-pointer text-[#979797]">Logout</div>
+            <div onClick={logoutHandler} className="dark:text-red-400 max-[1250px]:text-[10px] text-xs cursor-pointer text-[#979797]">Logout</div>
         </div>
     </div>
   )

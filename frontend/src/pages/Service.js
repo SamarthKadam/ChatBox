@@ -3,7 +3,7 @@ import Card from '../components/HomeComponents/Card'
 
 export default function Service() {
   return (
-    <div className='dark:bg-gray-500'>
+    <div className=' dark:bg-gray-700'>
     <div className='h-[100vh] px-40 max-[885px]:px-20 max-[653px]:px-14 py-[5%] flex justify-center items-center'>
     <div className='flex flex-col items-center'>
       <div className='dark:text-white w-[60%]'>

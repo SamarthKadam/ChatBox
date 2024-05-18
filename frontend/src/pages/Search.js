@@ -83,7 +83,7 @@ export default function Search() {
     }
 
   return (
-    <div className='w-[80vw] relative flex flex-col'>
+    <div className='dark:bg-gray-800 w-[80vw] relative flex flex-col'>
       <ToastContainer/>
         <SearchBar onChange={onChangeTextHandler} searchHandler={searchHandler} ></SearchBar>
         <div className=' w-[100%] flex box-border justify-center py-2 relative'>

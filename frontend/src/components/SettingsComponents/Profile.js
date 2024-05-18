@@ -68,7 +68,7 @@ export default function Profile() {
         sx={{ width: 150, height: 150 }}
         src={image}
       />
-      <div className="flex justify-center flex-col gap-5">
+      <div className="dark:text-gray-100 flex justify-center flex-col gap-5">
         <label
           htmlFor="fileInput"
           className="bg-[#202142] hover:bg-[#202162] text-white cursor-pointer px-4 py-2 max-[1024px]:px-2 max-[1024px]:py-1 max-[1024px]:text-sm rounded-md font-Roboto tracking-tight"

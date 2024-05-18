@@ -3,7 +3,7 @@ import img from '../../assets/images/empty.png'
 
 export default function EmptyMessages() {
   return (
-    <div className='flex flex-col justify-center h-[100%] items-center'>
+    <div className='dark:text-gray-200 flex flex-col justify-center h-[100%] items-center'>
         <img className='w-[15%]' src={img}></img>
         <div className='text-[#AEC0D8]'>Nothing Here</div>
         <div className='flex gap-2'>
