@@ -4,13 +4,9 @@ import SendIcon from "@mui/icons-material/Send";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { socket } from "../../socket/socket";
-import { AddMessage } from "../../services/Actions/Chat/action";
-import { moveChatToTop } from "../../services/Actions/Chat/action";
-import SpeechRecognition, {
-  useSpeechRecognition,
-} from "react-speech-recognition";
+import { AddMessage, moveChatToTop, updateChatBar } from "../../services/Actions/Chat/action";
+import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { updateChatBar } from "../../services/Actions/Chat/action";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import { Box } from "@mui/material";
@@ -27,24 +23,19 @@ export default function Type() {
   const [typing, setTyping] = useState(false);
   const [Microphone, setMircophone] = useState(false);
   const inputRef = useRef(null);
-  const [openPicker, setOpenPicker] = React.useState(false);
+  const [openPicker, setOpenPicker] = useState(false);
   const theme = useTheme();
   const emojiPickerRef = useRef(null);
 
-  const {
-    transcript,
-    listening,
-    resetTranscript,
-    browserSupportsSpeechRecognition,
-  } = useSpeechRecognition();
+  const { transcript, resetTranscript } = useSpeechRecognition();
 
   useEffect(() => {
     setMessage(transcript);
-  }, [transcript, resetTranscript]);
+  }, [transcript]);
 
   const messageHandler = (e) => {
     setMessage(e.target.value);
-
+    if (!message) return;
     if (!socketConnected) return;
 
     if (!typing) {
@@ -53,10 +44,10 @@ export default function Type() {
     }
 
     let lastTypingTime = new Date().getTime();
-    var timerLength = 3000;
+    const timerLength = 3000;
     setTimeout(() => {
-      var timeNow = new Date().getTime();
-      var timeDiff = timeNow - lastTypingTime;
+      const timeNow = new Date().getTime();
+      const timeDiff = timeNow - lastTypingTime;
       if (timeDiff >= timerLength && typing) {
         socket.emit("stop typing", isSet._id);
         setTyping(false);
@@ -86,28 +77,25 @@ export default function Type() {
   }, [isSet]);
 
   const sendMessage = async (event) => {
-    if (message.length === 0) return;
-
-    if (event.key === "Enter" || event.type === "click") {
+    if ((event.type === "keydown" && event.key === "Enter" && !event.shiftKey) || event.type === "click") {
       event.preventDefault();
+      if (!message.trim()) return;
+      
       const cookie = localStorage.getItem("jwt");
       const bodyData = {
         chatId: isSet._id,
-        content: message,
+        content: message.trim(),
       };
       setMessage("");
       resetTranscript();
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/v1/message`,
-        {
-          method: "post",
-          headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${cookie}`,
-          },
-          body: JSON.stringify(bodyData),
-        }
-      );
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/message`, {
+        method: "post",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${cookie}`,
+        },
+        body: JSON.stringify(bodyData),
+      });
       const data = await response.json();
       dispatch(AddMessage(data.data));
       dispatch(updateChatBar(isSet._id, data.data.content));
@@ -130,10 +118,7 @@ export default function Type() {
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (
-        emojiPickerRef.current &&
-        !emojiPickerRef.current.contains(event.target)
-      ) {
+      if (emojiPickerRef.current && !emojiPickerRef.current.contains(event.target)) {
         setOpenPicker(false);
       }
     }
@@ -145,99 +130,40 @@ export default function Type() {
   }, []);
 
   function handleEmojiClick(emoji) {
-    const input = inputRef.current;
-    // setMessage(emoji)
-    console.log("LL", input);
     if (emoji) {
-      setMessage(message + emoji);
+      setMessage((prev) => prev + emoji);
     }
   }
+
   if (isSet === null) return <></>;
 
   return (
-    <div
-      className="border-[1px] border-[#f5f5f5] bg-[#FFFFFF] h-[12%] flex flex-row justify-center items-center relative"
-      ref={emojiPickerRef}
-    >
+    <div className="border-[1px] border-[#f5f5f5] bg-[#FFFFFF] h-[12%] flex flex-row justify-center items-center relative" ref={emojiPickerRef}>
       {!Microphone && !message && (
-        <Box
-          onClick={startListening}
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "97%",
-            translate: "-95% -50%",
-          }}
-        >
-          <MicIcon sx={{ width: 22, cursor: "pointer" }} color="info"></MicIcon>
+        <Box onClick={startListening} style={{ position: "absolute", top: "50%", left: "97%", translate: "-95% -50%" }}>
+          <MicIcon sx={{ width: 22, cursor: "pointer" }} color="info" />
         </Box>
       )}
 
       {Microphone && !message && (
-        <Box
-          onClick={stopListening}
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "97%",
-            translate: "-95% -50%",
-          }}
-        >
-          <CancelIcon
-            sx={{ width: 22, cursor: "pointer" }}
-            color="info"
-          ></CancelIcon>
+        <Box onClick={stopListening} style={{ position: "absolute", top: "50%", left: "97%", translate: "-95% -50%" }}>
+          <CancelIcon sx={{ width: 22, cursor: "pointer" }} color="info" />
         </Box>
       )}
 
-      <Box
-        style={{
-          zIndex: 10,
-          left: "47%",
-          position: "fixed",
-          display: openPicker ? "inline" : "none",
-          bottom: 81,
-        }}
-      >
-        <Picker
-          theme={theme.palette.mode}
-          data={data}
-          onEmojiSelect={(emoji) => {
-            handleEmojiClick(emoji.native);
-          }}
-        />
+      <Box style={{ zIndex: 10, left: "47%", position: "fixed", display: openPicker ? "inline" : "none", bottom: 81 }}>
+        <Picker theme={theme.palette.mode} data={data} onEmojiSelect={(emoji) => handleEmojiClick(emoji.native)} />
       </Box>
-      <IconButton
-        onClick={() => {
-          setOpenPicker(!openPicker);
-        }}
-        sx={{ width: 42, cursor: "pointer" }}
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "2%",
-          translate: "-4% -50%",
-        }}
-        color="info"
-      >
+      <IconButton onClick={() => setOpenPicker(!openPicker)} sx={{ width: 42, cursor: "pointer" }} style={{ position: "absolute", top: "50%", left: "2%", translate: "-4% -50%" }} color="info">
         <InsertEmoticonIcon />
       </IconButton>
       {message && (
-        <Box
-          onClick={sendMessage}
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "97%",
-            translate: "-95% -50%",
-            cursor: "pointer",
-          }}
-        >
-          <SendIcon color="action" sx={{ width: 22 }}></SendIcon>
+        <Box onClick={sendMessage} style={{ position: "absolute", top: "50%", left: "97%", translate: "-95% -50%", cursor: "pointer" }}>
+          <SendIcon color="action" sx={{ width: 22 }} />
         </Box>
       )}
       <textarea
-        inputRef={inputRef}
+        ref={inputRef}
         value={message}
         onKeyDown={sendMessage}
         onChange={messageHandler}
@@ -245,7 +171,7 @@ export default function Type() {
         data-gramm="false"
         type="text"
         placeholder="Type a message"
-        className="overflow-hidden bg-gray-100 resize-none font-Roboto box-border max-[900px]:px-8 px-[5%] flex  text-md max-[900px]:text-sm w-[82%] py-[1%] outline-none h-[70%] rounded-3xl"
+        className="overflow-hidden bg-gray-100 resize-none p-2.5 font-Roboto box-border max-[900px]:px-8 px-[5%] flex text-md max-[900px]:text-sm w-[82%] outline-none h-[50px] rounded-3xl"
       ></textarea>
     </div>
   );
