@@ -13,6 +13,8 @@ import Settings from './pages/Settings';
 
 import Root,{loader as loadingAction} from './pages/Root';
 import Search from './pages/Search';
+import ForgetPassword, { action as ForgetAction } from './pages/ForgetPassword';
+import ResetPassword, { loader as ResetLoader, action as ResetAction } from './pages/ResetPassword';
 
 
 const router = createBrowserRouter([
@@ -33,6 +35,18 @@ const router = createBrowserRouter([
     path:'signup',
     element:<Signup></Signup>,
     action:SignupAction
+  },
+  //forget password and reset password routes
+  {
+    path:'forget-password',
+    element:<ForgetPassword />,
+    action: ForgetAction
+  },
+  {
+    path:'reset-password/:userId/:verificationToken',
+    element:<ResetPassword />,
+    action: ResetAction,
+    loader: ResetLoader
   },
   {
     path:'home',

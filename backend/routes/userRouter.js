@@ -12,6 +12,9 @@ router.post('/login',authController.login);
 router.post('/ispresent',authController.isUserPresent)
 router.post('/protect',authController.protect,authController.send);
 router.post('/uploadPhoto',authController.protect,userController.uploadUserPhoto,userController.UploadPhoto)
+router.post('/forget-password', authController.sendForgetMail);
+router.post('/forget-verification', authController.verifyForgetMail);
+router.post('/reset-password', authController.resetPassword)
 
 
 module.exports=router;

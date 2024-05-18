@@ -12,10 +12,11 @@ const downloadRouter = require("./routes/downloadRouter");
 
 const allowedOrigins = ['http://localhost:3000','https://chat-box-samarthkadam.vercel.app'];
 app.use(cors({
-  origin:'*'
+  origin: allowedOrigins
 }));
 app.use(cookieParser());
 app.use(express.json());
+app.use(express.urlencoded({extended: true}))//for using postman
 app.use(express.static('public/img/user'));
 
 app.use("/api/v1/users", userRouter);
