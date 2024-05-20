@@ -174,10 +174,6 @@ export default function Main() {
               {showPassword ? <VisibilityOff /> : <Visibility />}
             </IconButton>
           </div>
-  <i className="w-full text-[3vw]  sm:text-sm text-gray-500">
-              *(Password must be 8-12 characters long and contain 1 capital
-              letter and 1 special character.)
-            </i>
   <div className='flex flex-row justify-center mt-8'>
     <Button sx={{padding:".5rem 4rem"}} onClick={sendData} variant="contained">
     {!submiting&&<div>SIGN UP</div>}
