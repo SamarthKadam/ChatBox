@@ -9,18 +9,19 @@ import { useNavigation } from 'react-router-dom'
 import { validate } from 'react-email-validator'
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-import { Button, Paper, Typography } from '@mui/material'
+import { Button, Paper, Typography, IconButton } from '@mui/material';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { ToastContainer, toast } from "react-toastify";
-import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher'
-
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 export default function Main() {
 
 
   const submit=useSubmit();
   const [loginData,setloginData]=useState({email:'',password:''});
   const [submitting,setSubmiting]=useState(false)
-
+  const [showPassword, setShowPassword] = useState(false);
 
 
   function submitData(e,googleauth,information)
@@ -69,7 +70,8 @@ export default function Main() {
 
 
 
-
+  const handleClickShowPassword = () => setShowPassword(!showPassword); // Toggle password visibility
+  const handleMouseDownPassword = (event) => event.preventDefault(); // Prevent default action on mouse down
 
   return (
     <div className='dark:bg-gray-700 flex flex-col items-center h-[100vh] w-[100vw] relative overflow-hidden px-2'>
@@ -86,7 +88,24 @@ export default function Main() {
 <hr></hr>
 <form className='mt-6 relative dark:text-gray-900'>
   <Input onSetData={setloginData}  name='email' text="Email ID" placeholder="Email address" type='text'></Input>
-  <Input onSetData={setloginData}  name='password'  text='Password' type='password' placeholder='Password'></Input>
+  <div className='relative'>
+            <Input
+              onSetData={setloginData}
+              name='password'
+              text='Password'
+              type={showPassword ? 'text' : 'password'} // Toggle between text and password
+              placeholder='Password'
+            />
+             <IconButton
+              aria-label='toggle password visibility'
+              onClick={handleClickShowPassword}
+              onMouseDown={handleMouseDownPassword}
+              edge='end'
+              style={{ position: 'absolute', right: '10px', top: '70%', transform: 'translateY(-50%)' }}
+            >
+              {showPassword ? <VisibilityOff /> : <Visibility />}
+            </IconButton>
+          </div>
   <div className='flex flex-row justify-center mt-10'>
     <Button sx={{padding:".5rem 4rem"}} onClick={submitData} variant="contained">
     {!submitting&&<div>LOG IN</div>}
