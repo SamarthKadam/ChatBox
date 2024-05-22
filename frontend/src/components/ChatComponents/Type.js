@@ -225,7 +225,7 @@ export default function Type() {
             style={{
               position: "absolute",
               top: "50%",
-              left: "8%",
+              left: "7.6%",
               translate: "-4% -50%",
             }}
             color="info"
