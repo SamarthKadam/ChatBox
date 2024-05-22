@@ -1,17 +1,17 @@
-import './input.css'
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import './input.css';
 import Home from './pages/Home';
-import Service from './pages/Service';
-import Login,{action as LoginAction}from './pages/Login';
-import Signup,{action as SignupAction} from './pages/Signup';
 import HomeChat from './pages/HomeChat';
 import Info from './pages/Info';
+import Login, { action as LoginAction } from './pages/Login';
+import Service from './pages/Service';
 import Settings from './pages/Settings';
+import Signup, { action as SignupAction } from './pages/Signup';
 
-import Root,{loader as loadingAction} from './pages/Root';
+import Root, { loader as loadingAction } from './pages/Root';
 import Search from './pages/Search';
 
 

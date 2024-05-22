@@ -1,20 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-import RecieverMessage from "./RecieverMessage";
-import SenderMessage from "./SenderMessage";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import useSound from "use-sound";
+import notifySound from "../../assets/sounds/notification.mp3";
+import { isSender } from "../../helper/Reusable";
+import { addIncomingUserChatBar, AddMessage, InitializeChatMessages, moveChatToTop, updateChatBar } from "../../services/Actions/Chat/action";
+import { socket } from "../../socket/socket";
 import Advertisement from "./Advertisement";
 import CircularLoading from "./CircularLoading";
-import { isSender } from "../../helper/Reusable";
-import { socket } from "../../socket/socket";
-import { InitializeChatMessages } from "../../services/Actions/Chat/action";
-import { useDispatch } from "react-redux";
-import { AddMessage } from "../../services/Actions/Chat/action";
 import EmptyMessages from "./EmptyMessages";
-import { moveChatToTop } from "../../services/Actions/Chat/action";
-import { updateChatBar } from "../../services/Actions/Chat/action";
-import useSound from "use-sound";
-import { addIncomingUserChatBar } from "../../services/Actions/Chat/action";
-import notifySound from "../../assets/sounds/notification.mp3";
+import RecieverMessage from "./RecieverMessage";
+import SenderMessage from "./SenderMessage";
 
 export default function ChatMessages() {
   const isSet = useSelector((state) => state.chat.activeChat);
