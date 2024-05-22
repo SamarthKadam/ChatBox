@@ -90,8 +90,8 @@ export default function HomeChat() {
   console.log("This is chat state",state);
 
   return (
-    <div className="grid max-[1250px]:w-[82vw] max-[1024px]:w-[92vw] max-[1250px]:grid-cols-[4.5fr,7fr] max-[900px]:grid-cols-[5.5fr,7fr]  w-[80vw] relative grid-rows-[1fr,7fr] grid-cols-[3.5fr,7fr] ">
-      <BasicModal handleClose={handleClose} open={open}></BasicModal>
+    <div className="grid max-[1250px]:w-[82vw] max-[1024px]:w-[92vw] max-[1250px]:grid-cols-[4.5fr,7fr] max-[900px]:grid-cols-[1fr,7fr]  w-[80vw] relative grid-rows-[1fr,7fr] grid-cols-[3.5fr,7fr] ">
+      <BasicModal className="" handleClose={handleClose} open={open}></BasicModal>
       <ChatDetails
         closeChat={closeChatDetails}
         chatModel={chatModel}
@@ -113,10 +113,12 @@ export default function HomeChat() {
             })}
             {isEmpty===true&&state.length === 0 && <NoChats></NoChats>}
         </div>
-      <div className="bg-[#F6F8FC] flex flex-col relative overflow-hidden">
+      <div className="bg-[#F6F8FC] flex flex-col relative overflow-hidden  Z ">
         <ChatMessages></ChatMessages>
         <Type></Type>
       </div>
     </div>
   );
 }
+
+//modified at line 93 max-[900px]:grid-cols-[1fr,7fr] --->to adjust in small screen
