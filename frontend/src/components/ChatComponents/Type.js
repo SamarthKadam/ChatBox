@@ -164,10 +164,8 @@ export default function Type() {
           <MicIcon
             sx={{ width: 38, cursor: "pointer" }}
             style={{
-              position: "absolute",
+              // position: "absolute",
               top: "50%",
-              left: "5%",
-              translate: "-4% -50%",
             }}
             color="info"
           ></MicIcon>
@@ -196,10 +194,8 @@ export default function Type() {
           <CancelIcon
             sx={{ width: 22, cursor: "pointer" }}
             style={{
-              position: "absolute",
+              // position: "absolute",
               top: "50%",
-              left: "4%",
-              translate: "-4% -50%",
             }}
             color="info"
           ></CancelIcon>
