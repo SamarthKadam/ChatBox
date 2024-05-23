@@ -18,6 +18,8 @@ import useTheme from "@mui/system/useTheme";
 import { IconButton } from "@mui/material";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 
+import { GetMode } from '../../GetThemeMode'
+
 export default function Type() {
   const isSet = useSelector((state) => state.chat.activeChat);
   const AllChats = useSelector((state) => state.chat.AllChats);
@@ -156,7 +158,7 @@ export default function Type() {
 
   return (
     <div
-      className="border-[1px] border-[#f5f5f5] bg-[#FFFFFF] h-[12%] flex flex-row justify-center items-center relative"
+      className={`${GetMode()} border-[1px] border-[#f5f5f5] bg-[#FFFFFF] h-[12%] flex flex-row justify-center items-center relative`}
       ref={emojiPickerRef}
     >
       {!Microphone && (
@@ -166,7 +168,7 @@ export default function Type() {
             style={{
               position: "absolute",
               top: "50%",
-              left: "5%",
+              left: "7%",
               translate: "-4% -50%",
             }}
             color="info"
@@ -189,6 +191,7 @@ export default function Type() {
             handleEmojiClick(emoji.native);
           }}
         />
+
       </Box>
 
       {Microphone && (
@@ -198,21 +201,25 @@ export default function Type() {
             style={{
               position: "absolute",
               top: "50%",
-              left: "4%",
+              left: "6%",
               translate: "-4% -50%",
             }}
             color="info"
           ></CancelIcon>
         </div>
       )}
-      <IconButton
-        onClick={() => {
-          setOpenPicker(!openPicker);
-        }}
-      >
-        <InsertEmoticonIcon />
-      </IconButton>
-      <div
+
+      <div className={`${GetMode()}-emogi`}>
+        <IconButton
+          onClick={() => {
+            setOpenPicker(!openPicker);
+          }}
+        >
+          <InsertEmoticonIcon />
+        </IconButton>
+      </div>
+
+      <div className={`${GetMode()}-send`}
         onClick={sendMessage}
         style={{
           position: "absolute",
@@ -233,7 +240,7 @@ export default function Type() {
         data-gramm="false"
         type="text"
         placeholder="Type a message"
-        className=" bg-gray-100 resize-none font-Roboto box-border max-[1024px]:px-8 px-[5%] flex  text-md max-[900px]:text-sm w-[95%] py-[1%] outline-none h-[70%] rounded-3xl"
+        className={`${GetMode()}-textarea bg-gray-100 resize-none font-Roboto box-border max-[1024px]:px-8 px-[5%] flex  text-md max-[900px]:text-sm w-[95%] py-[1%] outline-none h-[70%] rounded-3xl`}
       ></textarea>
     </div>
   );

@@ -6,6 +6,9 @@ import { getSender } from "../../helper/Reusable";
 import { socket } from "../../socket/socket";
 import groupLogo from '../../assets/images/group.png'
 
+import '../../color-theming/style.css'
+import { GetMode } from '../../GetThemeMode'
+
 export default function ChatTitle({ openChatModel }) {
   const data = useSelector((state) => state.chat.activeChat);
   const [isTyping, setIsTyping] = useState(false);
@@ -44,7 +47,7 @@ export default function ChatTitle({ openChatModel }) {
   }
 
   return (
-    <div className="flex flex-row px-[5%] box-border justify-between w-[100%]">
+    <div className={`${GetMode()}-chattitle flex flex-row px-[5%] box-border justify-between w-[100%]`}>
       <div className="flex flex-row">
         <Avatar
           referrerPolicy="no-referrer"

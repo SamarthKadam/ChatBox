@@ -8,9 +8,12 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 
+import '../../color-theming/style.css'
+import { GetMode } from '../../GetThemeMode'
+
 export default function SearchBar({onChange,searchHandler}) {
   return (
-    <div className=' h-[10%] w-[100%] flex box-border justify-center py-2 relative'>
+    <div className={`${GetMode()}-search h-[10%] w-[100%] flex box-border justify-center py-2 relative `}>
         {/* <SearchOutlined className='absolute l-[0%]'></SearchOutlined>
         <input className='w-[60%] font-Roboto text-lg border-2 p-2 rounded-md focus:border-[#4BB8FE] focus:outline-none' type='text'></input> */}
         <FormControl sx={{ m: 1, width: '60%' }} variant="outlined">

@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../services/Actions/User/actions";
 import toast from "react-toastify";
 
+import {GetMode} from '../../GetThemeMode';
+import '../../color-theming/style.css'
+
 export default function Profile() {
   const dispatch = useDispatch();
   const dataredux = useSelector((state) => state.user.userInfo);
@@ -84,7 +87,7 @@ export default function Profile() {
         />
         <div
           onClick={handleUpload}
-          className="font-medium border-[1px] cursor-pointer border-[#000000] px-4 py-2 rounded-md font-Roboto tracking-tight max-[1024px]:px-2 max-[1024px]:py-1 max-[1024px]:text-sm"
+          className={`${GetMode()}-setting-btn font-medium border-[1px] cursor-pointer border-[#000000] px-4 py-2 rounded-md font-Roboto tracking-tight max-[1024px]:px-2 max-[1024px]:py-1 max-[1024px]:text-sm`}
         >
           Upload Picture
         </div>

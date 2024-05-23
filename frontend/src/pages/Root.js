@@ -10,6 +10,8 @@ import { setUser } from '../services/Actions/User/actions';
 import { redirect } from 'react-router-dom';
 import { useLoaderData } from 'react-router-dom';
 
+import '../color-theming/style.css'
+import { GetMode } from '../GetThemeMode'
 
 export default function Root() {
  const dispatch=useDispatch();
@@ -45,15 +47,15 @@ export default function Root() {
 //   },[dispatch,navigate])
 
   return (
-    <div className='h-[100vh] flex flex-row'>
-    <div className='h-[100vh] max-[1250px]:w-[18vw] max-[1024px]:w-[8vw] w-[20vw] grid grid-rows-[1fr,6fr,0.8fr]'>
-    <div className=" flex  flex-row  items-center border-[1px] border-[#f5f5f5]">
+    <div className={`${GetMode()}-bg h-[100vh] flex flex-row`}>
+    <div className={`${GetMode()}-bg h-[100vh] max-[1250px]:w-[18vw] max-[1024px]:w-[8vw] w-[20vw] grid grid-rows-[1fr,6fr,0.8fr]`}>
+    <div className={`${GetMode()}-border flex  flex-row  items-center border-[1px] border-[#f5f5f5]`}>
       <div className='flex flex-row ml-[15%]  items-center'>
-     <img alt='logo' className="h-8 mr-1 max-[1250px]:h-7" src={logo}></img> <Title black={true} title='ChatBox'></Title>
+     <img alt='logo' className="h-8 mr-1 max-[1250px]:h-7" src={logo}></img> <Title title='ChatBox'></Title>
       </div>
     </div>
-    <div className='border-[1px] border-[#f5f5f5]'><Menu></Menu></div>
-    <div className='border-[1px] border-[#f5f5f5] flex item-center'>
+    <div className={`${GetMode()}-border border-[1px] border-[#f5f5f5]`}><Menu></Menu></div>
+    <div className={`${GetMode()}-border border-[1px] border-[#f5f5f5] flex item-center`}>
       <UserCard></UserCard>
     </div>
     </div>

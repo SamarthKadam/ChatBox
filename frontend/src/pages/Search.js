@@ -8,6 +8,10 @@ import { AddUser } from '../services/Actions/Chat/action';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+
+import '../color-theming/style.css'
+import { GetMode } from '../GetThemeMode'
+
 export default function Search() {
 
   const dispatch=useDispatch();
@@ -86,7 +90,7 @@ export default function Search() {
     <div className='w-[80vw] relative flex flex-col'>
       <ToastContainer/>
         <SearchBar onChange={onChangeTextHandler} searchHandler={searchHandler} ></SearchBar>
-        <div className=' w-[100%] flex box-border justify-center py-2 relative'>
+        <div className={`${GetMode()}-results w-[100%] flex box-border justify-center py-2 relative `}>
         {!isLoading&&resultsEmpty&&<p>0 matching results found</p>}
        {isLoading&&<Loading></Loading>}
        {!isLoading&&users.length>0&&( <div className='w-[60%] border-[1px] rounded-md border-[#acacac] px-[1%] py-[1%] flex flex-col'>

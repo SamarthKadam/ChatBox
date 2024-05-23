@@ -8,6 +8,9 @@ import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from "react-toastify";
 import InfoIcon from '@mui/icons-material/Info';
 
+import '../../src/color-theming/style.css'
+import { GetMode } from '../GetThemeMode';
+
 export default function Settings() {
 
   const dispatch=useDispatch();
@@ -75,9 +78,9 @@ export default function Settings() {
   };
 
   return (
-    <div className="grid w-[80vw] relative grid-rows-[1fr,7fr] ">
-      <div className="border-[1px] border-[#f5f5f5]"></div>
-      <div className="border-[1px] border-[#f5f5f5]">
+    <div className={`${GetMode()}-setting grid w-[80vw] relative grid-rows-[1fr,7fr]`}>
+      <div className={`${GetMode()}-setting`}></div>
+      <div className={`${GetMode()}-setting border-[1px] border-[#f5f5f5]`}>
         <ToastContainer></ToastContainer>
         <div className="px-[5%] py-[2%]">
           <div className="font-Poppins max-[1024px]:text-xl font-semibold text-2xl">

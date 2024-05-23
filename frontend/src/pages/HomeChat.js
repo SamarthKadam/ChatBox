@@ -18,6 +18,10 @@ import NoChats from "./util/NoChats";
 import { MotionAnimate } from "react-motion-animate";
 import { removeChat } from "../services/Actions/Chat/action";
 import { NullifyActiveChat } from "../services/Actions/Chat/action";
+
+import '../color-theming/style.css'
+import { GetMode } from '../GetThemeMode'
+
 export default function HomeChat() {
   const state = useSelector((state) => state.chat.AllChats);
   const dispatch = useDispatch();
@@ -89,6 +93,7 @@ export default function HomeChat() {
 
   console.log("This is chat state",state);
 
+
   return (
     <div className="grid max-[1250px]:w-[82vw] max-[1024px]:w-[92vw] max-[1250px]:grid-cols-[4.5fr,7fr] max-[900px]:grid-cols-[5.5fr,7fr]  w-[80vw] relative grid-rows-[1fr,7fr] grid-cols-[3.5fr,7fr] ">
       <BasicModal handleClose={handleClose} open={open}></BasicModal>
@@ -100,7 +105,7 @@ export default function HomeChat() {
       <div className="flex flex-row items-center  border-[1px] border-[#f5f5f5]">
         <ChatTitle openChatModel={openChatDetails}></ChatTitle>
       </div>
-        <div className=" border-[1px] overflow-y-scroll no-scrollbar border-[#f5f5f5]">
+        <div className={`${GetMode()}-msg border-[1px] overflow-y-scroll no-scrollbar border-[#f5f5f5]`}>
           {isLoading&&<Loading></Loading>}
           {!isLoading &&
             state&&

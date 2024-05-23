@@ -1,0 +1,189 @@
+.dark-blue{
+    background-color: rgb(0, 0, 0);
+    color: rgb(157, 165, 34);
+
+}
+
+.dark-textarea{
+    background-color:#432b2b;
+    color: rgb(94, 78, 181);
+    padding-left: 35px;
+
+}
+.white-textarea{
+    background-color:#ddd3d3;
+    color: rgb(94, 78, 181);
+
+}
+
+.dark-emogi button{
+    color: wheat;
+}
+.light-emogi button{
+    color: rgba(0, 0, 0, 0.78);
+}
+
+.dark-send svg{
+    color: #b87fdd;
+}
+.light-send svg{
+    color: #36304c;
+}
+
+.dark{
+    background-color: rgb(0, 0, 0);
+
+}
+.light{
+    color: black;
+}  
+
+.dark-msg{
+    background-color: rgb(0, 0, 0);
+    color: rgb(94, 78, 181);
+    border-left: none;
+    border-top: none;
+
+}
+.light-msg{
+    background-color: white;
+}
+
+
+#dark-messages{
+    background-color: rgb(36 38 37);
+    color: rgb(203, 193, 199);
+}
+#dark-messages:hover{
+    background-color: rgb(114 121 131);
+    color: rgb(255, 255, 255 , 0.8);
+    .dark-lastmsg{
+        color: rgb(255, 255, 0 , 0.5);
+    }
+}
+#dark-current-msg{
+    background-color: #d6bdbd;
+    color: #252f58;
+    font-weight: bolder;
+    .dark-lastmsg{
+        color: #0147ff;
+    }
+}
+.dark-lastmsg{
+    color: rgb(255, 255, 255 , 0.5);
+}
+
+#light-messages{
+    background-color: rgb(224 , 243 , 234 , 0.5);
+}
+#light-messages:hover{
+    background-color: rgb(210 210 218);;
+}
+#light-current-msg{
+    background-color: #d6bdbd;
+}
+.light-lastmsg{
+    color: blue;
+}
+
+
+.dark-bg{
+    background-color: #240740;
+}
+
+/* sidebar */
+
+.dark-sidebar{
+    color: rgb(208, 200, 213);
+}
+.dark-sidebar svg{
+    color: rgb(106, 201, 252);
+}
+.dark-border{
+    border: none;
+}
+
+.dark-setting{
+    background-color: black;
+    border: none;
+    color: blue;
+}
+.light-setting{
+    background-color: #f3f1f1;
+    
+}
+
+.dark-setting-btn{
+    background-color: blueviolet;
+    border-color: #f3f1f1;
+    color: wheat;
+}
+.light-setting-btn{
+    background-color: #f3f1f1;
+    
+}
+
+.dark-setting-email input{
+    color: #b87fdd;
+    border: 3px solid rgb(152, 72, 232);
+    padding-left: 6px;
+    height: 10px;
+    text-align: center;
+}
+.dark-setting-email label{
+    color: white;
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.dark-setting-name input{
+    border: 3px solid rgb(152, 72, 232);
+    padding-left: 6px;
+    height: 10px;
+    text-align: center;
+}
+.dark-setting-name label{
+    color: white;
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.dark-search >div >div {
+    background-color: #E8E7EB;
+}
+
+.dark-results >div >div >div >div{
+    color: #c08888;
+}
+
+.dark-adv{
+    background-color: black;
+    border: 1px solid blue;
+    border-left: none;
+}
+.dark-adv-dwn{
+    color: blue;
+}
+
+.dark-heading{
+    color: #f0f0f0;
+}
+
+.dark-upbprder{
+    border-top: none;
+}
+.dark-dwbprder{
+    border-bottom: none;
+}
+
+.dark-username{
+    color: white;
+}
+
+.dark-chattitle{
+    color: blue;
+}
+
+.light-chattitle{
+    color: black;
+}

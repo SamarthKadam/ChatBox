@@ -16,6 +16,11 @@ import useSound from "use-sound";
 import { addIncomingUserChatBar } from "../../services/Actions/Chat/action";
 import notifySound from "../../assets/sounds/notification.mp3";
 
+
+//my imports 
+import '../../color-theming/style.css'
+import { GetMode } from '../../GetThemeMode'
+
 export default function ChatMessages() {
   const isSet = useSelector((state) => state.chat.activeChat);
   const AllChats = useSelector((state) => state.chat.AllChats);
@@ -37,8 +42,7 @@ export default function ChatMessages() {
       );
 
       console.log("Lets test");
-      if (!isChatBarPresent)
-      {
+      if (!isChatBarPresent) {
         dispatch(addIncomingUserChatBar(newMessageRecieved.chat));
         dispatch(updateChatBar(newMessageRecieved.chat._id, newMessageRecieved.content));
         return;
@@ -115,8 +119,8 @@ export default function ChatMessages() {
   return (
     <div
       ref={div}
-      className="w-[100%] h-[88%] px-[3%] overflow-y-scroll no-scrollbar py-[2%] box-border relative flex flex-col"
-    >
+      className={`${GetMode()} w-[100%] h-[88%] px-[3%] overflow-y-scroll no-scrollbar py-[2%] box-border relative flex flex-col`}>
+        
       {isLoading && <CircularLoading></CircularLoading>}
       {!isLoading && data.length === 0 && <EmptyMessages></EmptyMessages>}
       {!isLoading && data.length > 0 && (
