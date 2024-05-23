@@ -46,7 +46,7 @@ export default function Type() {
 
   const messageHandler = (e) => {
     setMessage(e.target.value);
-
+    if (!message) return;
     if (!socketConnected) return;
 
     if (!typing) {
@@ -90,12 +90,13 @@ export default function Type() {
   const sendMessage = async (event) => {
     if (message.length === 0) return;
 
-    if (event.key === "Enter" || event.type === "click") {
+    if ((event.type === "keydown" && event.key === "Enter" && !event.shiftKey) || event.type === "click") {
       event.preventDefault();
+      if (!message.trim()) return;
       const cookie = localStorage.getItem("jwt");
       const bodyData = {
         chatId: isSet._id,
-        content: message,
+        content: message.trim()
       };
       setMessage("");
       resetTranscript();
