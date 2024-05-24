@@ -49,10 +49,14 @@ export default function ShareProfile({ id }) {
             </button>
           </div>
           <div className="flex w-full items-center justify-start gap-4">
-            <div className="border text-gray-400 border-gray-500 bg-[#16173485] p-4 rounded-lg">
+            <div className="border hidden sm:inline  text-gray-400 border-gray-500 bg-[#16173485] p-4 rounded-lg">
               <h1>{`${window.location.origin}/home/${id}`}</h1>
             </div>
-            <button onClick={() => copyToClipboard()}>
+            <button
+              className="flex gap-4 border  border-gray-500 p-2 rounded-lg sm:rounded-none sm:p-0 sm:border-none"
+              onClick={() => copyToClipboard()}
+            >
+              <p className="sm:hidden">Click to copy!</p>
               <ContentCopyIcon />
             </button>
           </div>
