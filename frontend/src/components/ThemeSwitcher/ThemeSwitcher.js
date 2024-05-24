@@ -8,7 +8,8 @@ const ThemeSwitcher = () => {
     return savedTheme ? savedTheme : (window.matchMedia("(prefers-color-scheme: dark)").matches ? 'dark' : 'light');
   };
 
-  const [theme, setTheme] = useState(getInitialTheme);
+  // Call getInitialTheme to get the initial theme value
+  const [theme, setTheme] = useState(getInitialTheme());
 
   useEffect(() => {
     localStorage.setItem('theme', theme);
