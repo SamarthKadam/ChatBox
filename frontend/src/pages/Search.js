@@ -60,6 +60,7 @@ export default function Search() {
     }
   })
   const data=await response.json();
+  // console.log(data);
   SetisLoading(false);
   data.users.length=data.users.length>2?data.users.length=2:data.users.length;
   SetUsers(data.users)
@@ -96,3 +97,5 @@ export default function Search() {
     </div>
   )
 }
+
+

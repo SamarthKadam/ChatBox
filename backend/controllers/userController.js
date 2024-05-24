@@ -57,7 +57,9 @@ exports.UpdateMe=catchAsync(async(req,res,next)=>{
     if(!req.body.name||!req.body.email)
     next(new AppError('Empty fields are not allowed',400))
 
-    const filteredBody=filterObj(req.body,"name","email")
+    console.log(req.body);
+
+    const filteredBody=filterObj(req.body,"name","email","status")
     const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
         new: true,
         runValidators: true

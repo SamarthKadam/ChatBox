@@ -19,7 +19,7 @@ export default function Main() {
 
   const navigation=useNavigation();
   const submit=useSubmit();
-  const [SignUpData,setSignUpData]=useState({name:'',email:'',password:''});
+  const [SignUpData,setSignUpData]=useState({name:'',email:'',password:'', status:'Available'});
   const[submiting,setSubmiting]=useState(false);
   const [showPassword, setShowPassword] = useState(false);
 

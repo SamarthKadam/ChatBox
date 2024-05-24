@@ -5,6 +5,7 @@ const axios=require('axios')
 const userSchema=new mongoose.Schema({
     name:{type:String,required:true},
     email:{type:String,required:true,unique:true},
+    status:{type:String,required:false, default:"Available"},
     password:{type:String,required:true},
     pic: {
         type:String,

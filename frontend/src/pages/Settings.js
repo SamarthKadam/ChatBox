@@ -2,6 +2,7 @@ import React from "react";
 import Profile from "../components/SettingsComponents/Profile";
 import InputName from "../components/SettingsComponents/InputName";
 import InputEmail from "../components/SettingsComponents/InputEmail";
+import InputStatus from "../components/SettingsComponents/InputStatus";
 import { useState,useEffect} from "react";
 import {setUser} from '../services/Actions/User/actions'
 import { useDispatch } from 'react-redux';
@@ -14,10 +15,12 @@ export default function Settings() {
   const storedData = JSON.parse(localStorage.getItem("info"));
   const [name, setName] = useState(storedData.name);
   const [email, setEmail] = useState(storedData.email);
+  const [status, setStatus] = useState(storedData.status);
 
   const resetData = () => {
     setName(storedData.name);
     setEmail(storedData.email);
+    setStatus(storedData.status);
   };
   const notify = (value) => {
     if (value === "error")
@@ -48,7 +51,9 @@ export default function Settings() {
     const dataSent = {
       name,
       email,
+      status
     };
+    // console.log(dataSent);
     const updateData = async () => {
       const cookie = localStorage.getItem("jwt");
       const response = await fetch(
@@ -63,6 +68,7 @@ export default function Settings() {
         }
       );
       const data = await response.json();
+      // console.log(data);
       if (data.status === "success")
       {
         notify("success");
@@ -91,6 +97,7 @@ export default function Settings() {
           <div className="mt-[3%] flex flex-col gap-8">
             <InputName name={name} setName={setName}></InputName>
             <InputEmail email={email} setEmail={setEmail}></InputEmail>
+            <InputStatus status={status} setStatus={setStatus}></InputStatus>
           </div>
           <div className="flex flex-row mt-[2%] gap-2">
             <div
