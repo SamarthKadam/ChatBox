@@ -12,5 +12,6 @@ module.exports = {
       'Poppins': ['Poppins', 'serif'] // Ensure fonts with spaces have " " surrounding it.
     },
   },
-  plugins: [],
+  plugins: [
+  ],
 }
