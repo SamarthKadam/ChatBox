@@ -91,3 +91,20 @@ exports.UploadPhoto=catchAsync(async(req,res,next)=>{
 
     
 // })
+
+exports.getUserById=catchAsync(async(req,res)=>{
+
+  try {
+    const users = await User.findById(req.params.id);
+    if (!users) {
+      return res.status(404).json({ message: 'Item not found' });
+    }
+    res.status(200).json({
+      status:'success',
+      users
+    })
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+})
