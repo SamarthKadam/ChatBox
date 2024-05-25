@@ -31,42 +31,32 @@ export default function ChatMessages() {
   }, []);
 
   useEffect(() => {
-    const messageFn = (newMessageRecieved) => {
-      const isChatBarPresent = AllChats.find(
-        (val) => val._id === newMessageRecieved.chat._id
-      );
+    const messageFn = (newMessageReceived) => {
+      const isChatBarPresent = AllChats.find(val => val._id === newMessageReceived.chat._id);
 
-      console.log("Lets test");
-      if (!isChatBarPresent)
-      {
-        dispatch(addIncomingUserChatBar(newMessageRecieved.chat));
-        dispatch(updateChatBar(newMessageRecieved.chat._id, newMessageRecieved.content));
+      if (!isChatBarPresent) {
+        dispatch(addIncomingUserChatBar(newMessageReceived.chat));
+        dispatch(updateChatBar(newMessageReceived.chat._id, newMessageReceived.content));
         return;
       }
 
       play();
-      if (isSet !== null && isSet._id !== newMessageRecieved.chat._id) {
-        dispatch(moveChatToTop(newMessageRecieved.chat._id));
-        dispatch(
-          updateChatBar(newMessageRecieved.chat._id, newMessageRecieved.content)
-        );
-      } else if (isSet !== null && isSet._id === newMessageRecieved.chat._id) {
-        dispatch(AddMessage(newMessageRecieved));
-        dispatch(moveChatToTop(newMessageRecieved.chat._id));
-        dispatch(
-          updateChatBar(newMessageRecieved.chat._id, newMessageRecieved.content)
-        );
+      if (isSet !== null && isSet._id !== newMessageReceived.chat._id) {
+        dispatch(moveChatToTop(newMessageReceived.chat._id));
+        dispatch(updateChatBar(newMessageReceived.chat._id, newMessageReceived.content));
+      } else if (isSet !== null && isSet._id === newMessageReceived.chat._id) {
+        dispatch(AddMessage(newMessageReceived));
+        dispatch(moveChatToTop(newMessageReceived.chat._id));
+        dispatch(updateChatBar(newMessageReceived.chat._id, newMessageReceived.content));
       } else if (isSet === null) {
-        dispatch(moveChatToTop(newMessageRecieved.chat._id));
-        dispatch(
-          updateChatBar(newMessageRecieved.chat._id, newMessageRecieved.content)
-        );
+        dispatch(moveChatToTop(newMessageReceived.chat._id));
+        dispatch(updateChatBar(newMessageReceived.chat._id, newMessageReceived.content));
       }
     };
 
-    socket.on("message recieved", messageFn);
+    socket.on("message received", messageFn);
     return () => {
-      socket.off("message recieved", messageFn);
+      socket.off("message received", messageFn);
     };
   }, [isSet, dispatch, AllChats]);
 
@@ -122,14 +112,19 @@ export default function ChatMessages() {
       {!isLoading && data.length > 0 && (
         <>
           {data.map((val, index) => {
-            if (isSender(val.sender._id))
+            if (!val || !val.sender) {
+              return null; // Skip rendering if message or sender is undefined
+            }
+            if (isSender(val.sender._id)) {
               return (
                 <SenderMessage
                   content={val.content}
+                  reactions={val.reactions}
+                  messageId={val._id}
                   key={index}
-                ></SenderMessage>
+                />
               );
-            else
+            } else {
               return (
                 <RecieverMessage
                   isGroupChat={isSet.isGroupChat}
@@ -138,9 +133,11 @@ export default function ChatMessages() {
                   messages={data}
                   index={index}
                   content={val.content}
+                  messageId={val._id}
                   key={index}
-                ></RecieverMessage>
+                />
               );
+            }
           })}
         </>
       )}
