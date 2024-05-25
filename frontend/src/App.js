@@ -11,6 +11,7 @@ import HomeChat from './pages/HomeChat';
 import Info from './pages/Info';
 import Settings from './pages/Settings';
 
+import './assets/styles/responsive.css'
 import Root,{loader as loadingAction} from './pages/Root';
 import Search from './pages/Search';
 

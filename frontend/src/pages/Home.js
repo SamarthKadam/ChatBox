@@ -5,6 +5,8 @@ import Service from './Service'
 import { useState } from 'react'
 import LoadingPage from './LoadingPage'
 
+// import '../assets/styles/responsive.css'
+
 import { useNavigate } from 'react-router-dom'
 export default function Home() {
 
@@ -39,7 +41,7 @@ export default function Home() {
   return (
      <div>
       {isLoading&&<LoadingPage></LoadingPage>}
-      {!isLoading&&(<><div className='h-[100vh] px-40 py-5 max-[885px]:px-20 max-[653px]:px-14 bg-[#012478]'>
+      {!isLoading&&(<><div className='home-content-resp h-[100vh] px-40 py-5 max-[885px]:px-20 max-[653px]:px-14 bg-[#012478]'>
         <NavBar/>
         <Description></Description>
      </div>

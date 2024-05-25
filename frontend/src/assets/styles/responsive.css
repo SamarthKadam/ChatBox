@@ -1,0 +1,59 @@
+.home-login{
+    display: none;
+}
+
+.desc{
+    font-weight: 300;
+}
+
+@media (max-width: 450px){
+    .home-login{
+        display: block;
+    }
+}
+
+@media (min-width: 450px){
+    .home-content-resp{
+        padding-right: 2rem;
+    }
+    .py-5{
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+}
+}
+
+@media (min-width: 630px ) and ( max-width: 780px){
+    .desca{
+        height: 200px;
+    }
+    .max-\[1127px\]\:top-\[0\%\]{
+        top: -14%;
+    }
+    .max-\[1127px\]\:top-\[-15\%\] {
+        top: -32%;
+    }
+    .max-\[1127px\]\:top-\[100\%\] {
+        top: 110%;
+    }
+}
+
+@media (min-width: 780px) and ( max-width: 1126px){
+    .desca{
+        height: 200px;
+    }
+    .max-\[1127px\]\:top-\[0\%\] {
+        top: -20%;
+        width: 46%;
+    }
+    .max-\[1127px\]\:top-\[-15\%\] {
+        top: -22%;
+    }
+    .my-\[19\%\] {
+        margin-top: -3%;
+        margin-bottom: 16%;
+    }
+    .max-\[1127px\]\:top-\[100\%\] {
+        top: 109%;
+        width: 46%;
+    }
+}
