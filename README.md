@@ -137,27 +137,39 @@ The illustration above showcases a conversation between two separate tabs opened
 - Socket IO
 - NPM Packages
 
-<a id="instructions"></a>
+<a id="instructions"> </a>
 
 ## Instructions
 
 1. Clone the project:
 
-   - Firstly, clone the project using the command: https://github.com/SamarthKadam/ChatBox
+   - Firstly, clone the project using the command:
+   ```bash
+   git clone https://github.com/SamarthKadam/ChatBox.git 
+   ```
 
 2. Install Packages:
 
    - Install the required packages by navigating to the backend directory: `cd backend` and then run `npm install`.
+    ```
+   cd backend
+   npm start
+    ```
    - Similarly, move to the frontend directory: `cd frontend` and execute `npm install`.
+   ```
+   cd frontend
+   npm start
+   ```
 
 3. To set up the frontend
 
    - Create a `.env` file in the frontend directory.
 
    - Add the following values to the `.env` file:
+   ```
      REACT_APP_API_URL=http://127.0.0.1:4000
      REACT_APP_SOCKET_URL=http://127.0.0.1:4000
-
+   ```
 4. For configuring the backend:
 
    - Establish your applications connection with MongoDB using following environment variables as key with your own values.
@@ -177,10 +189,18 @@ The illustration above showcases a conversation between two separate tabs opened
 5. Start Backend Server:
 
    - Start the backend server using the command: `cd backend` and then `npm start`.
+   ```
+   cd backend
+   npm start
+   ```
 
 6. Start Frontend:
 
    - Finally, initiate the frontend with the command: `cd frontend` and then `npm start`.
+   ```
+   cd frontend
+   npm start
+   ```
 
 7. Open `http://localhost:3000` with your browser to see the app
 
