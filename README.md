@@ -1,4 +1,4 @@
-<a id="about"> </a>
+<a id="about"></a>
 
 # ChatBox-Web App🌟
 
@@ -17,7 +17,7 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
 - [Features and Interfaces](#features)
 
   - [Home](#home)
-  - [Login and Authentication](#auth)
+  - [Login/Signup](#auth)
   - [Chats](#chats)
   - [Messages](#messages)
   - [Groups](#group)
@@ -34,22 +34,21 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
 - [Links](#links)
 - [Contact](#contact)
 
-  <a id="features"> </a>
+  <a id="features"></a>
 
 ## Features and Interfaces
 
-1. Home Page <a id="home"> </a>
+1. Home Page <a id="home"></a>
 
    - [Landing Page](https://chat-box-samarthkadam.vercel.app/) which lists all the features of the app
      <br/><br/>
 
-   <img width="1835" alt="HomePage" src="./backend/public/screenshots/Home.png">
+   <img width="1835" alt="Home Page" src="./backend/public/screenshots/Home.png">
    <br/><br/>
    <img width="1835" alt="Services" src="./backend/public/screenshots/Home2.png">
-
    <br/><br/>
 
-2. Login/Signup Page (Authentication) <a id="auth"> </a>
+2. Login/Signup <a id="auth"> </a>
 
    - Fast and secure authentication
    - JWT tokens used to persist the authentication state
@@ -59,7 +58,7 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
 
    <br/><br/>
 
-3. Chats <a id="chats"> </a>
+3. Chats <a id="chats"></a>
 
    - Conversation History: View a comprehensive list of all your past chats, including details about whom you've chatted with and the timestamps of each conversation.
 
@@ -69,7 +68,7 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
 
    <br/><br/>
 
-4. Messages <a id="messages"> </a>
+4. Messages <a id="messages"></a>
 
    - Effortless Chatting: Easily communicate with others through Socket.IO's seamless functionality.
 
@@ -80,7 +79,7 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
    <img width="1835" alt="Messages" src="./backend/public/screenshots/Messages.png">
 
 <br/><br/> 
-5. Groups <a id="group"> </a>
+5. Groups <a id="group"></a>
 
 - Group Creation: Effortlessly create group chats with the people you need.
 
@@ -88,7 +87,7 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
   <br/><br/>
   <img width="1835" alt="Group" src="./backend/public/screenshots/Group.png">
 
-<br/><br/> 6. Search <a id="search"> </a>
+<br/><br/> 6. Search <a id="search"></a>
 
 - Robust Search Functionality: Powerful search feature to easily find people within the application.
 
@@ -96,7 +95,7 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
 
   <img width="1835" alt="Group" src="./backend/public/screenshots/Search.png">
 
-<br/><br/> 7. Settings <a id="settings"> </a>
+<br/><br/> 7. Settings <a id="settings"></a>
 
 - Credential Updates: Easily modify your credentials such as email, name like information.
 
@@ -113,7 +112,7 @@ The illustration above showcases a conversation between two separate tabs opened
 
 ## Tech stack
 
-<a id="frontend"> </a>
+<a id="frontend"></a>
 
 #### Frontend
 
@@ -123,7 +122,7 @@ The illustration above showcases a conversation between two separate tabs opened
 - MaterialUI
 - TailWindCSS
 
-<a id="backend"> </a>
+<a id="backend"></a>
 
 #### Backend
 
@@ -131,14 +130,14 @@ The illustration above showcases a conversation between two separate tabs opened
 - Express
 - MongoDB
 
-<a id="other"> </a>
+<a id="other"></a>
 
 #### Other Tools
 
 - Socket IO
 - NPM Packages
 
-<a id="instructions"> </a>
+<a id="instructions"></a>
 
 ## Instructions
 
@@ -195,13 +194,13 @@ REACT_APP_SOCKET_URL=https://chatbox-api-bj21.onrender.com
 
 
 
-<a id="links"> </a>
+<a id="links"></a>
 
 ## Useful Links
 
 - [Project Demo](https://chat-box-samarthkadam.vercel.app/)
 
-<a id="contact"> </a>
+<a id="contact"></a>
 
 ## Need help?
 
