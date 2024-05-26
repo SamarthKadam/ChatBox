@@ -11,3 +11,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.navbar-bg {
+  background-color: rgb(1,36,120);
+  height: 100px;
+}
+.align-center{
+  display: flex;
+  align-items: center;
+}
+.nav-links li a:hover {
+  color: #FFCC33; /* Change color on hover */
+}

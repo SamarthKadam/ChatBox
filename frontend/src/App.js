@@ -13,6 +13,7 @@ import Settings from './pages/Settings';
 
 import Root,{loader as loadingAction} from './pages/Root';
 import Search from './pages/Search';
+import ContactUs from './pages/ContactUs';
 
 
 const router = createBrowserRouter([
@@ -56,8 +57,11 @@ const router = createBrowserRouter([
         element:<Search></Search>
       }
     ]
-
-  }
+  },
+  {
+    path: 'contact-us', // Define the Contact Us route
+    element: <ContactUs />,
+  },
 ]);
 function App() {
   return (<RouterProvider router={router} />);

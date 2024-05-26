@@ -16,9 +16,9 @@ export default function NavList() {
   }
 
   return (
-    <div>
+    <div class="align-center">
       <div id="menulinks" class="menulinks duration-500 md:static md:min-h-fit absolute min-h-[28vh] left-[0%] top-[-100%] md:w-auto w-[100%] flex justify-center py-5 fixed ">
-        <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8 text-white font-Roboto font-semibold ">
+        <ul className="nav-links flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8 text-white font-Roboto font-semibold ">
           <li>
             <NavLink
               to="/"
@@ -41,6 +41,9 @@ export default function NavList() {
           </li>
           <li>
             <NavLink to="/signup">Signup</NavLink>
+          </li>
+          <li>
+            <NavLink to="/contact-us">Contact Us</NavLink>
           </li>
         </ul>
       </div>
