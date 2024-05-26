@@ -2,7 +2,7 @@
 
 # ChatBox-Web App🌟
 
-Welcome to Chatbox, your go-to platform for effortless and engaging conversations. Connect with friends, family, and new acquaintances in real-time with our user-friendly interface.Share messages in a secure and vibrant environment.Chatbox fosters seamless communication with its intuitive design and robust features. Stay connected, express yourself, and build meaningful connections with ease.(Desktop Application Comming Soon)
+Welcome to Chatbox, your go-to platform for effortless and engaging conversations. Connect with friends, family, and new acquaintances in real-time with our user-friendly interface.Share messages in a secure and vibrant environment.Chatbox fosters seamless communication with its intuitive design and robust features. Stay connected, express yourself, and build meaningful connections with ease.(Desktop Application Coming Soon)
 
 <p  align="center">
 
@@ -143,8 +143,10 @@ The illustration above showcases a conversation between two separate tabs opened
 
 1. Clone the project:
 
-   - Firstly, clone the project using the command: https://github.com/SamarthKadam/ChatBox
-
+   - Firstly, clone the project using the command: 
+   ```
+   git clone https://github.com/SamarthKadam/ChatBox.git
+  ```
 2. Install Packages:
 
    - Install the required packages by navigating to the backend directory: cd backend and then run npm install.
