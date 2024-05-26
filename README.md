@@ -120,7 +120,7 @@ The illustration above showcases a conversation between two separate tabs opened
 - Javascript
 - Redux
 - MaterialUI
-- TailWindCSS
+- TailwindCSS
 
 <a id="backend"> </a>
 
