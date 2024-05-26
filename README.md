@@ -149,7 +149,7 @@ The illustration above showcases a conversation between two separate tabs opened
 2. Install Packages:
 
    - Install the required packages by navigating to the backend directory: `cd backend` and then run `npm install`.
-   - Similarly, move to the frontend directory: cd frontend and execute npm install.
+   - Similarly, move to the frontend directory: `cd frontend` and execute `npm install`.
 
 3. To set up the frontend
 
@@ -177,11 +177,11 @@ The illustration above showcases a conversation between two separate tabs opened
 
 5. Start Backend Server:
 
-   - Start the backend server using the command: cd backend and then npm start.
+   - Start the backend server using the command: `cd backend` and then `npm start`.
 
 6. Start Frontend:
 
-   - Finally, initiate the frontend with the command: cd frontend and then npm start.
+   - Finally, initiate the frontend with the command: `cd frontend` and then `npm start`.
 
 7. Open `http://localhost:3000` with your browser to see the app
 
