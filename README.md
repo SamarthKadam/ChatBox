@@ -45,7 +45,7 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
 
    <img width="1835" alt="HomePage" src="./backend/public/screenshots/Home.png">
    <br/><br/>
-   <img width="1835" alt="Services" src="./backend/public/screenshots/Home2.png"
+   <img width="1835" alt="Services" src="./backend/public/screenshots/Home2.png">
 
    <br/><br/>
 
@@ -79,7 +79,8 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
 
    <img width="1835" alt="Messages" src="./backend/public/screenshots/Messages.png">
 
-<br/><br/> 5. Groups <a id="group"> </a>
+<br/><br/> 
+5. Groups <a id="group"> </a>
 
 - Group Creation: Effortlessly create group chats with the people you need.
 
@@ -147,7 +148,7 @@ The illustration above showcases a conversation between two separate tabs opened
 
 2. Install Packages:
 
-   - Install the required packages by navigating to the backend directory: cd backend and then run npm install.
+   - Install the required packages by navigating to the backend directory: `cd backend` and then run `npm install`.
    - Similarly, move to the frontend directory: cd frontend and execute npm install.
 
 3. To set up the frontend
