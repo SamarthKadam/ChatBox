@@ -50,25 +50,29 @@ export default function HomeChat() {
       setIsLoading(true);
       setRequestSent(true);
       const cookie = localStorage.getItem("jwt");
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/chat`, {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${cookie}`,
-        },
-      });
-      const data = await response.json();
-      if(data.data.length===0)
-      setIsEmpty(true)
-
-      setIsLoading(false);
-      dispatch(InitializeChat(data.data));
+      try{
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/chat`, {
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${cookie}`,
+          },
+        });
+        const data = await response.json();
+        if(data.data.length===0)
+          setIsEmpty(true)
+        setIsLoading(false);
+        dispatch(InitializeChat(data.data));
+      } catch (error){
+        console.log("Failed to fetch chats:", error);
+        setIsLoading(false);
+      }
     };
     if(state.length>0)
     {
       return;
     }
     getAllChats();
-  }, [dispatch]);
+  }, []);
 
   const selectChat = (data) => {
     const isPresent = data.hasOwnProperty("notify");
