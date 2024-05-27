@@ -164,14 +164,15 @@ The illustration above showcases a conversation between two separate tabs opened
    - Create a `config.env` file in the backend directory.
    - Set the following environment variables in the `config.env` file:
 
-   - DBPASSWORD=<-yourmongodbpassword-><br>
-     DB=<-yourmongodbconnectionuri-><br>
-     PORT=4000<br>
-     DOMAIN=127.0.0.1<br>
-     JWTEXPIRES=90d<br>
-     JWTSECRET=<-giveanysecretkey-><br>
-     JWT_COOKIE_EXPIRES=90<br>
-
+   ```
+     DBPASSWORD=<-yourmongodbpassword->
+     DB=<-yourmongodbconnectionuri->
+     PORT=4000
+     DOMAIN=127.0.0.1
+     JWTEXPIRES=90d
+     JWTSECRET=<-giveanysecretkey->
+     JWT_COOKIE_EXPIRES=90
+   ```
 
 5. Start Backend Server:
 
