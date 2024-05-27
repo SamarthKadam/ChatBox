@@ -12,16 +12,16 @@ export default function NavList() {
     e.target.name = e.target.name === "grid" ? "close" : "grid";
 
     const menulinks = document.querySelector(".menulinks");
-    menulinks.classList.toggle("top-[8%]");
+    menulinks.classList.toggle("top-[10%]");
   }
 
   return (
     <div>
       <div
         id="menulinks"
-        class="menulinks duration-500 md:static md:min-h-fit  min-h-[28vh] left-[0%] top-[-100%] md:w-auto w-[100%] flex justify-center py-5 fixed "
+        class="menulinks  duration-500 md:static md:min-h-fit  min-h-[28vh] left-[0%] top-[-100%] md:w-auto w-[100%] flex justify-center py-5 fixed "
       >
-        <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8 text-white font-Roboto font-semibold ">
+        <ul className="flex  md:flex-row flex-col md:items-center md:gap-[4vw] gap-8 text-white font-Roboto font-semibold ">
           <li>
             <NavLink
               to="/"
