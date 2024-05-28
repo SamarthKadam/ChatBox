@@ -2,7 +2,7 @@
 
 # ChatBox-Web App🌟
 
-Welcome to Chatbox, your go-to platform for effortless and engaging conversations. Connect with friends, family, and new acquaintances in real-time with our user-friendly interface.Share messages in a secure and vibrant environment.Chatbox fosters seamless communication with its intuitive design and robust features. Stay connected, express yourself, and build meaningful connections with ease.(Desktop Application Comming Soon)
+Welcome to Chatbox, your go-to platform for effortless and engaging conversations. Connect with friends, family, and new acquaintances in real-time with our user-friendly interface.Share messages in a secure and vibrant environment.Chatbox fosters seamless communication with its intuitive design and robust features. Stay connected, express yourself, and build meaningful connections with ease.(Desktop Application Coming Soon)
 
 <p  align="center">
 
@@ -45,7 +45,7 @@ Welcome to Chatbox, your go-to platform for effortless and engaging conversation
 
    <img width="1835" alt="HomePage" src="./backend/public/screenshots/Home.png">
    <br/><br/>
-   <img width="1835" alt="Services" src="./backend/public/screenshots/Home2.png"
+   <img width="1835" alt="Services" src="./backend/public/screenshots/Home2.png">
 
    <br/><br/>
 
