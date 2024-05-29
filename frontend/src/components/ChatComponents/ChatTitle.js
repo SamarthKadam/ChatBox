@@ -4,7 +4,8 @@ import MoreHorizOutlinedIcon from "@mui/icons-material/MoreHorizOutlined";
 import { useSelector } from "react-redux";
 import { getSender } from "../../helper/Reusable";
 import { socket } from "../../socket/socket";
-import groupLogo from '../../assets/images/group.png'
+import groupLogo from "../../assets/images/group.png";
+import moment from "moment";
 
 export default function ChatTitle({ openChatModel }) {
   const data = useSelector((state) => state.chat.activeChat);
@@ -13,24 +14,21 @@ export default function ChatTitle({ openChatModel }) {
   useEffect(() => {
     if (data === null) return;
 
+    const setTypeHandler = (room) => {
+      setIsTyping(data._id === room);
+    };
 
-    const setTypeHandler=(room)=>{
-      setIsTyping(data._id===room)
-    }
-  
-    const unsetTypeHandler=(room)=>{
+    const unsetTypeHandler = (room) => {
       setIsTyping(false);
-    }
-  
+    };
 
     socket.on("typing", setTypeHandler);
-    socket.on("stop typing",unsetTypeHandler);
+    socket.on("stop typing", unsetTypeHandler);
 
-    return ()=>{
-      socket.off("typing",setTypeHandler);
-      socket.off("stop typing",unsetTypeHandler);
-    }
-
+    return () => {
+      socket.off("typing", setTypeHandler);
+      socket.off("stop typing", unsetTypeHandler);
+    };
   }, [data]);
 
   if (data === null) return <></>;
@@ -42,7 +40,7 @@ export default function ChatTitle({ openChatModel }) {
   } else {
     user = getSender(data.users);
   }
-
+  // console.log(user);
   return (
     <div className="flex flex-row px-[5%] box-border justify-between w-[100%]">
       <div className="flex flex-row">
@@ -50,7 +48,13 @@ export default function ChatTitle({ openChatModel }) {
           referrerPolicy="no-referrer"
           alt="Group-pic"
           sx={{ width: 48, height: 48 }}
-          src={isGroupChat?groupLogo:(user.pic.startsWith('user')?`${process.env.REACT_APP_API_URL}/${user.pic}`:user.pic)}
+          src={
+            isGroupChat
+              ? groupLogo
+              : user.pic.startsWith("user")
+              ? `${process.env.REACT_APP_API_URL}/${user.pic}`
+              : user.pic
+          }
         ></Avatar>
         <div className="flex flex-col ml-3">
           <div className="text-xl font-Roboto font-semibold">{user.name}</div>
@@ -59,6 +63,15 @@ export default function ChatTitle({ openChatModel }) {
               {data.isGroupChat ? "Someone" : user.name} is typing...
             </div>
           )}
+
+          {!isTyping &&
+            (user.isOnline ? (
+              <div className="text-xs sm:text-base md:text-lg font-normal  text-[#1f751f]">
+                Online
+              </div>
+            ) : (
+              `Last Online: ${moment(user.lastOnline).fromNow()}`
+            ))}
         </div>
       </div>
       <div onClick={openChatModel}>

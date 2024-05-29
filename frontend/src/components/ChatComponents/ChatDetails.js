@@ -23,13 +23,12 @@ import { NullifyActiveChat } from "../../services/Actions/Chat/action";
 import { removeChat } from "../../services/Actions/Chat/action";
 import { socket } from "../../socket/socket";
 
-
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: window.innerWidth/3,
+  width: window.innerWidth / 3,
   bgcolor: "background.paper",
   boxShadow: 24,
   borderRadius: "14px",
@@ -122,14 +121,17 @@ export default function ChatDetails({ chatModel, closeChat }) {
       chatName: ref.current.value,
     };
 
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/chat/rename`, {
-      method: "put",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${cookie}`,
-      },
-      body: JSON.stringify(bodyData),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/api/v1/chat/rename`,
+      {
+        method: "put",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${cookie}`,
+        },
+        body: JSON.stringify(bodyData),
+      }
+    );
     const data = await response.json();
     if (data.status === "success") {
       closeChat();
@@ -153,14 +155,17 @@ export default function ChatDetails({ chatModel, closeChat }) {
       return notify("error", "User already in the group!");
     }
 
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/chat/groupadd`, {
-      method: "put",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${cookie}`,
-      },
-      body: JSON.stringify(bodyData),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/api/v1/chat/groupadd`,
+      {
+        method: "put",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${cookie}`,
+        },
+        body: JSON.stringify(bodyData),
+      }
+    );
     const data = await response.json();
     if (data.status === "success") {
       dispatch(addNewUserToGroup(user, activeUser._id));
@@ -213,7 +218,7 @@ export default function ChatDetails({ chatModel, closeChat }) {
           body: JSON.stringify(bodyData),
         }
       );
-      socket.emit("removechatbar-send",activeUser._id)
+      socket.emit("removechatbar-send", activeUser._id);
       dispatch(NullifyActiveChat());
       dispatch(removeChat(activeUser._id));
       // const data=await response.json();

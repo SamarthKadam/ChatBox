@@ -37,10 +37,11 @@ export default function ChatMessages() {
       );
 
       console.log("Lets test");
-      if (!isChatBarPresent)
-      {
+      if (!isChatBarPresent) {
         dispatch(addIncomingUserChatBar(newMessageRecieved.chat));
-        dispatch(updateChatBar(newMessageRecieved.chat._id, newMessageRecieved.content));
+        dispatch(
+          updateChatBar(newMessageRecieved.chat._id, newMessageRecieved.content)
+        );
         return;
       }
 
@@ -111,7 +112,7 @@ export default function ChatMessages() {
   }, [data]);
 
   if (isSet === null) return <Advertisement></Advertisement>;
-
+  console.log(data);
   return (
     <div
       ref={div}
