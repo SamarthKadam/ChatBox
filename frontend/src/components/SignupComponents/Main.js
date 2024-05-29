@@ -155,7 +155,7 @@ export default function Main() {
 <hr></hr>
 <form className='mt-6 relative'>
   <Input onSetData={setSignUpData} name='name' text='Name' placeholder='Enter your name' type='text'></Input>
-  <Input onSetData={setSignUpData} name='email' text="Email ID" placeholder="" type='text'></Input>
+  <Input onSetData={setSignUpData} name='email' text="Email ID" placeholder="Enter Email Address" type='text'></Input>
   <div className='relative'>
             <Input
               onSetData={setSignUpData}
