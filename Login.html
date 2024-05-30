@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        * {
+            color: white;
+        }
+
+        body {
+            background-image: url("https://c0.wallpaperflare.com/preview/789/637/166/backlit-chiemsee-dawn-desktop-backgrounds.jpg");
+            background-size: cover;
+            display: flex;
+            background-repeat: no-repeat;
+        }
+
+
+        form i {
+
+            cursor: pointer;
+        }
+
+        ::placeholder {
+            color: rgb(0, 0, 0);
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 80px;
+            border: 2px solid white;
+            max-width: fit-content;
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+        }
+
+        h1 {
+            margin-left: 10px;
+        }
+
+        input {
+            border-radius: 25px;
+            border: 2px solid white;
+            color: black;
+        }
+
+        button {
+            margin-left: 5px;
+        }
+        a{
+            font-weight:500;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <br><br>
+        <h1>Login</h1>
+        <br><br>
+        <form>
+
+            Name:
+            <input type="text" name="userID" id="userID" placeholder="Enter your name">
+            <br><br>
+
+            Password:
+            <input type="password" name="password" id="password" placeholder="Enter password">
+            <i class="bi bi-eye-slash" id="togglePassword"></i>
+            <br><br>
+            <button type="submit" id="submit" class="btn btn-primary">
+                LOGIN
+            </button>
+            <br><br>
+            If you don't have an account?
+            <a href="http://127.0.0.1:5500/Sign%20up.html"> SIGN UP </a>
+            <br><br>
+        </form>
+    </div>
+    <script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#password');
+        togglePassword.addEventListener('click', () => {
+            // Toggle the type attribute using getAttribute() method
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // Toggle the eye and bi-eye icon
+            togglePassword.classList.toggle('bi-eye');
+            togglePassword.classList.toggle('bi-eye-slash');
+        });
+    </script>
+
+</body>
+
+</html>
