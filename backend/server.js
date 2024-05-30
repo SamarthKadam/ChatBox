@@ -40,7 +40,6 @@ const io = require("socket.io")(server, {
 
 io.on("connection", (socket) => {
   socket.on("setup", async (userData) => {
-    console.log("a user is connected", userData._id);
     socket.userId = userData._id;
     await User.findByIdAndUpdate(socket.userId, {
       isOnline: true,
@@ -48,24 +47,39 @@ io.on("connection", (socket) => {
     });
     socket.join(userData._id);
     socket.emit("connected");
+    io.emit("status update", {
+      userId: socket.userId,
+      isOnline: true,
+      lastOnline: null,
+    });
   });
 
   socket.on("disconnect", async () => {
     if (socket.userId) {
-      console.log(`a user with id: ${socket.userId} disconnected`);
+      const lastOnline = moment().toISOString();
       await User.findByIdAndUpdate(socket.userId, {
         isOnline: false,
-        lastOnline: moment().toISOString(),
+        lastOnline,
+      });
+      io.emit("status update", {
+        userId: socket.userId,
+        isOnline: false,
+        lastOnline,
       });
     }
   });
 
   socket.on("logout", async () => {
     if (socket.userId) {
-      console.log(`a user with id: ${socket.userId} logged out`);
+      const lastOnline = moment().toISOString();
       await User.findByIdAndUpdate(socket.userId, {
         isOnline: false,
-        lastOnline: moment().toISOString(),
+        lastOnline,
+      });
+      io.emit("status update", {
+        userId: socket.userId,
+        isOnline: false,
+        lastOnline,
       });
       socket.userId = null;
       socket.emit("server processed logout..!");

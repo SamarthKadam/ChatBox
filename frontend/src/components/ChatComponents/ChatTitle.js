@@ -10,6 +10,7 @@ import moment from "moment";
 export default function ChatTitle({ openChatModel }) {
   const data = useSelector((state) => state.chat.activeChat);
   const [isTyping, setIsTyping] = useState(false);
+  const [userStatus, setUserStatus] = useState(null);
 
   useEffect(() => {
     if (data === null) return;
@@ -22,12 +23,20 @@ export default function ChatTitle({ openChatModel }) {
       setIsTyping(false);
     };
 
+    const statusUpdateHandler = (statusUpdate) => {
+      if (data && !data.isGroupChat && statusUpdate.userId === user._id) {
+        setUserStatus(statusUpdate);
+      }
+    };
+
     socket.on("typing", setTypeHandler);
     socket.on("stop typing", unsetTypeHandler);
+    socket.on("status update", statusUpdateHandler);
 
     return () => {
       socket.off("typing", setTypeHandler);
       socket.off("stop typing", unsetTypeHandler);
+      socket.off("status update", statusUpdateHandler);
     };
   }, [data]);
 
@@ -40,7 +49,9 @@ export default function ChatTitle({ openChatModel }) {
   } else {
     user = getSender(data.users);
   }
-  // console.log(user);
+
+  const currentStatus = userStatus || user;
+
   return (
     <div className="flex flex-row px-[5%] box-border justify-between w-[100%]">
       <div className="flex flex-row">
@@ -63,14 +74,13 @@ export default function ChatTitle({ openChatModel }) {
               {data.isGroupChat ? "Someone" : user.name} is typing...
             </div>
           )}
-
           {!isTyping &&
-            (user.isOnline ? (
+            (currentStatus.isOnline ? (
               <div className="text-xs sm:text-base md:text-lg font-normal  text-[#1f751f]">
                 Online
               </div>
             ) : (
-              `Last Online: ${moment(user.lastOnline).fromNow()}`
+              `Last Online: ${moment(currentStatus.lastOnline).fromNow()}`
             ))}
         </div>
       </div>
