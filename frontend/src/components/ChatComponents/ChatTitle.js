@@ -68,20 +68,17 @@ export default function ChatTitle({ openChatModel }) {
           }
         ></Avatar>
         <div className="flex flex-col ml-3">
-          <div className="text-xl font-Roboto font-semibold">{user.name}</div>
-          {isTyping && (
-            <div className="text-xs font-normal  text-[#30C730]">
-              {data.isGroupChat ? "Someone" : user.name} is typing...
+          <div className="flex justify-between items-center">
+            <div className="text-xs sm:text-sm md:text-base lg:text-lg font-Roboto font-semibold">
+              {user.name}
             </div>
-          )}
-          {!isTyping &&
-            (currentStatus.isOnline ? (
-              <div className="text-xs sm:text-base md:text-lg font-normal  text-[#1f751f]">
-                Online
-              </div>
-            ) : (
-              `Last Online: ${moment(currentStatus.lastOnline).fromNow()}`
-            ))}
+            {!isTyping &&
+              (currentStatus.isOnline ? (
+                <div className="flex w-2 h-2 bg-green-600 rounded-full ml-3 my-2"></div>
+              ) : (
+                <div></div>
+              ))}
+          </div>
         </div>
       </div>
       <div onClick={openChatModel}>

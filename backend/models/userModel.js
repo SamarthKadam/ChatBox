@@ -21,10 +21,6 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  lastOnline: {
-    type: Date,
-    default: null,
-  },
   gender: {
     type: String,
   },

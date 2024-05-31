@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Avatar } from "@mui/material";
 import Badge from "../ChatComponents/util/Badge";
 import { getSender } from "../../helper/Reusable";
 import { useSelector } from "react-redux";
-import { socket } from "../../socket/socket";
 import groupLogo from "../../assets/images/group.png";
 
 export default function ChatBar({ data, select }) {
@@ -15,28 +14,6 @@ export default function ChatBar({ data, select }) {
   } else {
     user = getSender(data.users);
   }
-
-  const [userStatus, setUserStatus] = useState({
-    isOnline: user.isOnline,
-    lastOnline: user.lastOnline,
-  });
-
-  useEffect(() => {
-    const statusUpdateHandler = (statusUpdate) => {
-      if (!isGroupChat && statusUpdate.userId === user._id) {
-        setUserStatus({
-          isOnline: statusUpdate.isOnline,
-          lastOnline: statusUpdate.lastOnline,
-        });
-      }
-    };
-
-    socket.on("status update", statusUpdateHandler);
-
-    return () => {
-      socket.off("status update", statusUpdateHandler);
-    };
-  }, [user._id, isGroupChat]);
 
   const latestMessage = data.latestMessage
     ? data.latestMessage.content.slice(0, 35)
@@ -80,9 +57,6 @@ export default function ChatBar({ data, select }) {
         </div>
       </div>
       <div className="flex flex-col items-end">
-        {userStatus.isOnline && (
-          <div className="flex w-2 h-2 bg-green-600 rounded-full mr-3 mb-2"></div>
-        )}
         <div className="text-xs max-[800px]:hidden font-medium cursor-pointer text-[#979797]">{`${String(
           dateObject.getHours() % 12
         ).padStart(2, "0")}:${String(dateObject.getMinutes()).padStart(

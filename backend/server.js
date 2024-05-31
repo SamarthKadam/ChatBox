@@ -2,7 +2,6 @@ const express = require("express");
 // const app = express();
 const http = require("http");
 const mongoose = require("mongoose");
-const moment = require("moment");
 const User = require("./models/userModel");
 const dotenv = require("dotenv");
 const app = require("./app");
@@ -43,43 +42,35 @@ io.on("connection", (socket) => {
     socket.userId = userData._id;
     await User.findByIdAndUpdate(socket.userId, {
       isOnline: true,
-      lastOnline: null,
     });
     socket.join(userData._id);
     socket.emit("connected");
     io.emit("status update", {
       userId: socket.userId,
       isOnline: true,
-      lastOnline: null,
     });
   });
 
   socket.on("disconnect", async () => {
     if (socket.userId) {
-      const lastOnline = moment().toISOString();
       await User.findByIdAndUpdate(socket.userId, {
         isOnline: false,
-        lastOnline,
       });
       io.emit("status update", {
         userId: socket.userId,
         isOnline: false,
-        lastOnline,
       });
     }
   });
 
   socket.on("logout", async () => {
     if (socket.userId) {
-      const lastOnline = moment().toISOString();
       await User.findByIdAndUpdate(socket.userId, {
         isOnline: false,
-        lastOnline,
       });
       io.emit("status update", {
         userId: socket.userId,
         isOnline: false,
-        lastOnline,
       });
       socket.userId = null;
       socket.emit("server processed logout..!");
