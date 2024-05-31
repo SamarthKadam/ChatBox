@@ -79,6 +79,11 @@ export default function ChatTitle({ openChatModel }) {
                 <div></div>
               ))}
           </div>
+          {isTyping && (
+            <div className="text-xs font-normal  text-[#30C730]">
+              {data.isGroupChat ? "Someone" : user.name} is typing...
+            </div>
+          )}
         </div>
       </div>
       <div onClick={openChatModel}>
