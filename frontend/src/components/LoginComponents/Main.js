@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useContext, useState} from 'react'
 import { Link } from 'react-router-dom'
 import Input from './Input'
 import Square from './Square'
@@ -14,10 +14,14 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { ToastContainer, toast } from "react-toastify";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { DarkModeContext } from '../ToggleMode/DarkModeContext'
+import {FaSun,FaMoon} from 'react-icons/fa6'
+
 export default function Main() {
 
 
   const submit=useSubmit();
+  const {isDarkMode,toggleMode}=useContext(DarkModeContext)
   const [loginData,setloginData]=useState({email:'',password:''});
   const [submitting,setSubmiting]=useState(false)
   const [showPassword, setShowPassword] = useState(false);
@@ -73,18 +77,23 @@ export default function Main() {
   const handleMouseDownPassword = (event) => event.preventDefault(); // Prevent default action on mouse down
 
   return (
-    <div className='flex flex-col items-center h-[100vh] w-[100vw] relative overflow-hidden px-2'>
+    <>
+   
+                    <div className='absolute right-10 z-[99] top-8'><button onClick={toggleMode}>{isDarkMode?<FaSun color='white' className='z-[99]' size={'2rem'}/>:<FaMoon size={'2rem'} className='z-[99]' />}</button></div>
+
+    <div className={`flex flex-col ${isDarkMode?"bg-black":""} items-center h-[100vh] w-[100vw] relative overflow-hidden px-2`}>
+
     <Square></Square>
     <Square isRight={true}></Square>
-  <Paper className='z-20 w-full max-w-[370px] p-[2rem] my-auto' elevation={3}>
+  <Paper className={`  z-20 w-full max-w-[370px] p-[2rem] my-auto`} style={{backgroundColor:`${isDarkMode?"rgba(255,255,255,0.1)":""}`}} elevation={3}>
 
-        <div className='font-Poppins text-3xl font-extrabold flex items-center flex-col'>
+        <div className={`${isDarkMode?"text-white":""} font-Poppins text-3xl font-extrabold flex items-center flex-col`}>
         <LockOpenIcon fontSize='large' color='primary'/>
           <Typography variant='h5'>Log In</Typography>
         </div>
 <br />
 <hr></hr>
-<form className='mt-6 relative'>
+<form className={` mt-6 relative`}>
   <Input onSetData={setloginData}  name='email' text="Email ID" placeholder="Email address" type='text'></Input>
   <div className='relative'>
             <Input
@@ -112,7 +121,7 @@ export default function Main() {
     </Box>}
     </Button>
   </div>
-  <Typography className='text-center py-3'>Already have and account ? <Link className='text-blue-600' to="/signup">SignUp</Link></Typography>
+  <Typography className={`${isDarkMode?"text-white":""} text-center py-3`}>Already have and account ? <Link className='text-blue-600' to="/signup">SignUp</Link></Typography>
 
   <div className='h-[1px] w-[100%] mt-10 bg-[#808080]'></div>
   <div className='flex flex-col items-center mt-6'>
@@ -123,5 +132,6 @@ export default function Main() {
 </form>
 </Paper>
 </div>
+</>
   )
 }
