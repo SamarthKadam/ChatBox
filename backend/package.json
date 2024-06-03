@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "author": "Samarth Kadam",
   "license": "ISC",
@@ -17,9 +17,11 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.1",
+    "mailgen": "^2.0.28",
     "mongodb": "4.1",
     "mongoose": "^7.5.0",
     "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.13",
     "nodemon": "^3.0.1",
     "socket.io": "^4.7.2"
   }
