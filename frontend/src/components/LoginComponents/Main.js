@@ -4,6 +4,7 @@ import Input from "./Input";
 import Square from "./Square";
 import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
+
 import { useSubmit } from "react-router-dom";
 import { useNavigation } from "react-router-dom";
 import { validate } from "react-email-validator";
@@ -12,13 +13,16 @@ import Box from "@mui/material/Box";
 import { Button, Paper, Typography } from "@mui/material";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 
+
 export default function Main() {
   const navigation = useNavigation();
   const submit = useSubmit();
   const [loginData, setloginData] = useState({ email: "", password: "" });
   const [submitting, setSubmiting] = useState(false);
 
+
   function submitData(e, googleauth, information) {
+
     setSubmiting(true);
     setTimeout(() => {
       setSubmiting(false);
@@ -32,8 +36,10 @@ export default function Main() {
     }
 
     e.preventDefault();
+
     if (!loginData.email || !validate(loginData.email) || !loginData.password) {
       alert("error");
+
     }
     submit(loginData, { method: "post" });
   }
@@ -52,6 +58,7 @@ export default function Main() {
     console.log(error);
   };
 
+
   return (
     <div className="flex flex-col items-center h-[100vh] w-[100vw] relative overflow-hidden px-2">
       <Square></Square>
@@ -64,6 +71,7 @@ export default function Main() {
           <LockOpenIcon fontSize="large" color="primary" />
           <Typography variant="h5">Log In</Typography>
         </div>
+
         <br />
         <hr></hr>
         <form className="mt-6 relative">
@@ -117,4 +125,5 @@ export default function Main() {
       </Paper>
     </div>
   );
+
 }

@@ -1,16 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
+import { socket } from "../../socket/socket";
+
 import MicIcon from "@mui/icons-material/Mic";
 import SendIcon from "@mui/icons-material/Send";
-import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
-import { socket } from "../../socket/socket";
-import { AddMessage } from "../../services/Actions/Chat/action";
-import { moveChatToTop } from "../../services/Actions/Chat/action";
-import SpeechRecognition, {
-  useSpeechRecognition,
-} from "react-speech-recognition";
+import { AddMessage, moveChatToTop, updateChatBar } from "../../services/Actions/Chat/action";
 import CancelIcon from "@mui/icons-material/Cancel";
-import {updateChatBar} from '../../services/Actions/Chat/action'
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
+import { Box, IconButton } from "@mui/material";
+import useTheme from "@mui/system/useTheme";
+import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
+
+import onMicSoundFile from "../../assets/sounds/onMic.mp3";
+import offMicSoundFile from "../../assets/sounds/offMic.mp3";
 
 export default function Type() {
   const isSet = useSelector((state) => state.chat.activeChat);
@@ -20,19 +24,30 @@ export default function Type() {
   const dispatch = useDispatch();
   const [typing, setTyping] = useState(false);
   const [Microphone, setMircophone] = useState(false);
+  const inputRef = useRef(null);
+  const [openPicker, setOpenPicker] = useState(false);
+  const theme = useTheme();
+  const emojiPickerRef = useRef(null);
+  const [noSoundTimeout, setNoSoundTimeout] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
 
   const {
     transcript,
-    listening,
     resetTranscript,
-    browserSupportsSpeechRecognition
+    browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
-
-
 
   useEffect(() => {
     setMessage(transcript);
-  }, [transcript, resetTranscript]);
+    resetNoSoundTimeout();
+  }, [transcript]);
+
+  const resetNoSoundTimeout = () => {
+    if (noSoundTimeout) {
+      clearTimeout(noSoundTimeout);
+    }
+    setNoSoundTimeout(setTimeout(stopListening, 5000));
+  };
 
   const messageHandler = (e) => {
     setMessage(e.target.value);
@@ -53,9 +68,8 @@ export default function Type() {
         socket.emit("stop typing", isSet._id);
         setTyping(false);
       }
-      socket.emit("stop typing",isSet._id);
+      socket.emit("stop typing", isSet._id);
     }, timerLength);
-
   };
 
   useEffect(() => {
@@ -70,15 +84,12 @@ export default function Type() {
   }, [isSet]);
 
   useEffect(() => {
-
-    if(isSet==null)
-    return;
+    if (isSet == null) return;
 
     resetTranscript();
     SpeechRecognition.stopListening();
     setMircophone(false);
-    setMessage('');
-
+    setMessage("");
   }, [isSet]);
 
   const sendMessage = async (event) => {
@@ -93,17 +104,20 @@ export default function Type() {
       };
       setMessage("");
       resetTranscript();
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/v1/message`, {
-        method: "post",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${cookie}`,
-        },
-        body: JSON.stringify(bodyData),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/v1/message`,
+        {
+          method: "post",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${cookie}`,
+          },
+          body: JSON.stringify(bodyData),
+        }
+      );
       const data = await response.json();
       dispatch(AddMessage(data.data));
-      dispatch(updateChatBar(isSet._id,data.data.content));
+      dispatch(updateChatBar(isSet._id, data.data.content));
       if (AllChats[0]._id !== isSet._id) {
         dispatch(moveChatToTop(isSet._id));
       }
@@ -111,46 +125,120 @@ export default function Type() {
     }
   };
 
-  const startListening=()=>{
-    SpeechRecognition.startListening({ continuous: true,language:'en-IN'})
+  const onMicSound = () => {
+    const audio = new Audio(onMicSoundFile);
+    audio.play();
+  }
+
+  const offMicSound = () => {
+    const audio = new Audio(offMicSoundFile);
+    audio.play();
+  }
+
+  const startListening = () => {
+    SpeechRecognition.startListening({ continuous: true, language: "en-IN" });
     setMircophone(true);
-  }
+    if (hasMounted) onMicSound();
+    resetNoSoundTimeout();
+  };
 
-  const stopListening=()=>{
-    SpeechRecognition.stopListening()
+  const stopListening = () => {
+    SpeechRecognition.stopListening();
     setMircophone(false);
-  }
+    if (hasMounted) offMicSound();
+    if (noSoundTimeout) {
+      clearTimeout(noSoundTimeout);
+      setNoSoundTimeout(null);
+    }
+  };
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        emojiPickerRef.current &&
+        !emojiPickerRef.current.contains(event.target)
+      ) {
+        setOpenPicker(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  function handleEmojiClick(emoji) {
+    const input = inputRef.current;
+    if (emoji) {
+      setMessage(message + emoji);
+    }
+  }
 
   if (isSet === null) return <></>;
 
-
   return (
-    <div className="border-[1px] border-[#f5f5f5] bg-[#FFFFFF] h-[12%] flex flex-row justify-center items-center relative">
-      {!Microphone&&(<div onClick={startListening}>
-        <MicIcon
-          sx={{ width: 22, cursor: "pointer" }}
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "4%",
-            translate: "-4% -50%",
-          }}
-          color="info"
-        ></MicIcon>
-        </div>)}
-      {Microphone&&(<div onClick={stopListening}><CancelIcon
-        sx={{ width: 22, cursor: "pointer" }}
+    <div
+      className="border-[1px] border-[#f5f5f5] bg-[#FFFFFF] h-[12%] flex flex-row justify-center items-center relative"
+      ref={emojiPickerRef}
+    >
+      {!Microphone && (
+        <div onClick={startListening}>
+          <MicIcon
+            sx={{ width: 38, cursor: "pointer" }}
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "7%",
+              translate: "-4% -50%",
+            }}
+            color="info"
+          ></MicIcon>
+        </div>
+      )}
+      <Box
         style={{
-          position: "absolute",
-          top: "50%",
-          left: "4%",
-          translate: "-4% -50%",
+          zIndex: 10,
+          left: "47%",
+          position: "fixed",
+          display: openPicker ? "inline" : "none",
+          bottom: 81,
         }}
-        color="info"
-      ></CancelIcon>
-      </div>)
-      }
+      >
+        <Picker
+          theme={theme.palette.mode}
+          data={data}
+          onEmojiSelect={(emoji) => {
+            handleEmojiClick(emoji.native);
+          }}
+        />
+      </Box>
+
+      {Microphone && (
+        <div onClick={stopListening}>
+          <CancelIcon
+            sx={{ width: 22, cursor: "pointer" }}
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "7.6%",
+              translate: "-4% -50%",
+            }}
+            color="info"
+          ></CancelIcon>
+        </div>
+      )}
+      <IconButton
+        onClick={() => {
+          setOpenPicker(!openPicker);
+        }}
+      >
+        <InsertEmoticonIcon />
+      </IconButton>
       <div
         onClick={sendMessage}
         style={{
@@ -164,6 +252,7 @@ export default function Type() {
         <SendIcon color="action" sx={{ width: 22 }}></SendIcon>
       </div>
       <textarea
+        ref={inputRef}
         value={message}
         onKeyDown={sendMessage}
         onChange={messageHandler}
@@ -171,7 +260,7 @@ export default function Type() {
         data-gramm="false"
         type="text"
         placeholder="Type a message"
-        className=" bg-gray-100 resize-none font-Roboto box-border max-[1024px]:px-8 px-[5%] flex  text-md max-[900px]:text-sm w-[95%] py-[1%] outline-none h-[70%] rounded-3xl"
+        className="bg-gray-100 resize-none font-Roboto box-border max-[1024px]:px-8 px-[6%] flex text-md max-[900px]:text-sm w-[95%] py-[1%] outline-none h-[70%] rounded-3xl"
       ></textarea>
     </div>
   );
