@@ -115,7 +115,7 @@ export default function ChatMessages() {
   return (
     <div
       ref={div}
-      className="w-[100%] h-[88%] px-[3%] overflow-y-scroll no-scrollbar py-[2%] box-border relative flex flex-col"
+      className="dark:text-gray-200 w-[100%] h-[88%] px-[3%] overflow-y-scroll no-scrollbar py-[2%] box-border relative flex flex-col"
     >
       {isLoading && <CircularLoading></CircularLoading>}
       {!isLoading && data.length === 0 && <EmptyMessages></EmptyMessages>}

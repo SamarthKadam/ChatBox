@@ -1,13 +1,15 @@
 import React from 'react'
+import ThemeSwitcher from '../components/ThemeSwitcher/ThemeSwitcher'
 
 export default function Info() {
   return (
-    <div className="grid w-[80vw] relative grid-rows-[1fr,7fr] ">
-    <div className="border-[1px] border-[#f5f5f5]"></div>
-    <div className="border-[1px] border-[#f5f5f5]">
+    <div className="dark:bg-gray-800 dark:text-white grid w-[80vw] relative grid-rows-[1fr,7fr] ">
+      <ThemeSwitcher/>
+    <div className="dark:bg-gray-950 border-[1px] border-[#f5f5f5]"></div>
+    <div className=" border-[1px] border-[#f5f5f5]">
     <div className="px-[5%] py-[2%]">
           <div className="font-Poppins max-[1024px]:text-xl font-semibold text-2xl">
-            About
+           About
           </div>
           <div className='mt-[2%] flex flex-col gap-4'>
           <div className=' flex flex-col'>
