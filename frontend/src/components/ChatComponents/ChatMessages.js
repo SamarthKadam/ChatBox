@@ -16,10 +16,6 @@ import useSound from "use-sound";
 import { addIncomingUserChatBar } from "../../services/Actions/Chat/action";
 import notifySound from "../../assets/sounds/notification.mp3";
 
-const isInputEmpty = (input) => {
-  return input.trim() === "";
-};
-
 export default function ChatMessages() {
   const isSet = useSelector((state) => state.chat.activeChat);
   const AllChats = useSelector((state) => state.chat.AllChats);
@@ -41,7 +37,8 @@ export default function ChatMessages() {
       );
 
       console.log("Lets test");
-      if (!isChatBarPresent) {
+      if (!isChatBarPresent)
+      {
         dispatch(addIncomingUserChatBar(newMessageRecieved.chat));
         dispatch(updateChatBar(newMessageRecieved.chat._id, newMessageRecieved.content));
         return;
@@ -113,70 +110,40 @@ export default function ChatMessages() {
     };
   }, [data]);
 
-  const sendMessage = (message) => {
-    // Check if the input is empty or null
-    if (isInputEmpty(message)) {
-      // Input is empty or null, do not send the message
-      console.log("Cannot send an empty message");
-      return;
-    }
-
-    // Input is not empty, proceed with sending the message
-    // ... (your existing code to send the message)
-  };
-
-  const handleMessageSend = (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
-
-    // Get the input value from your text area or chatbox
-    const messageInput = event.target.elements.messageInput.value;
-
-    sendMessage(messageInput);
-
-    // Clear the input field after sending the message
-    event.target.elements.messageInput.value = "";
-  };
-
   if (isSet === null) return <Advertisement></Advertisement>;
 
   return (
-    <div>
-      <div
-        ref={div}
-        className="w-[100%] h-[88%] px-[3%] overflow-y-scroll no-scrollbar py-[2%] box-border relative flex flex-col"
-      >
-        {isLoading && <CircularLoading></CircularLoading>}
-        {!isLoading && data.length === 0 && <EmptyMessages></EmptyMessages>}
-        {!isLoading && data.length > 0 && (
-          <>
-            {data.map((val, index) => {
-              if (isSender(val.sender._id))
-                return (
-                  <SenderMessage
-                    content={val.content}
-                    key={index}
-                  ></SenderMessage>
-                );
-              else
-                return (
-                  <RecieverMessage
-                    isGroupChat={isSet.isGroupChat}
-                    name={val.sender.name}
-                    img={val.sender.pic}
-                    messages={data}
-                    index={index}
-                    content={val.content}
-                    key={index}
-                  ></RecieverMessage>
-                );
-            })}
-          </>
-        )}
-      </div>
-      <form onSubmit={handleMessageSend}>
-        <textarea name="messageInput" placeholder="Type your message here" />
-        <button type="submit">Send</button>
-      </form>
+    <div
+      ref={div}
+      className="w-[100%] h-[88%] px-[3%] overflow-y-scroll no-scrollbar py-[2%] box-border relative flex flex-col"
+    >
+      {isLoading && <CircularLoading></CircularLoading>}
+      {!isLoading && data.length === 0 && <EmptyMessages></EmptyMessages>}
+      {!isLoading && data.length > 0 && (
+        <>
+          {data.map((val, index) => {
+            if (isSender(val.sender._id))
+              return (
+                <SenderMessage
+                  content={val.content}
+                  key={index}
+                ></SenderMessage>
+              );
+            else
+              return (
+                <RecieverMessage
+                  isGroupChat={isSet.isGroupChat}
+                  name={val.sender.name}
+                  img={val.sender.pic}
+                  messages={data}
+                  index={index}
+                  content={val.content}
+                  key={index}
+                ></RecieverMessage>
+              );
+          })}
+        </>
+      )}
     </div>
   );
 }
