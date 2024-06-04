@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import NavBar from '../components/HomeComponents/NavBar'
 import Description from '../components/HomeComponents/Description'
 import Service from './Service'
@@ -6,8 +6,9 @@ import { useState } from 'react'
 import LoadingPage from './LoadingPage'
 
 import { useNavigate } from 'react-router-dom'
+import { DarkModeContext } from '../components/ToggleMode/DarkModeContext'
 export default function Home() {
-
+  const {isDarkMode}=useContext(DarkModeContext)
   const navigate=useNavigate();
   const [isLoading,setIsLoading]=useState(true);
 
@@ -15,7 +16,7 @@ export default function Home() {
     
     const checkIfLoggedIn=async()=>{
       const cookie=localStorage.getItem('jwt');
-      const response=await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users/protect`,{
+      const response=await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users/protect`,{     
       method:'post',
       headers:{
         'Content-type':'application/json',
@@ -39,7 +40,7 @@ export default function Home() {
   return (
      <div>
       {isLoading&&<LoadingPage></LoadingPage>}
-      {!isLoading&&(<><div className='h-[100vh] px-40 py-5 max-[885px]:px-20 max-[653px]:px-14 bg-[#012478]'>
+      {!isLoading&&(<><div className={` h-[100vh] ${isDarkMode?"text-white bg-black":""} px-40 py-5 max-[885px]:px-20 max-[653px]:px-14 bg-[#012478]`}>
         <NavBar/>
         <Description></Description>
      </div>

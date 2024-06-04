@@ -14,6 +14,7 @@ import NotFoundPage from './pages/404Page';
 
 import Root,{loader as loadingAction} from './pages/Root';
 import Search from './pages/Search';
+import { DarkModeProvider } from './components/ToggleMode/DarkModeContext';
 
 
 const router = createBrowserRouter([
@@ -65,8 +66,11 @@ const router = createBrowserRouter([
   }
 ]);
 function App() {
-  return (<RouterProvider router={router} />);
-}
+  return (
+  <DarkModeProvider>
+    <RouterProvider router={router} />
+  </DarkModeProvider>
+);}
 
 export default App;
 
