@@ -13,7 +13,7 @@ import HowToRegIcon from '@mui/icons-material/HowToReg';
 import { ToastContainer, toast } from "react-toastify";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
+import { FaArrowCircleLeft } from 'react-icons/fa';
 export default function Main() {
 
 
@@ -147,6 +147,7 @@ export default function Main() {
     <Square></Square>
     <Square isRight={true}></Square>
   <Paper className='z-20 w-full max-w-[370px] p-[2rem] my-auto' elevation={3}>
+  <Link to="/"><FaArrowCircleLeft className="text-blue-600 cursor-pointer text-2xl"></FaArrowCircleLeft></Link>
         <div className='font-Poppins text-3xl font-extrabold flex items-center flex-col'>
         <HowToRegIcon fontSize='large' color='primary'/>
           <Typography variant='h5'>Sign Up</Typography>
