@@ -117,16 +117,16 @@ export default function Profile() {
           <div style={{ position: 'relative', width: '200px', height: '200px' }}>
           <Cropper
             src={imagePreview}
-            style={{ height: 200, width: '200px', filter: 'grayscale(50%)', borderRadius: '50%' }}
+            style={{ height: 200, width: '200px', borderRadius: '50%' }}
             initialAspectRatio={1}
             aspectRatio={1}
             guides={false}
             ref={cropperRef}
             viewMode={1}
-              background={false}
-              responsive={true}
-              checkOrientation={false}
-              autoCropArea={1}
+            background={false}
+            responsive={true}
+            checkOrientation={false}
+            autoCropArea={1}
           />
           <div
               style={{
@@ -136,9 +136,9 @@ export default function Profile() {
                 width: '100%',
                 height: '100%',
                 borderRadius: '50%',
-                boxShadow: '0 0 0 2000px rgba(225, 225, 225, 0.5)',
+                // boxShadow: '0 0 0 2000px rgba(0, 0, 0, 0.5)',
                 pointerEvents: 'none',
-                border: '2px solid #000'
+                border: '1px solid #000'
               }}
             ></div>
           </div>
