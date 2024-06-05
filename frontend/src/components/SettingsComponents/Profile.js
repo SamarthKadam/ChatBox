@@ -33,7 +33,11 @@ export default function Profile() {
 
   const handleUpload = () => {
     if (cropperRef.current && cropperRef.current.cropper) {
-      const croppedImageDataUrl = cropperRef.current.cropper.getCroppedCanvas().toDataURL();
+      const croppedImageDataUrl = cropperRef.current.cropper.getCroppedCanvas({
+        width: 150,
+        height: 150,
+        fillColor: '#fff',
+      }).toDataURL();
 
       // Convert the base64 URL to a Blob
       const blob = dataURLtoBlob(croppedImageDataUrl);
@@ -98,7 +102,7 @@ export default function Profile() {
           htmlFor="fileInput"
           className="cursor-pointer ml-2"
         >
-          <FaPen className="h-6 w-6" />
+          <FaPen className="h-4 w-4" style={{ width: 16, height: 16 }}/>
         </label>
         <input
           type="file"
@@ -110,17 +114,37 @@ export default function Profile() {
         </div>
         {imagePreview && (
         <div className="flex flex-col items-start">
+          <div style={{ position: 'relative', width: '200px', height: '200px' }}>
           <Cropper
             src={imagePreview}
-            style={{ height: 200, width: "60%" }}
+            style={{ height: 200, width: '200px', filter: 'grayscale(50%)', borderRadius: '50%' }}
             initialAspectRatio={1}
             aspectRatio={1}
             guides={false}
             ref={cropperRef}
+            viewMode={1}
+              background={false}
+              responsive={true}
+              checkOrientation={false}
+              autoCropArea={1}
           />
-          <div className="flex gap-4 mt-4">
-            <button onClick={handleUpload} className="bg-blue-500 text-white px-4 py-2 rounded">Upload</button>
-            <button onClick={handleCancel} className="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>
+          <div
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                borderRadius: '50%',
+                boxShadow: '0 0 0 2000px rgba(225, 225, 225, 0.5)',
+                pointerEvents: 'none',
+                border: '2px solid #000'
+              }}
+            ></div>
+          </div>
+          <div className="flex gap-2 mt-4">
+            <div  onClick={handleUpload} className= "bg-[#202142] hover:bg-[#202162] text-white font-medium cursor-pointer border-[#000000] px-4 py-2 max-[1024px]:px-2 max-[1024px]:py-1 max-[1024px]:text-sm rounded-md font-Roboto tracking-tight">Upload</div>
+            <div onClick={handleCancel} className="bg-[#C6CED1] text-white font-medium cursor-pointer border-[#000000] px-4 py-2 rounded-md font-Roboto tracking-tight max-[1024px]:px-2 max-[1024px]:py-1 max-[1024px]:text-sm">Cancel</div>
           </div>
         </div>
       )}
