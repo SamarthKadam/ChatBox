@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 import { socket } from "../../socket/socket";
-
 import MicIcon from "@mui/icons-material/Mic";
 import SendIcon from "@mui/icons-material/Send";
 import { AddMessage, moveChatToTop, updateChatBar } from "../../services/Actions/Chat/action";
@@ -12,7 +11,6 @@ import Picker from "@emoji-mart/react";
 import { Box, IconButton } from "@mui/material";
 import useTheme from "@mui/system/useTheme";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
-
 import onMicSoundFile from "../../assets/sounds/onMic.mp3";
 import offMicSoundFile from "../../assets/sounds/offMic.mp3";
 
@@ -92,8 +90,12 @@ export default function Type() {
     setMessage("");
   }, [isSet]);
 
+  const isValidMessage = (message) => {
+    return message.trim() !== "";
+  };
+
   const sendMessage = async (event) => {
-    if (message.length === 0) return;
+    if (!isValidMessage(message)) return;
 
     if (event.key === "Enter" || event.type === "click") {
       event.preventDefault();
@@ -128,12 +130,12 @@ export default function Type() {
   const onMicSound = () => {
     const audio = new Audio(onMicSoundFile);
     audio.play();
-  }
+  };
 
   const offMicSound = () => {
     const audio = new Audio(offMicSoundFile);
     audio.play();
-  }
+  };
 
   const startListening = () => {
     SpeechRecognition.startListening({ continuous: true, language: "en-IN" });
@@ -252,16 +254,16 @@ export default function Type() {
         <SendIcon color="action" sx={{ width: 22 }}></SendIcon>
       </div>
       <textarea
-        ref={inputRef}
-        value={message}
-        onKeyDown={sendMessage}
-        onChange={messageHandler}
-        spellCheck="false"
-        data-gramm="false"
-        type="text"
-        placeholder="Type a message"
-        className="bg-gray-100 resize-none font-Roboto box-border max-[1024px]:px-8 px-[6%] flex text-md max-[900px]:text-sm w-[95%] py-[1%] outline-none h-[70%] rounded-3xl"
-      ></textarea>
+  ref={inputRef}
+  value={message}
+  onKeyDown={sendMessage}
+  onChange={messageHandler}
+  spellCheck="false"
+  data-gramm="false"
+  type="text"
+  placeholder="Type a message"
+  className="bg-gray-100 resize-none font-Roboto box-border max-[1024px]:px-8 px-[6%] flex text-md max-[900px]:text-sm w-[95%] py-[1%] outline-none h-[70%] rounded-3xl"
+></textarea>
     </div>
   );
 }
