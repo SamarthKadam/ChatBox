@@ -172,7 +172,7 @@ export default function Main() {
               edge='end'
               style={{ position: 'absolute', right: '10px', top: '70%', transform: 'translateY(-50%)' }}
             >
-              {showPassword ? <VisibilityOff /> : <Visibility />}
+              {showPassword ? <Visibility /> : <VisibilityOff />}
             </IconButton>
           </div>
   <div className='flex flex-row justify-center mt-8'>
