@@ -17,3 +17,8 @@ ion-icon {
     }   
     
   
+    .menulinks ul li a:hover {
+      color: #ffcc33; /* Change this to your desired hover color */
+      text-decoration: underline; /* Adds underline on hover */
+    }
+    
