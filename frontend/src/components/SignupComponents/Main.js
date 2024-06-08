@@ -1,9 +1,9 @@
-import React,{useState} from 'react'
-import Input from '../LoginComponents/Input'
-import Square from '../LoginComponents/Square'
-import { GoogleLogin } from '@react-oauth/google'
+import React, { useState, useEffect } from 'react';
+import Input from '../LoginComponents/Input';
+import Square from '../LoginComponents/Square';
+import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
-import {Link, useNavigation} from 'react-router-dom'
+import { Link, useNavigation } from 'react-router-dom';
 import { useSubmit } from 'react-router-dom';
 import { validate } from 'react-email-validator';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -14,6 +14,42 @@ import { ToastContainer, toast } from "react-toastify";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { FaArrowCircleLeft } from 'react-icons/fa';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
+
+const PasswordRequirements = ({ password }) => {
+  const specialCharacterRegex = /[!@#$%^&*(),.?":{}|<>]/;
+  const numberRegex = /[0-9]/;
+  const uppercaseRegex = /[A-Z]/;
+
+  const boxStyle = {
+    border: '1px solid #ccc',
+    padding: '8px',
+    borderRadius: '4px',
+    marginTop: '8px',
+    backgroundColor: '#f9f9f9'
+  };
+
+  return (
+    <div style={boxStyle}>
+      <ul>
+        <li style={{ color: password.length >= 8 && password.length <= 12 ? 'green' : 'red' }}>
+          {password.length >= 8 && password.length <= 12 ? <CheckCircleIcon /> : <CancelIcon />} 8-12 characters
+        </li>
+        <li style={{ color: numberRegex.test(password) ? 'green' : 'red' }}>
+          {numberRegex.test(password) ? <CheckCircleIcon /> : <CancelIcon />} At least one number
+        </li>
+        <li style={{ color: uppercaseRegex.test(password) ? 'green' : 'red' }}>
+          {uppercaseRegex.test(password) ? <CheckCircleIcon /> : <CancelIcon />} At least one uppercase letter
+        </li>
+        <li style={{ color: specialCharacterRegex.test(password) ? 'green' : 'red' }}>
+          {specialCharacterRegex.test(password) ? <CheckCircleIcon /> : <CancelIcon />} At least one special character
+        </li>
+      </ul>
+    </div>
+  );
+};
+
 export default function Main() {
 
 
@@ -22,6 +58,10 @@ export default function Main() {
   const [SignUpData,setSignUpData]=useState({name:'',email:'',password:''});
   const[submiting,setSubmiting]=useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    // Update the component when password changes
+  }, [SignUpData.password]);
 
   function sendData(e,googleauth)
   {
@@ -158,6 +198,7 @@ export default function Main() {
   <Input onSetData={setSignUpData} name='name' text='Name' placeholder='Enter your name' type='text'></Input>
   <Input onSetData={setSignUpData} name='email' text="Email ID" placeholder="Enter Email Address" type='text'></Input>
   <div className='relative'>
+  <div className='relative'>
             <Input
               onSetData={setSignUpData}
               name='password'
@@ -170,10 +211,12 @@ export default function Main() {
               onClick={handleClickShowPassword}
               onMouseDown={handleMouseDownPassword}
               edge='end'
-              style={{ position: 'absolute', right: '10px', top: '70%', transform: 'translateY(-50%)' }}
+              style={{ position: 'absolute', right: '10px', top: '71%', transform: 'translateY(-50%)' }}
             >
-              {showPassword ? <Visibility /> : <VisibilityOff />}
+              {showPassword ? <VisibilityOff /> : <Visibility />}
             </IconButton>
+            </div>
+          <PasswordRequirements password={SignUpData.password} />
           </div>
   <div className='flex flex-row justify-center mt-8'>
     <Button sx={{padding:".5rem 4rem"}} onClick={sendData} variant="contained">
