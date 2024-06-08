@@ -156,8 +156,10 @@ The illustration above showcases a conversation between two separate tabs opened
    - Create a `.env` file in the frontend directory.
 
    - Add the following values to the `.env` file:
+   - ```
      REACT_APP_API_URL=http://127.0.0.1:4000
      REACT_APP_SOCKET_URL=http://127.0.0.1:4000
+     ```
 
 4. For configuring the backend:
 
