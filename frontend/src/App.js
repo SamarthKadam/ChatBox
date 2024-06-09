@@ -22,7 +22,7 @@ const router = createBrowserRouter([
     element: <Home></Home>,
   },
   {
-    path:'service',
+    path:'/service',
     element:<Service></Service>
   },
   {
@@ -69,10 +69,3 @@ function App() {
 }
 
 export default App;
-
-
-///todo 
-//messages not incoming when ad is showw
-//responsiveness
-//loading spinner
-//
