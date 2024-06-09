@@ -15,6 +15,8 @@ import { updateChatBar } from "../../services/Actions/Chat/action";
 import useSound from "use-sound";
 import { addIncomingUserChatBar } from "../../services/Actions/Chat/action";
 import notifySound from "../../assets/sounds/notification.mp3";
+import { format, isToday, isYesterday, parseISO } from 'date-fns';
+
 
 export default function ChatMessages() {
   const isSet = useSelector((state) => state.chat.activeChat);
@@ -110,7 +112,32 @@ export default function ChatMessages() {
     };
   }, [data]);
 
+
+  const groupedMessagesByDate = (data) => {
+    return data.reduce((acc, message) => {
+      const messageDate = format(parseISO(message.createdAt), 'yyyy-MM-dd');
+      if(!acc[messageDate]){
+        acc[messageDate] = [];
+      }
+      acc[messageDate].push(message);
+      return acc;
+    },{})
+  }
+  const groupedMessages = groupedMessagesByDate(data);
+
+  const formatDateHeader = (date) => {
+    const parsedDate = parseISO(date);
+    if (isToday(parsedDate)) {
+      return 'Today';
+    } else if (isYesterday(parsedDate)) {
+      return 'Yesterday';
+    } else {
+      return format(parsedDate, 'd MMMM yyyy');
+    }
+  };
+
   if (isSet === null) return <Advertisement></Advertisement>;
+
 
   return (
     <div
@@ -121,27 +148,38 @@ export default function ChatMessages() {
       {!isLoading && data.length === 0 && <EmptyMessages></EmptyMessages>}
       {!isLoading && data.length > 0 && (
         <>
-          {data.map((val, index) => {
-            if (isSender(val.sender._id))
-              return (
-                <SenderMessage
-                  content={val.content}
-                  key={index}
-                ></SenderMessage>
-              );
-            else
-              return (
-                <RecieverMessage
-                  isGroupChat={isSet.isGroupChat}
-                  name={val.sender.name}
-                  img={val.sender.pic}
-                  messages={data}
-                  index={index}
-                  content={val.content}
-                  key={index}
-                ></RecieverMessage>
-              );
-          })}
+          {Object.keys(groupedMessages).map(date => (
+            <div key={date}>
+              <div className="flex justify-center">
+                <div className=" rounded-md px-4 py-2 my-4 bg-slate-200 text-slate-600 font-normal">
+                  {formatDateHeader(date)}
+                </div>
+              </div>
+              {groupedMessages[date].map((val, index) => {
+                if (isSender(val.sender._id))
+                  return (
+                    <SenderMessage
+                      time = {val.createdAt}
+                      content={val.content}
+                      key={index}
+                    ></SenderMessage>
+                  );
+                else
+                  return (
+                    <RecieverMessage
+                      isGroupChat={isSet.isGroupChat}
+                      name={val.sender.name}
+                      img={val.sender.pic}
+                      messages={data}
+                      index={index}
+                      content={val.content}
+                      time = {val.createdAt}
+                      key={index}
+                    ></RecieverMessage>
+                  );
+              })}
+            </div>
+          ))}
         </>
       )}
     </div>
