@@ -151,7 +151,7 @@ export default function ChatMessages() {
           {Object.keys(groupedMessages).map(date => (
             <div key={date}>
               <div className="flex justify-center">
-                <div className=" rounded-md px-4 py-2 my-4 bg-slate-200 text-slate-600 font-normal">
+                <div className=" rounded-md px-2.5 py-1.5 my-4 bg-slate-200 text-slate-600 font-normal text-sm">
                   {formatDateHeader(date)}
                 </div>
               </div>
