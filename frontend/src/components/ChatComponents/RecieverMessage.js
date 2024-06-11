@@ -17,8 +17,11 @@ export default function RecieverMessage({
   if (isSameUser(messages, index) && isGroupChat) {
     return (
       <div className="flex flex-row justify-start my-1">
-        <div className="bg-[#FFFFFF]  rounded-tr-xl ml-[45px] font-Roboto rounded-br-xl rounded-bl-xl box-border px-2 py-2  max-[900px]:text-sm ">
-          {content}
+        <div className="bg-[#FFFFFF]  rounded-tr-xl ml-[45px] font-Roboto rounded-br-xl rounded-bl-xl box-border px-2 py-2  max-[900px]:text-sm flex justify-between">
+          <div>
+            {content}
+          </div>
+          <p className=" text-[11px] pl-2 pt-3 flex items-end font-medium">{`${String(messageTime.getHours()%12 || 12).padStart(2,'0')}:${String(messageTime.getMinutes()).padStart(2,'0')} ${messageTime.getHours()>=12?'pm':'am'}`}</p>
         </div>
       </div>
     );
