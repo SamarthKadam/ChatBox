@@ -29,6 +29,9 @@ export default function NavList() {
           </li>
           <li>
             <NavLink
+                      className={({ isActive }) => 
+                                   `hoverEffect ${isActive ? "text-[#0945E8" : ""}`
+                                }
               onClick={() => {
                 ScrollDown();
               }}
@@ -37,10 +40,18 @@ export default function NavList() {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/login">Login</NavLink>
+            <NavLink to="/login" 
+               className={({ isActive }) => 
+                                   `hoverEffect ${isActive ? "text-[#0945E8" : ""}`
+                                }
+            >Login</NavLink>
           </li>
           <li>
-            <NavLink to="/signup">Signup</NavLink>
+            <NavLink to="/signup" 
+                className={({ isActive }) => 
+                                   `hoverEffect ${isActive ? "text-[#0945E8" : ""}`
+                                }
+            >Signup</NavLink>
           </li>
         </ul>
       </div>
