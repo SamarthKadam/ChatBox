@@ -15,6 +15,7 @@ import { updateChatBar } from "../../services/Actions/Chat/action";
 import useSound from "use-sound";
 import { addIncomingUserChatBar } from "../../services/Actions/Chat/action";
 import notifySound from "../../assets/sounds/notification.mp3";
+import { format, isToday, isYesterday } from "date-fns";
 
 export default function ChatMessages() {
   const isSet = useSelector((state) => state.chat.activeChat);
@@ -35,12 +36,11 @@ export default function ChatMessages() {
       const isChatBarPresent = AllChats.find(
         (val) => val._id === newMessageRecieved.chat._id
       );
-
-      console.log("Lets test");
-      if (!isChatBarPresent)
-      {
+      if (!isChatBarPresent) {
         dispatch(addIncomingUserChatBar(newMessageRecieved.chat));
-        dispatch(updateChatBar(newMessageRecieved.chat._id, newMessageRecieved.content));
+        dispatch(
+          updateChatBar(newMessageRecieved.chat._id, newMessageRecieved.content)
+        );
         return;
       }
 
@@ -109,8 +109,26 @@ export default function ChatMessages() {
       clearTimeout(timer);
     };
   }, [data]);
-
+  
   if (isSet === null) return <Advertisement></Advertisement>;
+  
+  const formatDateHeader = (date) => {
+    const messageDate = new Date(date);
+    if (isToday(messageDate)) {
+      return "Today";
+    } else if (isYesterday(messageDate)) {
+      return "Yesterday";
+    } else {
+      return format(messageDate, "d MMMM yyyy");
+    }
+  };
+
+  const isMessageNewDay = (current, previous) =>
+    !previous ||
+  formatDateHeader(current.createdAt) !==
+  formatDateHeader(previous.createdAt);
+
+  
 
   return (
     <div
@@ -122,25 +140,36 @@ export default function ChatMessages() {
       {!isLoading && data.length > 0 && (
         <>
           {data.map((val, index) => {
-            if (isSender(val.sender._id))
-              return (
-                <SenderMessage
-                  content={val.content}
-                  key={index}
-                ></SenderMessage>
-              );
-            else
-              return (
-                <RecieverMessage
-                  isGroupChat={isSet.isGroupChat}
-                  name={val.sender.name}
-                  img={val.sender.pic}
-                  messages={data}
-                  index={index}
-                  content={val.content}
-                  key={index}
-                ></RecieverMessage>
-              );
+            const showDateHeader = isMessageNewDay(val, data[index - 1]);
+            return (
+              <div key={index}>
+                {showDateHeader && (
+                  <div className="flex justify-center">
+                    <div className=" rounded-md px-2.5 py-1.5 my-4 bg-slate-200 text-slate-600 font-normal text-sm">
+                      {formatDateHeader(val.createdAt)}
+                    </div>
+                  </div>
+                )}
+                {isSender(val.sender._id) ? (
+                  <SenderMessage
+                    time={val.createdAt}
+                    content={val.content}
+                    key={index}
+                  ></SenderMessage>
+                ) : (
+                  <RecieverMessage
+                    isGroupChat={isSet.isGroupChat}
+                    name={val.sender.name}
+                    img={val.sender.pic}
+                    messages={data}
+                    index={index}
+                    content={val.content}
+                    time={val.createdAt}
+                    key={index}
+                  ></RecieverMessage>
+                )}
+              </div>
+            );
           })}
         </>
       )}
