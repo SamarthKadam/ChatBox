@@ -36,8 +36,6 @@ export default function ChatMessages() {
       const isChatBarPresent = AllChats.find(
         (val) => val._id === newMessageRecieved.chat._id
       );
-
-      console.log("Lets test");
       if (!isChatBarPresent) {
         dispatch(addIncomingUserChatBar(newMessageRecieved.chat));
         dispatch(

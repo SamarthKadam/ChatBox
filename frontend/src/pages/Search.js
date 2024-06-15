@@ -73,11 +73,8 @@ export default function Search() {
     const accessChatHandler=(values)=>{
 
       const isPresent=state.find((data)=>{
-        console.log(data)
         return data.email===values.email
       });
-      console.log(state)
-      console.log(values)
       dispatch(AddUser(values,state))
       notify(values.name);
       setTimeout(()=>{
