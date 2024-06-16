@@ -29,7 +29,6 @@ export default function NavList() {
   </li>
   <li>
     <NavLink
-      to="/services"
       onClick={() => {
         ScrollDown();
       }}
