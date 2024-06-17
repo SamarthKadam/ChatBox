@@ -12,7 +12,7 @@ export default function Profile() {
 
   const data = JSON.parse(localStorage.getItem("info"));
   const [Pic, setPic] = useState(data.pic);
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [setSelectedFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const cropperRef = useRef(null);
 
