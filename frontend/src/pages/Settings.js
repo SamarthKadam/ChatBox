@@ -2,7 +2,7 @@ import React from "react";
 import Profile from "../components/SettingsComponents/Profile";
 import InputName from "../components/SettingsComponents/InputName";
 import InputEmail from "../components/SettingsComponents/InputEmail";
-import { useState,useEffect} from "react";
+import { useState} from "react";
 import {setUser} from '../services/Actions/User/actions'
 import { useDispatch } from 'react-redux';
 import { ToastContainer, toast } from "react-toastify";
