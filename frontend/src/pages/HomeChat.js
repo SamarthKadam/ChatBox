@@ -71,7 +71,6 @@ export default function HomeChat() {
   }, [dispatch]);
 
   const selectChat = (data) => {
-    const isPresent = data.hasOwnProperty("notify");
     dispatch(SetActiveChat(data));
   };
 
