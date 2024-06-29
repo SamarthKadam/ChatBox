@@ -10,6 +10,7 @@ import Signup,{action as SignupAction} from './pages/Signup';
 import HomeChat from './pages/HomeChat';
 import Info from './pages/Info';
 import Settings from './pages/Settings';
+import NotFoundPage from './pages/404Page';
 
 import Root,{loader as loadingAction} from './pages/Root';
 import Search from './pages/Search';
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       }
     ]
 
+  },
+  {
+    path:'*',
+    element:<NotFoundPage></NotFoundPage>
   }
 ]);
 function App() {

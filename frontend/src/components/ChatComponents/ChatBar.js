@@ -42,7 +42,7 @@ export default function ChatBar({data,select}) {
     </div>
       </div>
       <div className='flex flex-col items-end'>
-        <div className='text-xs max-[800px]:hidden font-medium cursor-pointer text-[#979797]' >{`${String(dateObject.getHours()%12).padStart(2,'0')}:${String(dateObject.getMinutes()).padStart(2,'0')} ${dateObject.getHours()>=12?'PM':'AM'}`}</div>
+        <div className='text-xs max-[800px]:hidden font-medium cursor-pointer text-[#979797]' >{`${String(dateObject.getHours()%12 || 12).padStart(2,'0')}:${String(dateObject.getMinutes()).padStart(2,'0')} ${dateObject.getHours()>=12?'PM':'AM'}`}</div>
         <div className='mt-1'>
         {data.notify&&<Badge>1</Badge>}
         </div>
