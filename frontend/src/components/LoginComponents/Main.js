@@ -74,55 +74,53 @@ export default function Main() {
   const handleMouseDownPassword = (event) => event.preventDefault(); // Prevent default action on mouse down
 
   return (
-    <div className='flex flex-col items-center h-[100vh] w-[100vw] relative overflow-hidden px-2'>
-    <Square></Square>
-    <Square isRight={true}></Square>
-  <Paper className='z-20 w-full max-w-[370px] p-[2rem] my-auto' elevation={3}>
-  <Link to="/"><FaArrowCircleLeft className="text-blue-600 cursor-pointer text-2xl"></FaArrowCircleLeft></Link>
-        <div className='font-Poppins text-3xl font-extrabold flex items-center flex-col'>
-        <LockOpenIcon fontSize='large' color='primary'/>
-          <Typography variant='h5'>Log In</Typography>
-        </div>
-<br />
-<hr></hr>
-<form className='mt-6 relative'>
-  <Input onSetData={setloginData}  name='email' text="Email ID" placeholder="Email address" type='text'></Input>
-  <div className='relative'>
-            <Input
-              onSetData={setloginData}
-              name='password'
-              text='Password'
-              type={showPassword ? 'text' : 'password'} // Toggle between text and password
-              placeholder='Password'
-            />
-             <IconButton
-              aria-label='toggle password visibility'
-              onClick={handleClickShowPassword}
-              onMouseDown={handleMouseDownPassword}
-              edge='end'
-              style={{ position: 'absolute', right: '10px', top: '70%', transform: 'translateY(-50%)' }}
-            >
-              {showPassword ? <Visibility /> : <VisibilityOff />}
-            </IconButton>
-          </div>
-  <div className='flex flex-row justify-center mt-10'>
-    <Button sx={{padding:".5rem 4rem"}} onClick={submitData} variant="contained">
-    {!submitting&&<div>LOG IN</div>}
-    {submitting&&<Box sx={{ display: 'flex' }}>
-      <CircularProgress size={25} style={{ color: '#FFFFFF' }} />
-    </Box>}
-    </Button>
-  </div>
-  <Typography className='text-center py-3'>Already have and account ? <Link className='text-blue-600' to="/signup">SignUp</Link></Typography>
-
-  <div className='h-[1px] w-[100%] mt-10 bg-[#808080]'></div>
-  <div className='flex flex-col items-center mt-6'>
-      <div className='mt-[2%]'>
-      <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+    <div className='relative flex flex-col items-center justify-center min-h-screen w-full p-4 overflow-hidden'>
+    <Square />
+    <Square isRight={true} />
+    <Paper className='z-20 w-full max-w-[370px] p-4 md:p-6'>
+      <Link to="/">
+        <FaArrowCircleLeft className="text-blue-600 cursor-pointer text-2xl mb-4" />
+      </Link>
+      <div className='font-Poppins text-2xl font-extrabold text-center'>
+        <LockOpenIcon fontSize='large' color='primary' />
+        <Typography variant='h5'>Log In</Typography>
       </div>
+      <form className='mt-4 flex flex-col space-y-4'>
+        <Input onSetData={setloginData} name='email' text="Email ID" placeholder="Email address" type='text' />
+        <div className='relative'>
+          <Input
+            onSetData={setloginData}
+            name='password'
+            text='Password'
+            type={showPassword ? 'text' : 'password'}
+            placeholder='Password'
+          />
+          <IconButton
+            aria-label='toggle password visibility'
+            onClick={handleClickShowPassword}
+            onMouseDown={handleMouseDownPassword}
+            edge='end'
+            style={{ position: 'absolute', right: '10px', top: '50%' }}
+          >
+            {showPassword ? <Visibility /> : <VisibilityOff />}
+          </IconButton>
+        </div>
+        <div className='flex justify-center'>
+          <Button sx={{ padding: ".5rem 2rem" }} onClick={submitData} variant="contained">
+            {!submitting && <div>LOG IN</div>}
+            {submitting && <Box sx={{ display: 'flex' }}>
+              <CircularProgress size={25} style={{ color: '#FFFFFF' }} />
+            </Box>}
+          </Button>
+        </div>
+        <Typography className='text-center py-2 text-sm'>Already have an account? <Link className='text-blue-600' to="/signup">SignUp</Link></Typography>
+        <div className='h-[1px] w-full bg-[#808080]' />
+        <div className='flex flex-col items-center mt-4'>
+          <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+        </div>
+      </form>
+    </Paper>
   </div>
-</form>
-</Paper>
-</div>
+  
   )
 }

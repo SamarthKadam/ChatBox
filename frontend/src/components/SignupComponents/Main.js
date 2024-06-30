@@ -184,56 +184,55 @@ export default function Main() {
   const handleMouseDownPassword = (event) => event.preventDefault(); // Prevent default action on mouse down
 
   return (
-    <div className='flex flex-col items-center h-[100vh] w-[100vw] relative overflow-hidden px-2'>
-      <Square></Square>
-      <Square isRight={true}></Square>
-      <Paper className='z-20 w-full max-w-[370px] p-[2rem] my-auto' elevation={3}>
-        <Link to="/"><FaArrowCircleLeft className="text-blue-600 cursor-pointer text-2xl"></FaArrowCircleLeft></Link>
-        <div className='font-Poppins text-3xl font-extrabold flex items-center flex-col'>
-          <HowToRegIcon fontSize='large' color='primary' />
-          <Typography variant='h5'>Sign Up</Typography>
+    <div className='relative flex flex-col items-center justify-center min-h-screen w-full p-4 overflow-hidden'>
+    <Square />
+    <Square isRight={true} />
+    <Paper className='z-20 w-full max-w-[370px] p-4 md:p-6'>
+      <Link to="/">
+        <FaArrowCircleLeft className="text-blue-600 cursor-pointer text-2xl mb-4" />
+      </Link>
+      <div className='font-Poppins text-2xl font-extrabold text-center'>
+        <HowToRegIcon fontSize='large' color='primary' />
+        <Typography variant='h5'>Sign Up</Typography>
+      </div>
+      <form className='mt-4 flex flex-col space-y-4'>
+        <Input onSetData={setSignUpData} name='name' text='Name' placeholder='Enter your name' type='text' />
+        <Input onSetData={setSignUpData} name='email' text="Email ID" placeholder="Enter Email Address" type='text' />
+        <div className='relative'>
+          <Input
+            onSetData={setSignUpData}
+            name='password'
+            text='Password'
+            type={showPassword ? 'text' : 'password'}
+            placeholder='Password'
+          />
+          <IconButton
+            aria-label='toggle password visibility'
+            onClick={handleClickShowPassword}
+            onMouseDown={handleMouseDownPassword}
+            edge='end'
+            style={{ position: 'absolute', right: '10px', top: '50%' }}
+          >
+            {showPassword ? <VisibilityOff /> : <Visibility />}
+          </IconButton>
         </div>
-        <br />
-        <hr></hr>
-        <form className='mt-6 relative'>
-          <Input onSetData={setSignUpData} name='name' text='Name' placeholder='Enter your name' type='text'></Input>
-          <Input onSetData={setSignUpData} name='email' text="Email ID" placeholder="Enter Email Address" type='text'></Input>
-          <div className='relative'>
-            <div className='relative'>
-              <Input
-                onSetData={setSignUpData}
-                name='password'
-                text='Password'
-                type={showPassword ? 'text' : 'password'} // Toggle between text and password
-                placeholder='Password'
-              />
-              <IconButton
-                aria-label='toggle password visibility'
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge='end'
-                style={{ position: 'absolute', right: '10px', top: '71%', transform: 'translateY(-50%)' }}
-              >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </div>
-            {showPasswordRequirements && <PasswordRequirements password={SignUpData.password} />}
-          </div>
-          <div className='flex flex-row justify-center mt-8'>
-            <Button sx={{ padding: ".5rem 4rem" }} onClick={sendData} variant="contained">
-              {!submitting && <div>SIGN UP</div>}
-              {submitting && <Box sx={{ display: 'flex' }}>
-                <CircularProgress size={25} style={{ color: '#FFFFFF' }} />
-              </Box>}
-            </Button>
-          </div>
-          <Typography className='text-center py-3'>Already have an account? <Link className='text-blue-600' to="/login">LogIn</Link></Typography>
-          <div className='h-[1px] w-[100%] mt-4 bg-[#808080]'></div>
-          <div className='flex flex-col items-center mt-6'>
-            <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
-          </div>
-        </form>
-      </Paper>
-    </div>
+        {showPasswordRequirements && <PasswordRequirements password={SignUpData.password} />}
+        <div className='flex justify-center mt-4'>
+          <Button sx={{ padding: ".5rem 2rem" }} onClick={sendData} variant="contained">
+            {!submitting && <div>SIGN UP</div>}
+            {submitting && <Box sx={{ display: 'flex' }}>
+              <CircularProgress size={25} style={{ color: '#FFFFFF' }} />
+            </Box>}
+          </Button>
+        </div>
+        <Typography className='text-center py-2 text-sm'>Already have an account? <Link className='text-blue-600' to="/login">LogIn</Link></Typography>
+        <div className='h-[1px] w-full bg-[#808080]' />
+        <div className='flex flex-col items-center mt-4'>
+          <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+        </div>
+      </form>
+    </Paper>
+  </div>
+  
   )
 }
