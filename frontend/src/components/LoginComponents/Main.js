@@ -113,7 +113,7 @@ export default function Main() {
     </Box>}
     </Button>
   </div>
-  <Typography className='text-center py-3'>Already have and account ? <Link className='text-blue-600' to="/signup">SignUp</Link></Typography>
+  <Typography className='text-center py-3'>Don't have an acoount?<Link className='text-blue-600' to="/signup">SignUp</Link></Typography>
 
   <div className='h-[1px] w-[100%] mt-10 bg-[#808080]'></div>
   <div className='flex flex-col items-center mt-6'>
