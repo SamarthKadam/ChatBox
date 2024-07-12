@@ -4,6 +4,7 @@ import Description from '../components/HomeComponents/Description'
 import Service from './Service'
 import { useState } from 'react'
 import LoadingPage from './LoadingPage'
+import BackToTop from '../components/HomeComponents/BackToTop'
 
 import { useNavigate } from 'react-router-dom'
 export default function Home() {
@@ -43,7 +44,9 @@ export default function Home() {
         <NavBar/>
         <Description></Description>
      </div>
-     <Service></Service></>)}
+     <Service></Service>
+     <BackToTop></BackToTop></>)}
      </div>
+     
   )
 }
