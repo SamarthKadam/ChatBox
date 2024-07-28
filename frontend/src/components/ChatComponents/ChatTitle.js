@@ -44,8 +44,8 @@ export default function ChatTitle({ openChatModel }) {
   }
 
   return (
-    <div className="flex flex-row px-[5%] box-border justify-between w-[100%]">
-      <div className="flex flex-row">
+    <div className="flex flex-row items-center px-[5%] box-border justify-between w-[100%]">
+      <div className="flex flex-row items-center">
         <Avatar
           referrerPolicy="no-referrer"
           alt="Group-pic"
