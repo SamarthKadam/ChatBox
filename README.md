@@ -121,7 +121,7 @@ The illustration above showcases a conversation between two separate tabs opened
 - Javascript
 - Redux
 - MaterialUI
-- TailWindCSS
+- TailwindCSS
 
 <a id="backend"> </a>
 
@@ -144,8 +144,10 @@ The illustration above showcases a conversation between two separate tabs opened
 
 1. Clone the project:
 
-   - Firstly, clone the project using the command: https://github.com/SamarthKadam/ChatBox
-
+   - Firstly, clone the project using the command: 
+   ```
+   git clone https://github.com/SamarthKadam/ChatBox.git
+  ```
 2. Install Packages:
 
    - Install the required packages by navigating to the backend directory: `cd backend` and then run `npm install`.
