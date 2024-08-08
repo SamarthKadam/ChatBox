@@ -17,3 +17,7 @@ ion-icon {
     }   
     
   
+    .hoverEffect:hover {
+      color: #0945e8;
+    }
+    
