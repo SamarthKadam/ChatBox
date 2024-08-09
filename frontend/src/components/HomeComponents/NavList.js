@@ -17,7 +17,7 @@ export default function NavList() {
 
   return (
     <div>
-      <div id="menulinks" class="menulinks w-auto  duration-500 md:static md:min-h-fit  min-h-[28vh]  md:w-auto flex justify-center py-5 ">
+      <div id="menulinks" class="menulinks fixed top-[8%] duration-500 md:static md:min-h-fit w-[100%] left-[0%]  min-h-[28vh]  md:w-auto flex justify-center py-5 ">
         <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8 text-white font-Roboto font-semibold ">
           <li className="hover:text-[#FFCC33]">
             <NavLink
