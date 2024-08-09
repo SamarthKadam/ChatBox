@@ -43,19 +43,19 @@ export default function Description() {
           The easiest & fasted way to live chat
         </p>
         <Banner></Banner>
-      </div>
+        </div>
       <div className="relative max-[451px]:hidden">
-        <div className="absolute  w-[50%] top-[20%] translate-y-[-20%] left-[95%] z-[555] translate-x-[-95%] max-[1127px]:top-[-15%]">
+            <div className="absolute  w-[50%] top-[20%] translate-y-[-20%] left-[95%] z-[555] translate-x-[-95%] max-[1127px]:top-[-15%]">
           {menChat.map((val, ind) => {
             return <Chat isMale={true} key={ind} message={val}></Chat>;
           })}
-        </div>
+              </div>
         <div className="absolute w-[50%] top-[68%] translate-y-[-68%]  left-[15%]  z-[87]  translate-x-[-15%] max-[1127px]:top-[78%]">
           {womenChat.map((val, ind) => {
             return <Chat isMale={false} key={ind} message={val}></Chat>;
           })}
-          {/* <Chat message={`Yeah definitely!, I'll throw this evening.`}></Chat> */}
-        </div>
+            {/* <Chat message={`Yeah definitely!, I'll throw this evening.`}></Chat> */}
+              </div>
         <img
           alt="men pic"
           className="w-[55%] rounded-[20px] absolute top-[30%] z-50 translate-y-[-30%] max-[1127px]:top-[0%]  "
@@ -86,7 +86,7 @@ export default function Description() {
           className=" absolute top-[15%] translate-y-[-15%] left-[95%] translate-x-[-95%]"
           src={orangeball}
         ></img>
-      </div>
+        </div>
     </div>
   );
 }

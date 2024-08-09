@@ -17,11 +17,8 @@ export default function NavList() {
 
   return (
     <div>
-      <div
-        id="menulinks"
-        class="menulinks  duration-500 md:static md:min-h-fit  min-h-[28vh] left-[0%] top-[-100%] md:w-auto w-[100%] flex justify-center py-5 fixed "
-      >
-        <ul className="flex  md:flex-row flex-col md:items-center md:gap-[4vw] gap-8 text-white font-Roboto font-semibold ">
+      <div id="menulinks" class="menulinks duration-500 md:static md:min-h-fit absolute min-h-[28vh] left-[0%] top-[-100%] md:w-auto w-[100%] flex justify-center py-5 fixed ">
+        <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8 text-white font-Roboto font-semibold ">
           <li>
             <NavLink
               to="/"
@@ -30,7 +27,7 @@ export default function NavList() {
               Product
             </NavLink>
           </li>
-          <li className=" hover:text-[#FFCC33]">
+          <li>
             <NavLink
               onClick={() => {
                 ScrollDown();
@@ -39,21 +36,21 @@ export default function NavList() {
               Services
             </NavLink>
           </li>
-          <li className=" hover:text-[#FFCC33]">
+          <li>
             <NavLink to="/login">Login</NavLink>
           </li>
-          <li className=" hover:text-[#FFCC33]">
+          <li>
             <NavLink to="/signup">Signup</NavLink>
           </li>
         </ul>
       </div>
       <div className="flex items-center gap-6">
-        <ion-icon
-          name="grid"
-          class="cursor-pointer md:hidden"
-          onClick={onToggleMenu}
-        ></ion-icon>
-      </div>
+          <ion-icon
+            name="grid"
+            class="cursor-pointer md:hidden"
+            onClick={onToggleMenu}
+          ></ion-icon>
+        </div>
     </div>
   );
 }
