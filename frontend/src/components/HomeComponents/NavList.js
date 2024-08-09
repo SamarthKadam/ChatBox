@@ -12,7 +12,7 @@ export default function NavList() {
     e.target.name = e.target.name === "grid" ? "close" : "grid";
 
     const menulinks = document.querySelector(".menulinks");
-    menulinks.classList.toggle("top-[10%]");
+    menulinks.classList.toggle("top-[8%]");
   }
 
   return (
