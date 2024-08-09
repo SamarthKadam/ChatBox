@@ -17,9 +17,9 @@ export default function NavList() {
 
   return (
     <div>
-      <div id="menulinks" class="menulinks duration-500 md:static md:min-h-fit absolute min-h-[28vh] left-[0%] top-[-100%] md:w-auto w-[100%] flex justify-center py-5 fixed ">
+      <div id="menulinks" class="menulinks fixed top-[8%] duration-500 md:static md:min-h-fit w-[100%] left-[0%]  min-h-[28vh]  md:w-auto flex justify-center py-5 ">
         <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8 text-white font-Roboto font-semibold ">
-          <li>
+          <li className="hover:text-[#FFCC33]">
             <NavLink
               to="/"
               className={({ isActive }) => (isActive ? "text-[#FFCC33]" : "")}
@@ -27,7 +27,7 @@ export default function NavList() {
               Product
             </NavLink>
           </li>
-          <li>
+          <li className="hover:text-[#FFCC33]">
             <NavLink
               onClick={() => {
                 ScrollDown();
@@ -36,10 +36,10 @@ export default function NavList() {
               Services
             </NavLink>
           </li>
-          <li>
+          <li className="hover:text-[#FFCC33]">
             <NavLink to="/login">Login</NavLink>
           </li>
-          <li>
+          <li className="hover:text-[#FFCC33]">
             <NavLink to="/signup">Signup</NavLink>
           </li>
         </ul>

@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 export default function Home() {
 
   const navigate=useNavigate();
-  const [isLoading,setIsLoading]=useState(true);
+  const [isLoading,setIsLoading]=useState(false);
 
   useEffect(()=>{
     
@@ -39,7 +39,7 @@ export default function Home() {
   return (
      <div>
       {isLoading&&<LoadingPage></LoadingPage>}
-      {!isLoading&&(<><div className='h-[100vh] px-40 py-5 max-[885px]:px-20 max-[653px]:px-14 bg-[#012478]'>
+      {!isLoading&&(<><div className='h-[100vh] px-40 py-5 md:pt-24 max-[885px]:px-20 max-[653px]:px-14 bg-[#012478]'>
         <NavBar/>
         <Description></Description>
      </div>
