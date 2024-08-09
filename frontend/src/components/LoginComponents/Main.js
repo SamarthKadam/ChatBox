@@ -14,6 +14,7 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { ToastContainer, toast } from "react-toastify";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import {FaArrowCircleLeft} from 'react-icons/fa'
 export default function Main() {
 
 
@@ -77,7 +78,7 @@ export default function Main() {
     <Square></Square>
     <Square isRight={true}></Square>
   <Paper className='z-20 w-full max-w-[370px] p-[2rem] my-auto' elevation={3}>
-
+  <Link to="/"><FaArrowCircleLeft className="text-blue-600 cursor-pointer text-2xl"></FaArrowCircleLeft></Link>
         <div className='font-Poppins text-3xl font-extrabold flex items-center flex-col'>
         <LockOpenIcon fontSize='large' color='primary'/>
           <Typography variant='h5'>Log In</Typography>
@@ -101,7 +102,7 @@ export default function Main() {
               edge='end'
               style={{ position: 'absolute', right: '10px', top: '70%', transform: 'translateY(-50%)' }}
             >
-              {showPassword ? <VisibilityOff /> : <Visibility />}
+              {showPassword ? <Visibility /> : <VisibilityOff />}
             </IconButton>
           </div>
   <div className='flex flex-row justify-center mt-10'>
@@ -112,7 +113,7 @@ export default function Main() {
     </Box>}
     </Button>
   </div>
-  <Typography className='text-center py-3'>Already have and account ? <Link className='text-blue-600' to="/signup">SignUp</Link></Typography>
+  <Typography className='text-center py-3'>Don't have an acoount? <Link className='text-blue-600' to="/signup">SignUp</Link></Typography>
 
   <div className='h-[1px] w-[100%] mt-10 bg-[#808080]'></div>
   <div className='flex flex-col items-center mt-6'>
