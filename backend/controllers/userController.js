@@ -3,6 +3,7 @@ const catchAsync=require('../utils/catchAsync');
 const AppError = require('../utils/AppError');
 const Chat=require('../models/chatModel');
 const multer=require('multer');
+const bcrypt=require('bcryptjs');
 
 const multerstorage=multer.diskStorage({
   destination:(req,file,cb)=>{
@@ -85,6 +86,23 @@ exports.UploadPhoto=catchAsync(async(req,res,next)=>{
       user:updatedUser
     }
   })
+})
+
+exports.updatePassword=catchAsync(async(req,res,next)=>{
+  if(!req.body.password)
+    next(new AppError('Password field is not allowed to be empty',400))
+
+    try{
+      const encryptPassword=await bcrypt.hash(req.body.password,12)
+      const updatedUser = await User.findByIdAndUpdate({_id:req.user.id},{password:encryptPassword});
+    }catch(err){
+      res.json({err})
+    }
+      
+      res.status(200).json({
+        status:'success',
+        message:"Password Updated"
+      })
 })
 
 // exports.AvailableUsersToCreateGroup=catchAsync(async(req,res)=>{

@@ -12,6 +12,7 @@ router.post('/login',authController.login);
 router.post('/ispresent',authController.isUserPresent)
 router.post('/protect',authController.protect,authController.send);
 router.post('/uploadPhoto',authController.protect,userController.uploadUserPhoto,userController.UploadPhoto)
+router.post('/updatepassword',authController.protect,userController.updatePassword)
 
 
 module.exports=router;
