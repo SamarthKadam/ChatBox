@@ -3,7 +3,7 @@ const catchAsync=require('../utils/catchAsync');
 const AppError = require('../utils/AppError');
 const Chat=require('../models/chatModel');
 const multer=require('multer');
-
+const uploadPhoto=require('../utils/UploadImage');
 const multerstorage=multer.diskStorage({
   destination:(req,file,cb)=>{
     cb(null,'public/img/user')
@@ -36,7 +36,6 @@ const filterObj = (obj, ...allowedFields) => {
     Object.keys(obj).forEach(el => {
       if (allowedFields.includes(el)) newObj[el] = obj[el];
     });
-  
     return newObj;
   };
 
@@ -74,10 +73,12 @@ exports.UploadPhoto=catchAsync(async(req,res,next)=>{
   let data;
   if (req.file)
   data= req.file.filename;
-  const updatedUser = await User.findByIdAndUpdate(req.user.id,{pic:data}, {
+  const uploadedUri=await uploadPhoto.UploadImage(data);
+  const updatedUser = await User.findByIdAndUpdate(req.user.id,{pic:uploadedUri}, {
     new: true,
     runValidators: true
   });
+  console.log("UPDATED USER",updatedUser);
 
   res.status(200).json({
     status:'success',

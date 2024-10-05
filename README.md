@@ -175,6 +175,9 @@ The illustration above showcases a conversation between two separate tabs opened
      JWTEXPIRES=90d
      JWTSECRET=<-giveanysecretkey->
      JWT_COOKIE_EXPIRES=90
+     CLOUD_NAME=<CLOUDINARY CLOUD NAME>
+     CLOUDINARY_API_KEY=<CLOUDINARY API KEY>
+     CLOUDINARY_API_SECRET=<CLOUD API SECRET>
    ```
 
 5. Start Backend Server:
