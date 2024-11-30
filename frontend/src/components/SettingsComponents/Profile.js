@@ -3,10 +3,15 @@ import { Avatar } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../services/Actions/User/actions";
 import toast from "react-toastify";
+import Alert from "../../helper/Alert.js";
 
 export default function Profile() {
   const dispatch = useDispatch();
   const dataredux = useSelector((state) => state.user.userInfo);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [isConfirm, setIsConfirm] = useState(false);
 
   const data = JSON.parse(localStorage.getItem("info"));
   const [Pic, setPic] = useState(data.pic);
@@ -25,15 +30,12 @@ export default function Profile() {
   const handleUpload = () => {
     if (selectedFile) {
       // Ask for confirmation before uploading
-      const isConfirmed = window.confirm(
-        "Are you sure you want to upload this image?"
-      );
-
-      if (!isConfirmed) return;
+      setShowConfirm(true);
+      if (!isConfirm) return;
 
       const formData = new FormData();
       formData.append("photo", selectedFile);
-
+      setIsConfirm(false);
       const cookie = localStorage.getItem("jwt");
       fetch(`${process.env.REACT_APP_API_URL}/api/v1/users/uploadPhoto`, {
         method: "POST",
@@ -45,7 +47,8 @@ export default function Profile() {
         .then((response) => response.json())
         .then((data) => {
           // Alert if image uploaded successfully
-          alert("Image uploaded successfully!");
+          setShowConfirm(false);
+          setIsOpen(true);
           dispatch(setUser(data.data.user));
         })
         .catch((error) => {
@@ -53,7 +56,7 @@ export default function Profile() {
           console.error("Error uploading image:", error);
         });
     } else {
-      alert("Please select an image to upload.");
+      setShowModal(true);
     }
   };
 
@@ -89,6 +92,25 @@ export default function Profile() {
           Upload Picture
         </div>
       </div>
+      <Alert
+        text={"Image uploaded successfully!"}
+        status={"success"}
+        onClose={() => setIsOpen(false)}
+        isVisible={modalIsOpen}
+      />
+      <Alert
+        text={"Please select an image to upload."}
+        status="failure"
+        onClose={() => setShowModal(false)}
+        isVisible={showModal}
+      />
+      <Alert
+        text={"Are you sure you want to upload this image?"}
+        status="confirm"
+        onClose={() => {setShowConfirm(false); setIsConfirm(false)}}
+        isVisible={showConfirm}
+        onConfirm={()=> {setIsConfirm(true); setShowConfirm(false); handleUpload()}}
+      />
     </div>
   );
 }
