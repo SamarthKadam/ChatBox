@@ -50,7 +50,6 @@ export default function Search() {
   }
 
   const searchHandler=async(value)=>{
-
     SetisLoading(true);
     const cookie=localStorage.getItem('jwt');
     const response=await fetch(`${process.env.REACT_APP_API_URL}/api/v1/users?search=${value}`,{
@@ -71,6 +70,8 @@ export default function Search() {
   }
 
     const accessChatHandler=(values)=>{
+
+      console.log(values)
 
       const isPresent=state.find((data)=>{
         return data.email===values.email

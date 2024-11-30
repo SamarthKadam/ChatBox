@@ -14,6 +14,7 @@ import NotFoundPage from './pages/404Page';
 
 import Root,{loader as loadingAction} from './pages/Root';
 import Search from './pages/Search';
+import Profile from './pages/Profile';
 
 
 const router = createBrowserRouter([
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         path:"search",
         element:<Search></Search>
+      },
+      {
+        path:":id",
+        element:<Profile></Profile>
       }
     ]
 

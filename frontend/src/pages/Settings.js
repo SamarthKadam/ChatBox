@@ -2,19 +2,18 @@ import React from "react";
 import Profile from "../components/SettingsComponents/Profile";
 import InputName from "../components/SettingsComponents/InputName";
 import InputEmail from "../components/SettingsComponents/InputEmail";
-import { useState,useEffect} from "react";
-import {setUser} from '../services/Actions/User/actions'
-import { useDispatch } from 'react-redux';
+import { useState, useEffect } from "react";
+import { setUser } from "../services/Actions/User/actions";
+import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
-import InfoIcon from '@mui/icons-material/Info';
+import InfoIcon from "@mui/icons-material/Info";
+import ShareProfile from "../components/SettingsComponents/ShareProfile";
 
 export default function Settings() {
-
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const storedData = JSON.parse(localStorage.getItem("info"));
   const [name, setName] = useState(storedData.name);
   const [email, setEmail] = useState(storedData.email);
-
   const resetData = () => {
     setName(storedData.name);
     setEmail(storedData.email);
@@ -63,13 +62,10 @@ export default function Settings() {
         }
       );
       const data = await response.json();
-      if (data.status === "success")
-      {
+      if (data.status === "success") {
         notify("success");
         dispatch(setUser(data.updatedUser));
-      }
-        
-      else notify("error");
+      } else notify("error");
     };
     updateData();
   };
@@ -80,12 +76,15 @@ export default function Settings() {
       <div className="border-[1px] border-[#f5f5f5]">
         <ToastContainer></ToastContainer>
         <div className="px-[5%] py-[2%]">
-          <div className="font-Poppins max-[1024px]:text-xl font-semibold text-2xl">
-            Public profile
+          <div className="flex relative items-center justify-between font-Poppins max-[1024px]:text-xl font-semibold text-2xl">
+            <h1>Public profile</h1>
+            <ShareProfile id={storedData._id} />
           </div>
           <div className="flex items-center mt-2">
-          <InfoIcon fontSize='10' color="info"></InfoIcon>
-          <div className="font-Poppins  text-xs">To update your profile picture, select an image and upload it.</div>
+            <InfoIcon fontSize="10" color="info"></InfoIcon>
+            <div className="font-Poppins  text-xs">
+              To update your profile picture, select an image and upload it.
+            </div>
           </div>
           <Profile></Profile>
           <div className="mt-[3%] flex flex-col gap-8">
