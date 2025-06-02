@@ -185,85 +185,69 @@ export default function Type() {
 
   return (
     <div
-      className="border-[1px] border-[#f5f5f5] bg-[#FFFFFF] h-[12%] flex flex-row justify-center items-center relative"
+      className=" bg-[#FFFFFF] h-[12%] flex py-5 flex-row justify-center items-center"
       ref={emojiPickerRef}
     >
       {!Microphone && (
-        <div onClick={startListening}>
+        <div onClick={startListening} className="px-1">
           <MicIcon
             sx={{ width: 38, cursor: "pointer" }}
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "7%",
-              translate: "-4% -50%",
-            }}
             color="info"
           ></MicIcon>
         </div>
       )}
-      <Box
-        style={{
-          zIndex: 10,
-          left: "47%",
-          position: "fixed",
-          display: openPicker ? "inline" : "none",
-          bottom: 81,
-        }}
-      >
-        <Picker
-          theme={theme.palette.mode}
-          data={data}
-          onEmojiSelect={(emoji) => {
-            handleEmojiClick(emoji.native);
-          }}
-        />
-      </Box>
-
       {Microphone && (
-        <div onClick={stopListening}>
+        <div onClick={stopListening} className="px-1">
           <CancelIcon
-            sx={{ width: 22, cursor: "pointer" }}
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "7.6%",
-              translate: "-4% -50%",
-            }}
+            sx={{ width: 38, cursor: "pointer" }}
             color="info"
           ></CancelIcon>
         </div>
       )}
-      <IconButton
-        onClick={() => {
-          setOpenPicker(!openPicker);
-        }}
-      >
-        <InsertEmoticonIcon />
-      </IconButton>
-      <div
-        onClick={sendMessage}
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "95%",
-          translate: "-95% -50%",
-          cursor: "pointer",
-        }}
-      >
-        <SendIcon color="action" sx={{ width: 22 }}></SendIcon>
+      <div className="bg-gray-100 rounded-xl mx-2 flex flex-row w-full items-center justify-between">
+        <Box
+          style={{
+            zIndex: 10,
+            left: "47%",
+            position: "fixed",
+            display: openPicker ? "inline" : "none",
+            bottom: 81,
+          }}
+        >
+          <Picker
+            theme={theme.palette.mode}
+            data={data}
+            onEmojiSelect={(emoji) => {
+              handleEmojiClick(emoji.native);
+            }}
+          />
+        </Box>
+
+        <IconButton
+          onClick={() => {
+            setOpenPicker(!openPicker);
+          }}
+        >
+          <InsertEmoticonIcon />
+        </IconButton>
+
+        <textarea
+          ref={inputRef}
+          value={message}
+          onKeyDown={sendMessage}
+          onChange={messageHandler}
+          spellCheck="false"
+          data-gramm="false"
+          type="text"
+          className="resize-none bg-gray-100 font-Roboto box-border text-md max-[900px]:text-sm w-full max-w-[100%] outline-none rounded-3xl  pt-[2%] leading-[normal]"
+          placeholder="Type a message"
+        ></textarea>
+        <div className="mx-5"
+          onClick={sendMessage}
+        >
+          <SendIcon color="action" sx={{ width: 22 }}></SendIcon>
+        </div>
       </div>
-      <textarea
-  ref={inputRef}
-  value={message}
-  onKeyDown={sendMessage}
-  onChange={messageHandler}
-  spellCheck="false"
-  data-gramm="false"
-  type="text"
-  placeholder="Type a message"
-  className="bg-gray-100 resize-none font-Roboto box-border max-[1024px]:px-8 px-[6%] flex text-md max-[900px]:text-sm w-[95%] py-[1%] outline-none h-[70%] rounded-3xl"
-></textarea>
     </div>
   );
 }
